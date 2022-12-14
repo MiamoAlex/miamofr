@@ -9,6 +9,17 @@ export class DataManager {
 
     currentState = this.MIAMOSTATES.INTRO;
 
+    constructor() {
+        if (localStorage.getItem('miamoSave')) {
+            this.save = JSON.parse(localStorage.getItem('miamoSave'));
+        } else {
+            this.save = {
+                storyAdvancement: 0,
+                name: ""
+            }
+        }
+    }
+
     /**
      * Changement de l'avancement de la partie
      * @param {String} state 

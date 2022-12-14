@@ -39,6 +39,9 @@ export class UiController {
      */
     audioSliderHandler(ev) {
         this.audioManager.volume = ev.target.value;
+        this.audioManager.currentSounds.forEach(audio => {
+            audio.volume = this.audioManager.volume;
+        });
     }
 
     /**
@@ -108,7 +111,6 @@ export class UiController {
                             img.style.top = `calc(${Math.random() * 100}vh`;
                             img.style.right = `calc(${Math.random() * 100}vw`;
                         }, 400);
-
                         setTimeout(() => {
                             eglantine.classList.add('main__eglantine-run');
                             eglantine.src = './assets/tex/eglantineburgz.png';

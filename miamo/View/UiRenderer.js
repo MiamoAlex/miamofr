@@ -12,10 +12,10 @@ export class UiRenderer {
     }
 
     /**
- * getElement() retourne un noeud du DOM à partir de l'id renseigné
- * @param {String} id Identifiant de l'objet 
- * @returns {Node} Noeud demandé
- */
+    * getElement() retourne un noeud du DOM à partir de l'id renseigné
+    * @param {String} id Identifiant de l'objet 
+    * @returns {Node} Noeud demandé
+    */
     getElement(id) {
         return this.domElements[id];
     }

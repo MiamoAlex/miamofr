@@ -12,6 +12,6 @@ export class AudioManager {
         audio.volume = this.volume;
         audio.play();
         this.currentSounds.push(audio);
-        audio.addEventListener('ended', () => this.currentSounds.splice(this.currentSounds.findIndex(audio), 1));
+        audio.addEventListener('ended', () => { this.currentSounds.splice(this.currentSounds.findIndex(currentAudio => currentAudio === audio), 1) });
     }
 }

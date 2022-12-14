@@ -1,0 +1,24 @@
+@use "functions" as *;
+$fonts: (
+  ff: (
+  ),
+  w: (
+    light: 300,
+    regular: 400,
+    bold: 700,
+  ),
+);
+
+$type-scale: (
+  small: (
+    500: rem(22),
+    600: rem(32),
+    800: rem(47),
+  ),
+  
+  large: (
+    500: rem(30),
+    600: rem(37),
+    800: rem(58),
+  ),
+);

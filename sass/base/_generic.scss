@@ -1,0 +1,13 @@
+@use "../abstracts/" as *;
+
+.theme {
+    @each $themes, $theme in $themes {
+        &__#{nth(map-values($theme), 1)} {
+            @each $theme, $shade in $theme {
+                @each $prop, $value in $shade {
+                    --clr-#{$theme}-#{$prop}: #{$value};
+                }
+            }
+        }
+    }
+}

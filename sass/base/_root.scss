@@ -1,0 +1,45 @@
+@use "../abstracts/"as *;
+
+:root {
+
+    @each $font,
+    $style in $fonts {
+
+        @each $prop,
+        $value in $style {
+            --font-#{$font}-#{$prop}: #{$value};
+        }
+    }
+
+    @each $screen-size,
+    $font-size in $type-scale {
+        @if $screen-size==small {
+
+            @each $size,
+            $value in $font-size {
+                --fs-#{$size}: #{$value};
+            }
+        }
+
+        @else if $screen-size==medium {
+            @include mq(medium) {
+
+                @each $size,
+                $value in $font-size {
+                    --fs-#{$size}: #{$value};
+                }
+            }
+        }
+
+        @else if $screen-size==large {
+            @include mq(large) {
+
+                @each $size,
+                $value in $font-size {
+                    --fs-#{$size}: #{$value};
+                }
+            }
+        }
+    }
+    scroll-behavior: smooth;
+}

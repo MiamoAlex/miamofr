@@ -1,5 +1,41 @@
-@use '../abstracts/' as *;
+@use "../abstracts/" as *;
 
 .main {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    place-content: center;
 
+    &__h1 {
+        font-size: 7rem;
+        opacity: 0.06;
+        transform: scaleY(2);
+        cursor: pointer;
+
+        &-anim {
+            animation: grow 30s forwards;
+        }
+    }
+
+    &__burger {
+        cursor: pointer;
+    }
+
+    &__eglantine {
+        &-run {
+            cursor: pointer;
+            animation: run infinite 6000ms;
+        }
+    }
+
+    &__hector {
+        position: absolute;
+        cursor: pointer;
+        animation: hector 15000ms forwards;
+    }
+
+    &__alert {
+        transform: scale(.2);
+        position: absolute;
+    }
 }

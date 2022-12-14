@@ -1,0 +1,27 @@
+@keyframes grow {
+    from {
+        transform: scale(1, 2);
+    } to {
+        transform: scale(15, 15);
+    }
+}
+
+@keyframes run {
+    0% {
+        transform: scaleX(1) translateX(0);
+    } 50% {
+        transform: scaleX(1) translateX(50vw);
+    } 75% {
+        transform: scaleX(-1) translateX(100vw);
+    } 100% {
+        transform: scaleX(1) translateX(0);
+    }
+}
+
+@keyframes hector {
+    0% {
+        transform: scaleX(1) translateY(0);
+    } 100% {
+        transform: scaleX(1) translateY(100%) translateX(100%);
+    }
+}

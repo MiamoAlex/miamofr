@@ -35,7 +35,7 @@ body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 /* A elements that don't have a class get default styles */
@@ -87,10 +87,6 @@ body {
   background-color: var(--clr-main-black);
   color: var(--clr-main-white);
   user-select: none;
-}
-
-h1 {
-  opacity: .025;
 }
 
 img {

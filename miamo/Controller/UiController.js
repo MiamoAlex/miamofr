@@ -71,10 +71,12 @@ export class UiController {
             if (document.body.requestFullscreen) {
                 document.body.requestFullscreen();
             }
-            console.log(ev.target.tagName)
             ev.target.classList.add('main__h1-anim')
             this.dataManager.setMiamoState('PENDING')
             this.audioManager.loadAudioFile('intro');
+            setTimeout(() => {
+                ev.target.textContent = '.fr';
+            }, 8200);
             setTimeout(() => {
                 this.uiRenderer.createImage('main', 'rire', 'main__happy', true);
                 setTimeout(() => {

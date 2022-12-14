@@ -15,10 +15,16 @@ export class UiController {
         }
     }
 
-    constructor(dataManager, uiRenderer, audioManager) {
+    constructor(dataManager, uiRenderer, audioManager, eventHandler) {
         this.dataManager = dataManager;
         this.uiRenderer = uiRenderer;
         this.audioManager = audioManager;
+        this.eventHandler = eventHandler;
+        // References pour l'eventHandler
+        this.eventHandler.uiController = this;
+        this.eventHandler.uiRenderer = this.uiRenderer;
+        this.eventHandler.audioManager = this.audioManager;
+        this.eventHandler.dataManager = this.dataManager;
 
         this.uiRenderer.appendDomElements(this.domElements);
         for (const key in this.domElements) {
@@ -53,7 +59,9 @@ export class UiController {
             case 'click':
                 const state = this.dataManager.getMiamoState();
                 if (state !== 'pending') {
-                    this[`${state}Event`](ev);
+                    console.log(state);
+                    this[`${state}Handler`](ev);
+                    this.dataManager.saveData();
                 }
                 break;
 
@@ -69,92 +77,63 @@ export class UiController {
      * introEvent() gère les clics sur le coeur de la page pendant l'introduction du site
      * @param {Event} ev Evenement au clic 
      */
-    introEvent(ev) {
+    introHandler(ev) {
         if (ev.target.tagName == 'H1') {
+            this.dataManager.setMiamoState('PENDING')
             if (document.body.requestFullscreen) {
                 document.body.requestFullscreen();
             }
+
             ev.target.classList.add('main__h1-anim')
-            this.dataManager.setMiamoState('PENDING')
             this.audioManager.loadAudioFile('intro');
             setTimeout(() => {
                 ev.target.textContent = '.fr';
             }, 8200);
+
             setTimeout(() => {
-                this.uiRenderer.createImage('main', 'rire', 'main__happy', true);
-                setTimeout(() => {
-                    this.uiRenderer.createImage('main', 'chien', 'main__doggychien', true);
-                    setTimeout(() => {
-                        this.uiRenderer.createImage('main', 'burger', 'main__burger', true);
-                        this.dataManager.setMiamoState('BURGER')
-                    }, 5000);
-                }, 2000);
-            }, 10500);
+                // Check sauvegarde
+                if (this.dataManager.save.state !== 'intro') {
+                    console.log(this.audioManager.currentSounds[0])
+                    this.audioManager.currentSounds[0].pause();
+                    this.dataManager.setMiamoState(this.dataManager.save.state);
+                    this.eventHandler[`${this.dataManager.getMiamoState()}Event`]();
+                } else {
+                    this.eventHandler.introEvent();
+                }
+            }, 10200);
         }
     }
     /**
      * burgerEvent() gère les clics sur le coeur de la page pendant qu'il y a le burger à l'écran
      * @param {Event} ev Evenement au clic 
      */
-    burgerEvent(ev) {
+    burgerHandler(ev) {
         if (ev.target.className === 'main__burger') {
-            this.dataManager.setMiamoState('PENDING')
-            this.uiRenderer.getElement('main').innerHTML = '';
-            this.audioManager.loadAudioFile('eating');
-            setTimeout(() => {
-                this.audioManager.loadAudioFile('eglantine');
-                setTimeout(() => {
-                    const eglantine = this.uiRenderer.createImage('main', 'eglantine', 'main__eglantine', false);
-                    setTimeout(() => {
-                        const interval = setInterval(() => {
-                            const img = this.uiRenderer.createImage('main', 'alerte', 'main__alert', false);
-                            img.style.top = `calc(${Math.random() * 100}vh`;
-                            img.style.right = `calc(${Math.random() * 100}vw`;
-                        }, 400);
-                        setTimeout(() => {
-                            eglantine.classList.add('main__eglantine-run');
-                            eglantine.src = './assets/tex/eglantineburgz.png';
-                            clearInterval(interval);
-                            this.dataManager.setMiamoState('EGLANTINE')
-                        }, 15000);
-                    }, 2500);
-                }, 6000);
-            }, 1000);
+            this.dataManager.setMiamoState('PENDING');
+            this.eventHandler.burgerEvent();
+            this.dataManager.save.state = 'BURGER';
         }
     }
     /**
-     * eglantineEvent() gère les clics sur le coeur de la page pendant qu'il y a eglantine à l'écran
+     * eglantineHandler() gère les clics sur le coeur de la page pendant qu'il y a eglantine à l'écran
      * @param {Event} ev Evenement au clic 
      */
-    eglantineEvent(ev) {
+    eglantineHandler(ev) {
         if (ev.target.classList[1] === 'main__eglantine-run') {
-            this.dataManager.setMiamoState('PENDING')
-            this.audioManager.loadAudioFile('eglantinedeath');
-            this.uiRenderer.createImage('main', 'burgers', 'main__burgers', true);
-            setTimeout(() => {
-                this.audioManager.loadAudioFile('hector');
-            }, 300);
-
-            setTimeout(() => {
-                this.dataManager.setMiamoState('HECTOR')
-                this.uiRenderer.createImage('main', 'hector', 'main__hector', false);
-            }, 6000);
-
+            this.dataManager.setMiamoState('PENDING');
+            this.eventHandler.eglantineEvent();
+            this.dataManager.save.state = 'EGLANTINE';
         }
     }
     /**
-     * hectorEvent() gère les clics sur le coeur de la page pendant qu'il y a hector à l'écran
+     * hectorHandler() gère les clics sur le coeur de la page pendant qu'il y a hector à l'écran
      * @param {Event} ev Evenement au clic 
      */
-    hectorEvent(ev) {
+    hectorHandler(ev) {
         if (ev.target.className === 'main__hector') {
             this.dataManager.setMiamoState('PENDING');
-            this.audioManager.loadAudioFile('hectordeath');
-            this.uiRenderer.createImage('main', 'burgers', 'main__burgers', true);
-            setTimeout(() => {
-                this.audioManager.loadAudioFile('chuchotemment');
-                this.uiRenderer.createImage('main', 'gustave', 'main__gustave', true);
-            }, 11000);
+            this.eventHandler.hectorEvent();
+            this.dataManager.save.state = 'HECTOR';
         }
     }
 

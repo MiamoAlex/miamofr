@@ -1,5 +1,15 @@
 export class UiRenderer {
     domElements = {};
+    templates = {};
+
+    constructor() {
+        const templates = document.querySelector('#templates');
+
+        for (let i = 0; i < templates.children.length; i++) {
+            const template = templates.children[i];
+            this.templates[template.className.split('template__')[1]] = template;
+        }
+    }
 
     /**
      * appendDomElements() ajoute aux elements visuels actuels un groupe de nouveau éléments récupérables

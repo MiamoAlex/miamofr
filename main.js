@@ -17,7 +17,7 @@ const App = {
         init: function() {
             App.model.dataManager = new Miamo.DataManager();
             App.view.uiRenderer = new Miamo.UiRenderer();
-            App.controller.uiController = new Miamo.UiController(App.model.dataManager, App.view.uiRenderer, new Miamo.AudioManager());
+            App.controller.uiController = new Miamo.UiController(App.model.dataManager, App.view.uiRenderer, new Miamo.AudioManager(), new Miamo.EventHandler());
         }
     },
 }

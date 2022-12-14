@@ -14,8 +14,7 @@ export class DataManager {
             this.save = JSON.parse(localStorage.getItem('miamoSave'));
         } else {
             this.save = {
-                storyAdvancement: 0,
-                name: ""
+                state: "intro"
             }
         }
     }
@@ -34,6 +33,10 @@ export class DataManager {
      */
     getMiamoState() {
         return this.currentState;
+    }
+
+    saveData() {
+        localStorage.setItem('miamoSave', JSON.stringify(this.save));
     }
     
 }

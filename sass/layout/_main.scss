@@ -5,6 +5,7 @@
     height: 100vh;
     display: grid;
     place-content: center;
+    position: relative;
 
     &__h1 {
         font-size: 7rem;

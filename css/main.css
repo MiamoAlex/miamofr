@@ -172,6 +172,7 @@ ul {
   top: 0;
   font-size: 1.25rem;
   width: 100%;
+  z-index: 10;
 }
 .header__sound {
   accent-color: #333;
@@ -182,6 +183,7 @@ ul {
   height: 100vh;
   display: grid;
   place-content: center;
+  position: relative;
 }
 .main__h1 {
   font-size: 7rem;

@@ -2,7 +2,7 @@ export class UiController {
     domElements = {
         body: {
             element: 'body',
-            events: ['keydown']
+            events: ['keydown', 'click']
         },
 
         audioSlider: {
@@ -11,8 +11,7 @@ export class UiController {
         },
 
         main: {
-            element: '.main',
-            events: ['click']
+            element: '.main'
         }
     }
 
@@ -47,28 +46,32 @@ export class UiController {
      * @param {Event} ev Appui d'une touche sur le clavier 
      */
     bodyHandler(ev) {
-        if (/^[a-zA-Z0-9_.-]*$/.test(ev.key) && ev.key.length === 1) {
-            this.audioManager.loadAudioFile(`keys/${ev.key}`);
+        switch (ev.type) {
+            case 'click':
+                const state = this.dataManager.getMiamoState();
+                if (state !== 'pending') {
+                    this[`${state}Event`](ev);
+                }
+                break;
+
+            case 'keydown':
+                if (/^[a-zA-Z0-9_.-]*$/.test(ev.key) && ev.key.length === 1) {
+                    this.audioManager.loadAudioFile(`keys/${ev.key}`);
+                }
+                break;
         }
     }
 
-    /**
-     * mainHandler() 
-     * @param {Event} ev Evenement au clic sur la section de jeu 
-     */
-    mainHandler(ev) {
-        const state = this.dataManager.getMiamoState()
-        if (state !== 'pending') {
-            this[`${state}Event`](ev);
-        }
-    }
     /**
      * introEvent() gère les clics sur le coeur de la page pendant l'introduction du site
      * @param {Event} ev Evenement au clic 
      */
     introEvent(ev) {
         if (ev.target.tagName == 'H1') {
-            document.body.requestFullscreen();
+            if (document.body.requestFullscreen) {
+                document.body.requestFullscreen();
+            }
+            console.log(ev.target.tagName)
             ev.target.classList.add('main__h1-anim')
             this.dataManager.setMiamoState('PENDING')
             this.audioManager.loadAudioFile('intro');

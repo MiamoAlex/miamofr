@@ -1,0 +1,17 @@
+.kitchen {
+    &__door {
+        position: absolute;
+        right: 12%;
+        top: 29%;
+        width: 10rem;
+        height: 15rem;
+    }
+
+    &__recipe {
+        width: 15rem;
+        position: absolute;
+        left: 50%;
+        top: 30%;
+        animation: float infinite 1s;
+    }
+}

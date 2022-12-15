@@ -2,9 +2,9 @@
     position: fixed;
     top: 0;
     font-size: 1.25rem;
-    width: 100%;
+    width: 100vw;
     z-index: 10;
     &__sound {
-        accent-color: #333;
+        accent-color: rgb(32, 32, 32);
     }
 }

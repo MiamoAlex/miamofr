@@ -1,21 +1,13 @@
 export class DataManager {
-    MIAMOSTATES = {
-        PENDING: 'pending',
-        INTRO: 'intro',
-        BURGER: 'burger',
-        EGLANTINE: 'eglantine',
-        HECTOR: 'hector'
-    }
-
-    currentState = this.MIAMOSTATES.INTRO;
+    canInterract = true;
+    currentState = 'intro';
 
     constructor() {
         if (localStorage.getItem('miamoSave')) {
             this.save = JSON.parse(localStorage.getItem('miamoSave'));
         } else {
             this.save = {
-                storyAdvancement: 0,
-                name: ""
+                state: "intro"
             }
         }
     }
@@ -25,7 +17,7 @@ export class DataManager {
      * @param {String} state 
      */
     setMiamoState(state) {
-        this.currentState = this.MIAMOSTATES[state];
+        this.currentState = state;
     }
 
     /**
@@ -34,6 +26,14 @@ export class DataManager {
      */
     getMiamoState() {
         return this.currentState;
+    }
+
+    /**
+     * Sauvegarde dans le cache de l'avancement de la partie et des données du joueur
+     */
+    saveData() {
+        this.save.state = this.currentState;
+        localStorage.setItem('miamoSave', JSON.stringify(this.save));
     }
     
 }

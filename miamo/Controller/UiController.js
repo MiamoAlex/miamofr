@@ -1,3 +1,5 @@
+import * as Miamo from '../index.js'
+
 export class UiController {
     domElements = {
         body: {
@@ -12,13 +14,20 @@ export class UiController {
 
         main: {
             element: '.main'
+        },
+
+        playground: {
+            element: '.main__playground',
+            events: ['mousemove']
         }
     }
 
-    constructor(dataManager, uiRenderer, audioManager) {
+    constructor(dataManager, uiRenderer) {
         this.dataManager = dataManager;
         this.uiRenderer = uiRenderer;
-        this.audioManager = audioManager;
+        this.audioManager = new Miamo.AudioManager();
+        this.requestManager = new Miamo.RequestManager();
+        this.eventHandler = new Miamo.EventHandlerCH1(this);
 
         this.uiRenderer.appendDomElements(this.domElements);
         for (const key in this.domElements) {
@@ -30,6 +39,20 @@ export class UiController {
                     }
                 });
             }
+        }
+    }
+
+    /**
+     * Déplacement de la caméra dans le monde
+     * @param {Event} ev 
+     */
+    playgroundHandler(ev) {
+        const rect = ev.currentTarget.getBoundingClientRect();
+        const x = ev.clientX - rect.left;
+        const y = ev.clientY - rect.top;
+        const playground = ev.currentTarget.children[0];
+        if (playground && playground.classList[0] == 'playground__content') {
+            playground.style.transform = `translate(${-x / 1064 * 30}%, ${-y / 1080 * 50}%)`
         }
     }
 
@@ -51,112 +74,24 @@ export class UiController {
     bodyHandler(ev) {
         switch (ev.type) {
             case 'click':
-                const state = this.dataManager.getMiamoState();
-                if (state !== 'pending') {
-                    this[`${state}Event`](ev);
+                this.audioManager.loadAudioFile('click', 'sfx');
+                if (this.dataManager.canInterract) {
+                    const dataset = ev.target.dataset;
+                    if (dataset.event) {
+                        this.eventHandler.triggerEvent(dataset.event, ev);
+                    } else if (dataset.voiceline) {
+                        this.audioManager.loadAudioFile(dataset.voiceline, 'voiceline')
+                    } else if (dataset.sfx) {
+                        this.audioManager.loadAudioFile(dataset.sfx, 'sfx')
+                    }
                 }
                 break;
 
             case 'keydown':
                 if (/^[a-zA-Z0-9_.-]*$/.test(ev.key) && ev.key.length === 1) {
-                    this.audioManager.loadAudioFile(`keys/${ev.key}`);
+                    this.audioManager.loadAudioFile(`keys/${ev.key}`, 'sfx');
                 }
                 break;
         }
     }
-
-    /**
-     * introEvent() gère les clics sur le coeur de la page pendant l'introduction du site
-     * @param {Event} ev Evenement au clic 
-     */
-    introEvent(ev) {
-        if (ev.target.tagName == 'H1') {
-            if (document.body.requestFullscreen) {
-                document.body.requestFullscreen();
-            }
-            ev.target.classList.add('main__h1-anim')
-            this.dataManager.setMiamoState('PENDING')
-            this.audioManager.loadAudioFile('intro');
-            setTimeout(() => {
-                ev.target.textContent = '.fr';
-            }, 8200);
-            setTimeout(() => {
-                this.uiRenderer.createImage('main', 'rire', 'main__happy', true);
-                setTimeout(() => {
-                    this.uiRenderer.createImage('main', 'chien', 'main__doggychien', true);
-                    setTimeout(() => {
-                        this.uiRenderer.createImage('main', 'burger', 'main__burger', true);
-                        this.dataManager.setMiamoState('BURGER')
-                    }, 5000);
-                }, 2000);
-            }, 10500);
-        }
-    }
-    /**
-     * burgerEvent() gère les clics sur le coeur de la page pendant qu'il y a le burger à l'écran
-     * @param {Event} ev Evenement au clic 
-     */
-    burgerEvent(ev) {
-        if (ev.target.className === 'main__burger') {
-            this.dataManager.setMiamoState('PENDING')
-            this.uiRenderer.getElement('main').innerHTML = '';
-            this.audioManager.loadAudioFile('eating');
-            setTimeout(() => {
-                this.audioManager.loadAudioFile('eglantine');
-                setTimeout(() => {
-                    const eglantine = this.uiRenderer.createImage('main', 'eglantine', 'main__eglantine', false);
-                    setTimeout(() => {
-                        const interval = setInterval(() => {
-                            const img = this.uiRenderer.createImage('main', 'alerte', 'main__alert', false);
-                            img.style.top = `calc(${Math.random() * 100}vh`;
-                            img.style.right = `calc(${Math.random() * 100}vw`;
-                        }, 400);
-                        setTimeout(() => {
-                            eglantine.classList.add('main__eglantine-run');
-                            eglantine.src = './assets/tex/eglantineburgz.png';
-                            clearInterval(interval);
-                            this.dataManager.setMiamoState('EGLANTINE')
-                        }, 15000);
-                    }, 2500);
-                }, 6000);
-            }, 1000);
-        }
-    }
-    /**
-     * eglantineEvent() gère les clics sur le coeur de la page pendant qu'il y a eglantine à l'écran
-     * @param {Event} ev Evenement au clic 
-     */
-    eglantineEvent(ev) {
-        if (ev.target.classList[1] === 'main__eglantine-run') {
-            this.dataManager.setMiamoState('PENDING')
-            this.audioManager.loadAudioFile('eglantinedeath');
-            this.uiRenderer.createImage('main', 'burgers', 'main__burgers', true);
-            setTimeout(() => {
-                this.audioManager.loadAudioFile('hector');
-            }, 300);
-
-            setTimeout(() => {
-                this.dataManager.setMiamoState('HECTOR')
-                this.uiRenderer.createImage('main', 'hector', 'main__hector', false);
-            }, 6000);
-
-        }
-    }
-    /**
-     * hectorEvent() gère les clics sur le coeur de la page pendant qu'il y a hector à l'écran
-     * @param {Event} ev Evenement au clic 
-     */
-    hectorEvent(ev) {
-        if (ev.target.className === 'main__hector') {
-            this.dataManager.setMiamoState('PENDING');
-            this.audioManager.loadAudioFile('hectordeath');
-            this.uiRenderer.createImage('main', 'burgers', 'main__burgers', true);
-            setTimeout(() => {
-                this.audioManager.loadAudioFile('chuchotemment');
-                this.uiRenderer.createImage('main', 'gustave', 'main__gustave', true);
-            }, 11000);
-        }
-    }
-
-
 }

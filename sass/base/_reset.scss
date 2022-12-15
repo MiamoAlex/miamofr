@@ -81,12 +81,15 @@ select {
 html,
 body {
   position: relative;
-  display: grid;
-  overflow: none;
-  place-content: center;
+  overflow: hidden;
   background-color: var(--clr-main-black);
   color: var(--clr-main-white);
   user-select: none;
+  cursor: url('/assets/tex/arrow.cur'), default;
+}
+
+[data-event], [data-voiceline], [data-sfx] {
+  cursor: url('/assets/tex/hover.cur'), default;
 }
 
 img {

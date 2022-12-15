@@ -11,3 +11,20 @@
         }
     }
 }
+
+
+.teleporter {
+    opacity: .25;
+    // background-color: #a06de5;
+}
+
+.magic {
+    background-color: purple;
+    width: 10rem;
+    height: 4rem;
+    left: 0;
+    right: 0;
+    margin: auto;
+    position: absolute;
+    bottom: 30%;
+}

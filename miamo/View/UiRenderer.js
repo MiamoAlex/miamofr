@@ -55,14 +55,25 @@ export class UiRenderer {
         destination.innerHTML = formattedTemplates;
     }
 
-    createImage(destination, src, className, clear) {
+    createImage(destination, src, className, clear, event) {
         if (clear) {
-            this.getElement('main').innerHTML = '';
+            this.getElement('playground').innerHTML = '';
         }
         const img = document.createElement('img');
         img.src = `./assets/tex/${src}.png`;
         img.className = className;
+        if (event) {
+            img.dataset.event = event;
+        }
         this.getElement(destination).appendChild(img);
         return img;
+    }
+
+    /**
+     * Chargement d'un nouveau playgorund à l'écran 
+     * @param {String} playground Contenu html du playground
+     */
+    loadPlayground(playground) {
+        this.getElement('playground').innerHTML = playground;
     }
 }

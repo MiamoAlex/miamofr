@@ -1,0 +1,24 @@
+.backroom {
+    &__eglantine {
+        position: absolute;
+        left: 10%;
+        bottom: 5%;
+        width: 9rem;
+    }
+
+    &__sign {
+        position: absolute;
+        left: 5%;
+        top: 30%;
+        width: 14rem;
+    }
+
+    &__adzpko {
+        position: absolute;
+        width: 4rem;
+        height: 13rem;
+        left: 42%;
+        top: 30%;
+        cursor: not-allowed;
+    }   
+}

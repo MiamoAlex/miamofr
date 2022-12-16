@@ -103,12 +103,22 @@ body {
   cursor: url("/assets/tex/arrow.cur"), default;
 }
 
-[data-event], [data-voiceline], [data-sfx], [data-playground], [data-sandwich] {
+[data-event],
+[data-voiceline],
+[data-sfx],
+[data-playground],
+[data-sandwich],
+[data-minigame] {
   cursor: url("/assets/tex/hover.cur"), default;
 }
 
 img {
   user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
 }
 
 use {
@@ -363,4 +373,38 @@ ul {
   left: 50%;
   top: 30%;
   animation: float infinite 1s;
+}
+
+.minigame__close {
+  color: #ee1414;
+  font-size: 5rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+.burgerclicker {
+  background: url(../../assets/backgrounds/burgerclick.png) no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 60rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+.burgerclicker__text {
+  font-size: 6rem;
+  position: absolute;
+  bottom: 6rem;
+}
+.burgerclicker__burger {
+  cursor: pointer;
+  width: 30rem;
+  transform: scale(1);
+  transition: transform 300ms;
+}
+.burgerclicker__burger:active {
+  transform: scale(0.9);
 }/*# sourceMappingURL=main.css.map */

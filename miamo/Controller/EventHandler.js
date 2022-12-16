@@ -16,6 +16,7 @@ export class EventHandler {
      */
     triggerEvent(event, ev) {
         this.dataManager.canInterract = false;
+        this.dataManager.playMode = 'playground';
         this[`${event}Event`](ev);
         if (this.lastEvent !== event) {
             this.lastEvent = event;
@@ -91,6 +92,7 @@ export class EventHandler {
      */
     async setupPlayground(playgroundName) {
         this.dataManager.canInterract = false;
+        this.dataManager.playMode = 'playground';
         const playgroundData = this.playgroundModels[playgroundName];
         if (playgroundData.music) {
             this.audioManager.loadAudioFile(playgroundData.music, 'music');

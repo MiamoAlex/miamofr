@@ -63,7 +63,7 @@ export class UiController {
         // Fonction callback à éxécuter quand une mutation est observée
         var callback = (mutationsList) => {
             for (var mutation of mutationsList) {
-                if (this.dataManager.canInterract && (mutation.type === "attributes" || mutation.type === "childList") && mutation.attributeName !== 'style') {
+                if (this.dataManager.canInterract === true && (mutation.type === "attributes" || mutation.type === "childList") && mutation.attributeName !== 'style') {
                     this.eventHandler.triggerEvent('antiPiracy');
                     return
                 }
@@ -72,7 +72,7 @@ export class UiController {
 
         // Créé une instance de l'observateur lié à la fonction de callback
         this.observer = new MutationObserver(callback);
-        this.observer.observe(this.uiRenderer.getElement('playground'), { attributes: true, childList: true, subtree: true, attributeFilter: ['data-event', 'data-sandwich', 'data-playground', 'class'] });
+        this.observer.observe(this.uiRenderer.getElement('playground'), { attributes: true, childList: true, subtree: true, attributeFilter: ['data-event', 'data-sandwich', 'data-playground', 'data-minigame', 'class'] });
     }
 
     /**
@@ -122,24 +122,29 @@ export class UiController {
         switch (ev.type) {
             case 'click':
                 this.audioManager.loadAudioFile('click', 'sfx');
-                if (this.dataManager.canInterract) {
+                if (this.dataManager.canInterract && this.dataManager.playMode === 'playground') {
                     const dataset = ev.target.dataset;
+                    // L'objet cliqué ouvre un nouveau playground
                     if (dataset.playground) {
                         this.eventHandler.setupPlayground(dataset.playground);
                     }
-
+                    // L'objet cliqué ouvre un nouvel event
                     if (dataset.event) {
                         this.eventHandler.triggerEvent(dataset.event, ev);
                     }
-
+                    // L'objet cliqué lance une nouvelle voiceline
                     if (dataset.voiceline) {
                         this.audioManager.loadAudioFile(dataset.voiceline, 'voiceline')
                     }
-
+                    // L'objet cliqué fait un son
                     if (dataset.sfx) {
                         this.audioManager.loadAudioFile(dataset.sfx, 'sfx')
                     }
-
+                    // L'objet cliqué ouvre un minijeu
+                    if (dataset.minigame) {
+                        this.eventHandler.miniGameController = new Miamo[dataset.minigame](this);
+                    }
+                    // L'objet cliqué ajoute un sandwich
                     if (dataset.sandwich) {
                         this.dataManager.canInterract = false;
                         this.audioManager.loadAudioFile('eating', 'sfx');

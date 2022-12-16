@@ -16,4 +16,13 @@ export class RequestManager {
         const req = await fetch(`./miamo/Model/playgrounds.json`);
         return await req.json();
     }
+    /**
+     * getMinigameUI() récupère l'interface du minijeu chargé
+     * @param {String} game 
+     * @returns {String}
+     */
+    async getMinigameUI(game) {
+        const req = await fetch(`./minigames/${game}.html`);
+        return await req.text();
+    }
 }

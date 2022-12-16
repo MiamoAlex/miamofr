@@ -1,17 +1,23 @@
 export class DataManager {
     canInterract = true;
     currentState = 'miamoIntro';
+    playMode = 'playground';
 
     constructor() {
         if (localStorage.getItem('miamoSave')) {
             this.save = JSON.parse(localStorage.getItem('miamoSave'));
+            // Conversion des vielles sauvegardes
             if (!this.save.sandwiches) {
                 this.save.sandwiches = []
+            }
+            if (!this.save.minigameStats) {
+                this.save.minigameStats = {}
             }
         } else {
             this.save = {
                 state: "miamoIntro",
-                sandwiches: []
+                sandwiches: [],
+                minigameStats: {}
             }
         }
     }

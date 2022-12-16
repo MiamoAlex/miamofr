@@ -28,6 +28,10 @@ export class BurgerClickerGame extends MiniGameController {
             case 'burgerclicker__burger':
                 this.stats.clicks++;
                 this.counter.textContent = this.stats.clicks;
+                const random = Math.random() * 100;
+                if (random > 95) {
+                    this.audioManager.loadAudioFile(`burgerclicker-reaction${Math.floor(Math.random() * 6 + 1)}`, 'sfx');
+                }
                 break;
         }
 

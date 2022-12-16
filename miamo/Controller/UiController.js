@@ -16,6 +16,10 @@ export class UiController {
             element: '.main'
         },
 
+        sandwiches: {
+            element: '.main__sandwiches'
+        },
+
         playground: {
             element: '.main__playground',
             events: ['mousemove']
@@ -69,6 +73,17 @@ export class UiController {
         // Créé une instance de l'observateur lié à la fonction de callback
         this.observer = new MutationObserver(callback);
         this.observer.observe(this.uiRenderer.getElement('playground'), { attributes: true, childList: true, subtree: true, attributeFilter: ['data-event', 'data-sandwich', 'data-playground', 'class'] });
+    }
+
+    /**
+     * updateSandwichesCounter() affiche le nombre de sandwiches collectés
+     */
+    updateSandwichesCounter() {
+        this.uiRenderer.getElement('sandwiches').classList.remove('hide');
+        this.uiRenderer.getElement('sandwiches').children[1].textContent = this.dataManager.save.sandwiches.length;
+        setTimeout(() => {
+            this.uiRenderer.getElement('sandwiches').classList.add('hide');
+        }, 3500);
     }
 
     /**
@@ -133,6 +148,7 @@ export class UiController {
                         } else {
                             this.dataManager.save.sandwiches = [parseInt(dataset.sandwich)];
                         }
+                        this.updateSandwichesCounter();
                         ev.target.remove();
                         setTimeout(() => {
                             this.dataManager.canInterract = true;

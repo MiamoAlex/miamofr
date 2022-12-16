@@ -7,6 +7,18 @@
     place-content: center;
     position: relative;
 
+    &__sandwiches {
+        @include flex(flex-start, flex-start, row);
+        gap: .5rem;
+        transition: opacity 300ms;
+        &-text {
+            font-size: 2rem;
+        }
+        &-img {
+            width: 4rem;
+        }
+    }
+
     &__playground {
         width: 100vw;
         height: 100vh;
@@ -41,7 +53,7 @@
     }
 
     &__alert {
-        transform: scale(.2);
+        transform: scale(0.2);
         position: absolute;
     }
 }

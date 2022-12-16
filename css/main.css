@@ -185,6 +185,10 @@ ul {
   opacity: 0.25;
 }
 
+.hide {
+  opacity: 0;
+}
+
 .magic {
   background-color: purple;
   width: 10rem;
@@ -226,6 +230,20 @@ ul {
   display: grid;
   place-content: center;
   position: relative;
+}
+.main__sandwiches {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: row;
+  gap: 0.5rem;
+  transition: opacity 300ms;
+}
+.main__sandwiches-text {
+  font-size: 2rem;
+}
+.main__sandwiches-img {
+  width: 4rem;
 }
 .main__playground {
   width: 100vw;

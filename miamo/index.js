@@ -7,3 +7,4 @@ export { AudioManager } from './Controller/AudioManager.js';
 export { RequestManager } from './Controller/RequestManager.js';
 export { EventHandler } from './Controller/EventHandler.js';
 export { EventHandlerCH1 } from './Controller/EventHandlerCH1.js';
+export { MiniGameController } from './Controller/MiniGameController.js';

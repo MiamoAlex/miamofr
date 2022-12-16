@@ -222,6 +222,20 @@ ul {
   right: 10%;
   bottom: 5%;
 }
+.sandwich__2 {
+  left: 12%;
+  bottom: 30%;
+}
+.sandwich__3 {
+  top: 30%;
+  width: 0.8rem;
+  right: 40%;
+}
+.sandwich__4 {
+  bottom: -5%;
+  right: -5%;
+  width: 15rem;
+}
 
 .header {
   position: fixed;
@@ -299,6 +313,21 @@ ul {
   transition: transform 100ms;
 }
 
+.kitchen__door {
+  position: absolute;
+  right: 12%;
+  top: 29%;
+  width: 10rem;
+  height: 15rem;
+}
+.kitchen__recipe {
+  width: 15rem;
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  animation: float infinite 1s;
+}
+
 .restaurant__eglantine {
   position: absolute;
   right: 15%;
@@ -360,19 +389,69 @@ ul {
   cursor: not-allowed;
 }
 
-.kitchen__door {
+.mageforest__teleporter {
   position: absolute;
-  right: 12%;
-  top: 29%;
-  width: 10rem;
-  height: 15rem;
+  width: 12rem;
+  height: 14rem;
+  left: 38%;
+  top: 36%;
 }
-.kitchen__recipe {
-  width: 15rem;
+.mageforest__eglantine {
   position: absolute;
-  left: 50%;
-  top: 30%;
-  animation: float infinite 1s;
+  left: 15%;
+  bottom: 25%;
+  width: 15rem;
+}
+.mageforest__poster {
+  position: absolute;
+  right: 30%;
+  top: 20%;
+  width: 10rem;
+}
+.mageforest__return {
+  height: 100%;
+  left: 0;
+  width: 12rem;
+}
+
+.traphouse__teleporter {
+  position: absolute;
+  width: 10rem;
+  height: 22rem;
+  right: 42%;
+  bottom: 15%;
+}
+.traphouse__return {
+  position: absolute;
+  left: 0;
+  width: 12rem;
+  height: 100%;
+}
+
+.magelake__return {
+  position: absolute;
+  right: 0;
+  height: 100%;
+}
+.magelake__frog {
+  position: absolute;
+  bottom: 5%;
+  right: 10%;
+  transform: scaleX(-1);
+  width: 10rem;
+}
+
+.weirdhouse__nerd {
+  position: absolute;
+  left: 45%;
+  bottom: 23%;
+  animation: float 1s infinite;
+}
+.weirdhouse__return {
+  position: absolute;
+  left: 0;
+  width: 12rem;
+  height: 100%;
 }
 
 .minigame__close {
@@ -407,4 +486,10 @@ ul {
 }
 .burgerclicker__burger:active {
   transform: scale(0.9);
+}
+.burgerclicker__logo {
+  position: absolute;
+  width: 16rem;
+  top: 0;
+  right: 4rem;
 }/*# sourceMappingURL=main.css.map */

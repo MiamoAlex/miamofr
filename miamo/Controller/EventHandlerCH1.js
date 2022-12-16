@@ -236,6 +236,17 @@ export class EventHandlerCH1 extends EventHandler {
         }
     }
 
+    rewardburgersEvent() {
+        this.uiRenderer.createImage('playground', 'eglantine', 'bravoooo !!', true, "");
+        this.audioManager.loadAudioFile('rewardburgers', 'voiceline', [
+            {
+                progress: 99, callback: () => {
+                    this.setupPlayground('restaurant');
+                }
+            }
+        ]);
+    }
+
     grandmaEndingEvent() {
         this.uiRenderer.createImage('playground', 'triste', 'ooh nonn snifff', true, "");
         this.audioManager.loadAudioFile('grandmaEnding', 'voiceline', [
@@ -259,7 +270,7 @@ export class EventHandlerCH1 extends EventHandler {
         this.uiRenderer.createImage('playground', 'recipe', 'main__recetteprevcieuse', true);
         this.audioManager.loadAudioFile('plottwist1', 'voiceline', [
             {
-                progress: 35, callback: () => {
+                progress: 33, callback: () => {
                     this.uiRenderer.createImage('playground', 'mechant', 'main__ohlevilainsorcier', true);
                 }
             },
@@ -269,16 +280,56 @@ export class EventHandlerCH1 extends EventHandler {
                 }
             },
             {
-                progress: 83, callback: () => {
+                progress: 78, callback: () => {
                     this.uiRenderer.createImage('playground', 'mechant', 'main__ohlevilainsorcier', true);
                 }
             },
             {
+                progress: 87, callback: () => {
+                    this.uiRenderer.createImage('playground', 'eglantine', 'SAUVE NOUS EGLANTINE', true);
+                }
+            },
+            {
                 progress: 99, callback: () => {
-                    this.setupPlayground('placeholder', 'ohnon');
+                    this.setupPlayground('mageforest', 'forestambient');
                 }
             }
         ]);
+    }
 
+    weirdhousenerdEvent() {
+        this.uiRenderer.createImage('playground', 'nerd', 'main__nzodev', true);
+        this.audioManager.loadAudioFile('enzo1', 'voiceline', [
+            {
+                progress: 21, callback: () => {
+                    this.uiRenderer.createImage('playground', 'triste', 'main__sniffysnif', true);
+                }
+            },
+            {
+                progress: 37, callback: () => {
+                    this.uiRenderer.createImage('playground', 'eglantine', 'main__eglantine', true);
+                }
+            },
+            {
+                progress: 48, callback: () => {
+                    this.uiRenderer.createImage('playground', 'hector', 'main__eglantine', true);
+                }
+            },
+            {
+                progress: 50, callback: () => {
+                    this.uiRenderer.createImage('playground', 'eglantine', 'main__eglantine', true);
+                }
+            },
+            {
+                progress: 60, callback: () => {
+                    this.uiRenderer.createImage('playground', 'nerd', 'grosnerd', true);
+                }
+            },
+            {
+                progress: 99, callback: () => {
+                    this.setupPlayground('placeholder');
+                }
+            }
+        ]);
     }
 }

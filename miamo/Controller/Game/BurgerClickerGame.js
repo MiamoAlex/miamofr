@@ -27,6 +27,11 @@ export class BurgerClickerGame extends MiniGameController {
 
             case 'burgerclicker__burger':
                 this.stats.clicks++;
+                switch (this.stats.clicks) {
+                    case 500:
+                        this.eventHandler.triggerEvent('rewardburgers');
+                        break;
+                }
                 this.counter.textContent = this.stats.clicks;
                 const random = Math.random() * 100;
                 if (random > 95) {

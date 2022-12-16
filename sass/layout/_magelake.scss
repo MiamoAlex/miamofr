@@ -1,0 +1,15 @@
+.magelake {
+    &__return {
+        position: absolute;
+        right: 0;
+        height: 100%;
+    }
+
+    &__frog {
+        position: absolute;
+        bottom: 5%;
+        right: 10%;
+        transform: scaleX(-1);
+        width: 10rem;
+    }
+}

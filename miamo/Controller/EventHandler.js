@@ -40,26 +40,33 @@ export class EventHandler {
             document.body.requestFullscreen();
         }
 
-        ev.target.classList.add('main__h1-anim')
-        this.audioManager.loadAudioFile('intro', 'voiceline', [
-            // le logo devient .fr
-            {
-                progress: 80, callback: () => {
-                    ev.target.textContent = '.fr';
-                }
-            },
-            // chargement de la sauvegarde ou début de la partie
-            {
-                progress: 95, callback: () => {
-                    this.dataManager.setMiamoState(this.dataManager.save.state);
-                    if (this[`${this.dataManager.getMiamoState()}Event`]) {
-                        this.triggerEvent(this.dataManager.getMiamoState());
-                    } else {
-                        this.setupPlayground(this.dataManager.getMiamoState());
-                    }
-                }
-            }
-        ]);
+        this.dataManager.setMiamoState(this.dataManager.save.state);
+        if (this[`${this.dataManager.getMiamoState()}Event`]) {
+            this.triggerEvent(this.dataManager.getMiamoState());
+        } else {
+            this.setupPlayground(this.dataManager.getMiamoState());
+        }
+
+        // ev.target.classList.add('main__h1-anim')
+        // this.audioManager.loadAudioFile('intro', 'voiceline', [
+        //     // le logo devient .fr
+        //     {
+        //         progress: 80, callback: () => {
+        //             ev.target.textContent = '.fr';
+        //         }
+        //     },
+        //     // chargement de la sauvegarde ou début de la partie
+        //     {
+        //         progress: 95, callback: () => {
+        //             this.dataManager.setMiamoState(this.dataManager.save.state);
+        //             if (this[`${this.dataManager.getMiamoState()}Event`]) {
+        //                 this.triggerEvent(this.dataManager.getMiamoState());
+        //             } else {
+        //                 this.setupPlayground(this.dataManager.getMiamoState());
+        //             }
+        //         }
+        //     }
+        // ]);
     }
 
     /**

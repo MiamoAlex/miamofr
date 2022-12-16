@@ -163,7 +163,7 @@ export class UiController {
                 break;
 
             case 'keydown':
-                if (/^[a-zA-Z0-9_.-]*$/.test(ev.key) && ev.key.length === 1) {
+                if (/^[a-zA-Z0-9_.-]*$/.test(ev.key.toLowerCase()) && ev.key.length === 1) {
                     this.audioManager.loadAudioFile(ev.key, 'keys');
                 }
                 break;

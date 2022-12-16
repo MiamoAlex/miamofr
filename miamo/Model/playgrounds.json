@@ -6,13 +6,34 @@
         ]
     },
     "kitchen": {
-        "music": "angel"
+        "music": "angel",
+        "sandwiches": [
+            2
+        ]
     },
     "backroom": {
         "music": "backroom",
         "sandwiches": [
             1
         ]
+    },
+    "magelake": {
+        "music": "forestambient",
+        "sandwiches": [
+            3
+        ]
+    },
+    "mageforest": {
+        "music": "forestambient"
+    },
+    "traphouse": {
+        "music": "forestambient",
+        "sandwiches": [
+            4
+        ]
+    },
+    "weirdhouse": {
+        "music": "weirdhouse"
     },
     "placeholder": {
         "music": "ohnon"

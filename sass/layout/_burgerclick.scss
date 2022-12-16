@@ -23,4 +23,11 @@
             transform: scale(.9);
         }
     }
+
+    &__logo {
+        position: absolute;
+        width: 16rem;
+        top: 0;
+        right: 4rem;
+    }
 }

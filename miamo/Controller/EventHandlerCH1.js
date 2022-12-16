@@ -5,6 +5,9 @@ export class EventHandlerCH1 extends EventHandler {
         super(uiController);
     }
 
+    /**
+     * Bienvenue sur miamo.fr !!!
+     */
     miamoIntroEvent() {
         // superbe image de personne souriant 😅😅😅😅
         this.uiRenderer.createImage('playground', 'rire', 'main__happy', true);
@@ -29,6 +32,9 @@ export class EventHandlerCH1 extends EventHandler {
         ]);
     }
 
+    /**
+     * Tu manges le burger et eglantine apparait
+     */
     burgerEvent() {
         this.uiRenderer.getElement('playground').innerHTML = '';
         this.audioManager.loadAudioFile('eating', 'sfx');
@@ -67,6 +73,9 @@ export class EventHandlerCH1 extends EventHandler {
         }, 1000);
     }
 
+    /**
+     * Eglantine est repoussée et les burgers sont sauvés?
+     */
     eglantineEvent() {
         clearTimeout(this.timedEvent);
         this.audioManager.loadAudioFile('eglantinedeath', 'sfx');
@@ -89,6 +98,9 @@ export class EventHandlerCH1 extends EventHandler {
         ]);
     }
 
+    /**
+     * Eglantine absorbe les burgers et devient énorme
+     */
     eglantineEatsBurgersEvent() {
         this.audioManager.loadAudioFile('eglantineEatsBurgers', 'voiceline', [
             {
@@ -109,6 +121,9 @@ export class EventHandlerCH1 extends EventHandler {
         ]);
     }
 
+    /**
+     * hector mange tous les burgers et MEURT.
+     */
     hectorEatsBurgersEvent() {
         this.audioManager.loadAudioFile('hectordeathburgers', 'voiceline', [
             {
@@ -129,6 +144,9 @@ export class EventHandlerCH1 extends EventHandler {
         ]);
     }
 
+    /**
+     * tu tues hector (bravo... (il est mort))
+     */
     hectorEvent() {
         clearTimeout(this.timedEvent);
         this.uiRenderer.createImage('playground', 'burgers', 'main__burgers', true);
@@ -148,6 +166,9 @@ export class EventHandlerCH1 extends EventHandler {
         ]);
     }
 
+    /**
+     * Fin de l'intro et entrée dans le restaurant
+     */
     introEndEvent() {
         this.uiRenderer.getElement('playground').innerHTML = '';
         this.audioManager.loadAudioFile('introEnd', 'voiceline', [
@@ -164,6 +185,9 @@ export class EventHandlerCH1 extends EventHandler {
         ]);
     }
 
+    /**
+     * un sorcier maléfique vient nous voler la recette !!!!!!!!!!!!
+     */
     recipeEvent() {
         this.uiRenderer.createImage('playground', 'recipe', 'main__recetteprevcieuse', true);
         this.audioManager.loadAudioFile('plottwist1', 'voiceline', [

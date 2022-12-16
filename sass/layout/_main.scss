@@ -16,6 +16,7 @@
         max-height: 720px;
         position: relative;
         overflow: hidden;
+        transition: filter 300ms;
     }
 
     &__h1 {

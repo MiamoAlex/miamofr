@@ -22,6 +22,11 @@ export class UiController {
         }
     }
 
+    cursorPosition = {
+        x: 0,
+        y: 0
+    };
+
     constructor(dataManager, uiRenderer) {
         this.dataManager = dataManager;
         this.uiRenderer = uiRenderer;
@@ -40,6 +45,16 @@ export class UiController {
                 });
             }
         }
+
+        // Fonction callback à éxécuter quand une mutation est observée
+        var callback = function (mutationsList) {
+            for (var mutation of mutationsList) {
+                // console.log(mutation)
+            }
+        };
+
+        // Créé une instance de l'observateur lié à la fonction de callback
+        this.observer = new MutationObserver(callback);
     }
 
     /**
@@ -48,11 +63,13 @@ export class UiController {
      */
     playgroundHandler(ev) {
         const rect = ev.currentTarget.getBoundingClientRect();
-        const x = ev.clientX - rect.left;
-        const y = ev.clientY - rect.top;
+        this.cursorPosition = {
+            x: ev.clientX - rect.left,
+            y: ev.clientY - rect.top
+        }
         const playground = ev.currentTarget.children[0];
         if (playground && playground.classList[0] == 'playground__content') {
-            playground.style.transform = `translate(${-x / 1064 * 30}%, ${-y / 1080 * 50}%)`
+            playground.style.transform = `translate(${-this.cursorPosition.x / 1064 * 30}%, ${-this.cursorPosition.y / 1080 * 50}%)`
         }
     }
 
@@ -89,7 +106,7 @@ export class UiController {
 
             case 'keydown':
                 if (/^[a-zA-Z0-9_.-]*$/.test(ev.key) && ev.key.length === 1) {
-                    this.audioManager.loadAudioFile(`keys/${ev.key}`, 'sfx');
+                    this.audioManager.loadAudioFile(ev.key, 'keys');
                 }
                 break;
         }

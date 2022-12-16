@@ -13,6 +13,7 @@ export class EventHandler {
      * @param {*} ev Eventuel evenement js
      */
     triggerEvent(event, ev) {
+        console.log(event)
         this[`${event}Event`](ev);
         if (event !== 'intro') {
             this.dataManager.setMiamoState(event);
@@ -22,6 +23,7 @@ export class EventHandler {
             }
         }
     };
+
     /**
      * introEvent() gère l'animatino du lancement de la page et la suite
      * @param {Evenement au clic} ev Clic sur miamo.fr 
@@ -33,7 +35,7 @@ export class EventHandler {
         }
 
         ev.target.classList.add('main__h1-anim')
-        this.audioManager.loadAudioFile('intro', 'sfx', [
+        this.audioManager.loadAudioFile('intro', 'voiceline', [
             // le logo devient .fr
             {
                 progress: 80, callback: () => {
@@ -50,6 +52,19 @@ export class EventHandler {
                     } else {
                         this.triggerEvent('miamoIntro');
                     }
+                }
+            }
+        ]);
+    }
+
+    /**
+     * antiPiracyEvent fait apparaitre un gros bébé énervé contre les méchants pirates
+     */
+    antiPiracyEvent() {
+        this.audioManager.loadAudioFile('antipiracy', [
+            {
+                progress: 0, callback: () => {
+                    this.uiRenderer.createImage('playground', 'antipiracy', 'main__bebz', true, 'miamoIntro');
                 }
             }
         ]);

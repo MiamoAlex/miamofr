@@ -6,21 +6,15 @@ export class EventHandlerCH1 extends EventHandler {
     }
 
     miamoIntroEvent() {
-        // Bienvenue sur miamo.fr
+        // superbe image de personne souriant 😅😅😅😅
+        this.uiRenderer.createImage('playground', 'rire', 'main__happy', true);
         this.audioManager.loadAudioFile('welcome', 'voiceline', [
-            // superbe image de personne souriant 😅😅😅😅
-            {
-                progress: 1, callback: async () => {
-                    this.uiRenderer.createImage('playground', 'rire', 'main__happy', true);
-                }
-            },
             // Apparition du doggy chien
             {
                 progress: 20, callback: () => {
                     this.uiRenderer.createImage('playground', 'chien', 'main__doggychien', true);
                 }
             },
-
             // hamburger moment 🍔
             {
                 progress: 85, callback: () => {
@@ -101,17 +95,17 @@ export class EventHandlerCH1 extends EventHandler {
     }
 
     async restaurantEvent() {
-        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground('restaurant'));
+        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground('restaurant'), this.uiController.cursorPosition);
         this.audioManager.loadAudioFile('ohnon', 'music');
     }
 
     async backroomEvent() {
-        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground('backroom'));
+        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground('backroom'), this.uiController.cursorPosition);
         this.audioManager.loadAudioFile('backroom', 'music');
     }
 
     async kitchenEvent() {
-        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground('kitchen'));
+        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground('kitchen'), this.uiController.cursorPosition);
         this.audioManager.loadAudioFile('angel', 'music');
     }
 
@@ -145,7 +139,7 @@ export class EventHandlerCH1 extends EventHandler {
      * placeholderEndingEvent()
      */
     async placeholderEndingEvent() {
-        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground('placeholder'));
+        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground('placeholder'), this.uiController.cursorPosition);
         this.audioManager.loadAudioFile('ohnon', 'music');
     }
 }

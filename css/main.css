@@ -223,6 +223,7 @@ ul {
   max-height: 720px;
   position: relative;
   overflow: hidden;
+  transition: filter 300ms;
 }
 .main__h1 {
   font-size: 7rem;

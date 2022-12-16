@@ -3,13 +3,17 @@ export class AudioManager {
     volume = .5;
     currentSounds = [];
 
+
+    constructor() {
+    }
+
     /**
      * loadAudioFile() s'occupe de charger un fichier audio pour le jouer
      * @param {String} audio Nom d'un fichier audio
      * @param {Array<Object>} callbacks Callbacks à jouer selon un certain temps
      */
     loadAudioFile(audioName, type, callbacks) {
-        const audio = new Audio(`./assets/audio/${audioName}.mp3`);
+        const audio = new Audio(`./assets/audio/${type}/${audioName}.mp3`);
         audio.volume = this.volume;
         audio.play();
         this.currentSounds.push(audio);
@@ -23,7 +27,7 @@ export class AudioManager {
                 break;
 
             case 'music':
-                audio.volume = this.volume * .75;
+                audio.volume = this.volume * .65;
                 this.currentMusic = audio;
                 audio.loop = true;
                 break;

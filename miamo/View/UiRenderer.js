@@ -55,6 +55,15 @@ export class UiRenderer {
         destination.innerHTML = formattedTemplates;
     }
 
+    /**
+     * createImage() génére une image avec certains parametres à l'écran
+     * @param {Node} destination Destinatino de l'image
+     * @param {String} src Nom de l'image pour remplir l'url
+     * @param {String} className Classe css à donner à l'image
+     * @param {boolean} clear Faut-il nettoyer l'écran (propre)
+     * @param {Event} event Dataset à remplir sur l'image qui doit déclencher un evenement
+     * @returns 
+     */
     createImage(destination, src, className, clear, event) {
         if (clear) {
             this.getElement('playground').innerHTML = '';
@@ -73,7 +82,12 @@ export class UiRenderer {
      * Chargement d'un nouveau playgorund à l'écran 
      * @param {String} playground Contenu html du playground
      */
-    loadPlayground(playground) {
-        this.getElement('playground').innerHTML = playground;
+    loadPlayground(playground, currentPos) {
+        this.getElement('playground').style.filter = 'brightness(0)';
+        setTimeout(() => {
+            this.getElement('playground').innerHTML = playground;
+            document.querySelector('.playground__content').style.transform = `translate(${-currentPos.x / 1064 * 30}%, ${-currentPos.y / 1080 * 50}%)`;
+            this.getElement('playground').style.filter = 'brightness(1)';
+        }, 300);
     }
 }

@@ -1,13 +1,17 @@
 export class DataManager {
     canInterract = true;
-    currentState = 'intro';
+    currentState = 'miamoIntro';
 
     constructor() {
         if (localStorage.getItem('miamoSave')) {
             this.save = JSON.parse(localStorage.getItem('miamoSave'));
+            if (!this.save.sandwiches) {
+                this.save.sandwiches = []
+            }
         } else {
             this.save = {
-                state: "miamoIntro"
+                state: "miamoIntro",
+                sandwiches: []
             }
         }
     }

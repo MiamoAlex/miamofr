@@ -27,7 +27,8 @@ export class UiController {
         y: 0
     };
 
-    constructor(dataManager, uiRenderer) {
+    constructor(dataManager, uiRenderer, window) {
+        this.window = window;
         this.dataManager = dataManager;
         this.uiRenderer = uiRenderer;
         this.audioManager = new Miamo.AudioManager();
@@ -46,6 +47,11 @@ export class UiController {
             }
         }
 
+        // Chargement du volume sonore
+        if (this.dataManager.save.volume) {
+            this.uiRenderer.getElement('audioSlider').value = this.audioManager.volume = this.dataManager.save.volume;
+        }
+
         console.log('%cbienvenue sur miamo.fr 👓', 'font-size:2rem;color:aquamarine');
         console.log('%csi tu es un pirate 🦜 alors pars rapidement car ici on ne rigole pas avec les pirates !!!! on a la bébé police avec nous alors attention', 'font-size:1rem;color:pink; font-weight:bold');
         console.log('%cburger', 'font-size:.4rem;color:aquamarine');
@@ -54,7 +60,7 @@ export class UiController {
         var callback = (mutationsList) => {
             for (var mutation of mutationsList) {
                 if (this.dataManager.canInterract && (mutation.type === "attributes" || mutation.type === "childList") && mutation.attributeName !== 'style') {
-                    this.eventHandler.triggerEvent('antiPiracy');      
+                    this.eventHandler.triggerEvent('antiPiracy');
                     return
                 }
             }
@@ -62,7 +68,7 @@ export class UiController {
 
         // Créé une instance de l'observateur lié à la fonction de callback
         this.observer = new MutationObserver(callback);
-        this.observer.observe(this.uiRenderer.getElement('playground'), { attributes: true, childList: true, subtree: true });
+        this.observer.observe(this.uiRenderer.getElement('playground'), { attributes: true, childList: true, subtree: true, attributeFilter: ['data-event', 'data-sandwich', 'data-playground', 'class'] });
     }
 
     /**
@@ -86,7 +92,8 @@ export class UiController {
      * @param {Event} ev Evenement au clic sur l'input
      */
     audioSliderHandler(ev) {
-        this.audioManager.volume = ev.target.value;
+        this.audioManager.volume = this.dataManager.save.volume = ev.target.value;
+        this.dataManager.saveData();
         this.audioManager.currentSounds.forEach(audio => {
             audio.volume = this.audioManager.volume;
         });
@@ -108,14 +115,28 @@ export class UiController {
 
                     if (dataset.event) {
                         this.eventHandler.triggerEvent(dataset.event, ev);
-                    } 
-                    
+                    }
+
                     if (dataset.voiceline) {
                         this.audioManager.loadAudioFile(dataset.voiceline, 'voiceline')
-                    } 
-                    
+                    }
+
                     if (dataset.sfx) {
                         this.audioManager.loadAudioFile(dataset.sfx, 'sfx')
+                    }
+
+                    if (dataset.sandwich) {
+                        this.dataManager.canInterract = false;
+                        this.audioManager.loadAudioFile('eating', 'sfx');
+                        if (this.dataManager.save.sandwiches) {
+                            this.dataManager.save.sandwiches.push(parseInt(dataset.sandwich));
+                        } else {
+                            this.dataManager.save.sandwiches = [parseInt(dataset.sandwich)];
+                        }
+                        ev.target.remove();
+                        setTimeout(() => {
+                            this.dataManager.canInterract = true;
+                        }, 300);
                     }
                 }
                 break;

@@ -7,6 +7,8 @@ export class EventHandler {
         this.requestManager = this.uiController.requestManager;
     }
 
+    currentCountEvent = 0;
+    lastEvent = '';
     /**
      * triggerEvent enclenche un evenement de l'histoire
      * @param {Event} event Evenement à enclencher
@@ -15,6 +17,10 @@ export class EventHandler {
     triggerEvent(event, ev) {
         this.dataManager.canInterract = false;
         this[`${event}Event`](ev);
+        if (this.lastEvent !== event) {
+            this.lastEvent = event;
+            this.currentCountEvent = 0;
+        }
         if (event !== 'intro' && event !== 'antiPiracy') {
             this.dataManager.setMiamoState(event);
             this.dataManager.saveData();
@@ -79,6 +85,10 @@ export class EventHandler {
         ]);
     }
 
+    /**
+     * Evenement général de génération des playgrounds
+     * @param {String} playgroundName 
+     */
     async setupPlayground(playgroundName) {
         this.dataManager.canInterract = false;
         const playgroundData = this.playgroundModels[playgroundName];
@@ -87,10 +97,10 @@ export class EventHandler {
         }
         this.dataManager.setMiamoState(playgroundName);
         this.dataManager.saveData();
-        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground(playgroundName), this.uiController.cursorPosition);
+        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground(playgroundName), this.uiController.cursorPosition, playgroundData.sandwiches, this.dataManager.save.sandwiches);
         setTimeout(() => {
             this.dataManager.canInterract = true;
-        }, 300);
+        }, 600);
     }
 
 }

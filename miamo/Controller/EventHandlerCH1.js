@@ -65,7 +65,7 @@ export class EventHandlerCH1 extends EventHandler {
                     }
                 },
                 {
-                    progress: 85, callback: () => {
+                    progress: 82, callback: () => {
                         this.dataManager.canInterract = true;
                     }
                 }
@@ -180,6 +180,73 @@ export class EventHandlerCH1 extends EventHandler {
             {
                 progress: 85, callback: () => {
                     this.dataManager.canInterract = true;
+                }
+            }
+        ]);
+    }
+
+    grandmaEvent() {
+        this.currentCountEvent++;
+        const grandma = this.uiRenderer.createImage('playground', 'grandma', 'GRAND MAMIE', true, "");
+        let grandmaLine;
+        switch (this.currentCountEvent) {
+            case 3:
+                grandmaLine = 'grandma1';
+                break;
+
+            case 5:
+                grandmaLine = 'grandma2';
+                break;
+
+            case 6:
+                grandmaLine = 'grandma3';
+                break;
+
+            case 7:
+                this.audioManager.loadAudioFile('grandmascreamer', 'voiceline', [
+                    {
+                        progress: 90, callback: () => {
+                            this.dataManager.save.state = 'grandmaending';
+                        }
+                    },
+                    {
+                        progress: 83, callback: () => {
+                            this.uiRenderer.createImage('playground', 'killergrandma', 't mort', true, "");
+                            setTimeout(() => {
+                                this.triggerEvent('grandmaEnding');
+                            }, 200);
+                        }
+                    }
+                ]);
+                break;
+
+            default:
+                grandmaLine = 'grandmabreath';
+                break;
+        }
+        if (this.currentCountEvent < 7) {
+            grandma.style.transform = `scale(${1 + this.currentCountEvent / 8})`;
+            this.audioManager.loadAudioFile(grandmaLine, 'voiceline', [
+                {
+                    progress: 99, callback: () => {
+                        this.setupPlayground('restaurant');
+                    }
+                }
+            ]);
+        }
+    }
+
+    grandmaEndingEvent() {
+        this.uiRenderer.createImage('playground', 'triste', 'ooh nonn snifff', true, "");
+        this.audioManager.loadAudioFile('grandmaEnding', 'voiceline', [
+            {
+                progress: 78, callback: () => {
+                    this.uiRenderer.getElement('playground').innerHTML = 'fin grand-mère';
+                }
+            },
+            {
+                progress: 99, callback: () => {
+                    this.setupPlayground('restaurant');
                 }
             }
         ]);

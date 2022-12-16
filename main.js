@@ -29,7 +29,7 @@ const App = {
             }
             App.model.dataManager = new Miamo.DataManager();
             App.view.uiRenderer = new Miamo.UiRenderer();
-            App.controller.uiController = new Miamo.UiController(App.model.dataManager, App.view.uiRenderer);
+            App.controller.uiController = new Miamo.UiController(App.model.dataManager, App.view.uiRenderer, window);
             App.controller.uiController.eventHandler.playgroundModels = await App.controller.uiController.requestManager.getPlaygroundModel();
         }
     },

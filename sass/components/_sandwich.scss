@@ -1,0 +1,12 @@
+.sandwich {
+    width: 8rem;
+    position: absolute;
+    &__0 {
+        top: 60%;
+        left: 50%;
+    }
+    &__1 {
+        right: 10%;
+        bottom: 5%;
+    }
+}

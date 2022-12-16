@@ -73,7 +73,7 @@ export class UiRenderer {
         img.className = className;
         if (event) {
             img.dataset.event = event;
-        } 
+        }
         if (playground) {
             img.dataset.playground = playground;
         }
@@ -85,12 +85,21 @@ export class UiRenderer {
      * Chargement d'un nouveau playgorund à l'écran 
      * @param {String} playground Contenu html du playground
      */
-    loadPlayground(playground, currentPos) {
+    loadPlayground(playground, currentPos, sandwiches, playerSandwiches) {
         this.getElement('playground').style.filter = 'brightness(0)';
+        // Après l'animation, création du playground
         setTimeout(() => {
             this.getElement('playground').innerHTML = playground;
-            document.querySelector('.playground__content').style.transform = `translate(${-currentPos.x / 1064 * 30}%, ${-currentPos.y / 1080 * 50}%)`;
+            const playergroundContent = document.querySelector('.playground__content');
+            playergroundContent.style.backgroundImage = `url(../../assets/backgrounds/${playergroundContent.dataset.background}.png)`
+            playergroundContent.style.transform = `translate(${-currentPos.x / 1064 * 30}%, ${-currentPos.y / 1080 * 50}%)`;
             this.getElement('playground').style.filter = 'brightness(1)';
+            // Création des sandwiches
+            sandwiches.forEach(sandwich => {
+                if (!playerSandwiches.includes(sandwich)) {
+                    playergroundContent.innerHTML += `<img src="../assets/tex/sandwich.gif" alt="mmmhmmhmhh h l e bon sandwiiiich" class="sandwich sandwich__${sandwich}" data-sandwich="${sandwich}">`;
+                }
+            });
         }, 300);
     }
 }

@@ -8,19 +8,7 @@
         right: 0;
         margin: auto;
         background-size: 100% 100%;
+        background-repeat: no-repeat;
         transition: transform 100ms;
-    }
-    &__restaurant
-    {
-        background: url(../../assets/backgrounds/restaurant.png) no-repeat;
-    }
-    &__backroom {
-        background: url(../../assets/backgrounds/backroom.png) no-repeat;
-    }
-    &__kitchen {
-        background: url(../../assets/backgrounds/kitchen.png) no-repeat;
-    }
-    &__placeholder {
-        background: url(../../assets/backgrounds/placeholder.png) no-repeat;
     }
 }

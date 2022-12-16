@@ -103,7 +103,7 @@ body {
   cursor: url("/assets/tex/arrow.cur"), default;
 }
 
-[data-event], [data-voiceline], [data-sfx], [data-playground] {
+[data-event], [data-voiceline], [data-sfx], [data-playground], [data-sandwich] {
   cursor: url("/assets/tex/hover.cur"), default;
 }
 
@@ -196,6 +196,19 @@ ul {
   bottom: 30%;
 }
 
+.sandwich {
+  width: 8rem;
+  position: absolute;
+}
+.sandwich__0 {
+  top: 60%;
+  left: 50%;
+}
+.sandwich__1 {
+  right: 10%;
+  bottom: 5%;
+}
+
 .header {
   position: fixed;
   top: 0;
@@ -254,19 +267,8 @@ ul {
   right: 0;
   margin: auto;
   background-size: 100% 100%;
+  background-repeat: no-repeat;
   transition: transform 100ms;
-}
-.playground__restaurant {
-  background: url(../../assets/backgrounds/restaurant.png) no-repeat;
-}
-.playground__backroom {
-  background: url(../../assets/backgrounds/backroom.png) no-repeat;
-}
-.playground__kitchen {
-  background: url(../../assets/backgrounds/kitchen.png) no-repeat;
-}
-.playground__placeholder {
-  background: url(../../assets/backgrounds/placeholder.png) no-repeat;
 }
 
 .restaurant__eglantine {
@@ -287,6 +289,13 @@ ul {
   top: 40%;
   width: 10rem;
   height: 15rem;
+}
+.restaurant__grandma {
+  position: absolute;
+  width: 12rem;
+  height: 18rem;
+  right: 0;
+  bottom: 10%;
 }
 .restaurant__gustave {
   position: absolute;

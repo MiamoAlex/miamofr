@@ -13,9 +13,9 @@ export class EventHandler {
      * @param {*} ev Eventuel evenement js
      */
     triggerEvent(event, ev) {
-        console.log(event)
+        this.dataManager.canInterract = false;
         this[`${event}Event`](ev);
-        if (event !== 'intro') {
+        if (event !== 'intro' && event !== 'antiPiracy') {
             this.dataManager.setMiamoState(event);
             this.dataManager.saveData();
             if (this.audioManager.currentMusic) {
@@ -29,7 +29,6 @@ export class EventHandler {
      * @param {Evenement au clic} ev Clic sur miamo.fr 
      */
     introEvent(ev) {
-        this.dataManager.canInterract = false;
         if (document.body.requestFullscreen) {
             document.body.requestFullscreen();
         }
@@ -45,12 +44,11 @@ export class EventHandler {
             // chargement de la sauvegarde ou début de la partie
             {
                 progress: 95, callback: () => {
-                    if (this.dataManager.save.state !== 'intro') {
-                        this.dataManager.canInterract = true;
-                        this.dataManager.setMiamoState(this.dataManager.save.state);
+                    this.dataManager.setMiamoState(this.dataManager.save.state);
+                    if (this[`${this.dataManager.getMiamoState()}Event`]) {
                         this.triggerEvent(this.dataManager.getMiamoState());
                     } else {
-                        this.triggerEvent('miamoIntro');
+                        this.setupPlayground(this.dataManager.getMiamoState());
                     }
                 }
             }
@@ -61,13 +59,38 @@ export class EventHandler {
      * antiPiracyEvent fait apparaitre un gros bébé énervé contre les méchants pirates
      */
     antiPiracyEvent() {
-        this.audioManager.loadAudioFile('antipiracy', [
+        this.audioManager.loadAudioFile('antipiracy', 'voiceline', [
             {
-                progress: 0, callback: () => {
+                progress: 1, callback: () => {
                     this.uiRenderer.createImage('playground', 'antipiracy', 'main__bebz', true, 'miamoIntro');
+                    this.uiRenderer.getElement('playground').append('écran sécurité anti pirate !! ! !! ! ! !!! bébé police')
+                }
+            },
+            {
+                progress: 95, callback: () => {
+                    this.dataManager.setMiamoState(this.dataManager.save.state);
+                    if (this[`${this.dataManager.getMiamoState()}Event`]) {
+                        this.triggerEvent(this.dataManager.getMiamoState());
+                    } else {
+                        this.setupPlayground(this.dataManager.getMiamoState());
+                    }
                 }
             }
         ]);
+    }
+
+    async setupPlayground(playgroundName) {
+        this.dataManager.canInterract = false;
+        const playgroundData = this.playgroundModels[playgroundName];
+        if (playgroundData.music) {
+            this.audioManager.loadAudioFile(playgroundData.music, 'music');
+        }
+        this.dataManager.setMiamoState(playgroundName);
+        this.dataManager.saveData();
+        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground(playgroundName), this.uiController.cursorPosition);
+        setTimeout(() => {
+            this.dataManager.canInterract = true;
+        }, 300);
     }
 
 }

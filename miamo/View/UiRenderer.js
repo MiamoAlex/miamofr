@@ -64,7 +64,7 @@ export class UiRenderer {
      * @param {Event} event Dataset à remplir sur l'image qui doit déclencher un evenement
      * @returns 
      */
-    createImage(destination, src, className, clear, event) {
+    createImage(destination, src, className, clear, event, playground) {
         if (clear) {
             this.getElement('playground').innerHTML = '';
         }
@@ -73,6 +73,9 @@ export class UiRenderer {
         img.className = className;
         if (event) {
             img.dataset.event = event;
+        } 
+        if (playground) {
+            img.dataset.playground = playground;
         }
         this.getElement(destination).appendChild(img);
         return img;

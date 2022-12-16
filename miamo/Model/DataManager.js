@@ -7,7 +7,7 @@ export class DataManager {
             this.save = JSON.parse(localStorage.getItem('miamoSave'));
         } else {
             this.save = {
-                state: "intro"
+                state: "miamoIntro"
             }
         }
     }

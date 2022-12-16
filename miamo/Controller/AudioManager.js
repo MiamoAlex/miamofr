@@ -27,6 +27,9 @@ export class AudioManager {
                 break;
 
             case 'music':
+                if (this.currentMusic) {
+                    this.currentMusic.pause();
+                }
                 audio.volume = this.volume * .65;
                 this.currentMusic = audio;
                 audio.loop = true;

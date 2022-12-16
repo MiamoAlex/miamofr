@@ -1,0 +1,17 @@
+{
+    "restaurant": {
+        "music": "ohnon"
+    },
+    
+    "kitchen": {
+        "music": "angel"
+    },
+
+    "backroom": {
+        "music": "backroom"
+    },
+
+    "placeholder" : {
+        "music": "ohnon"
+    }
+}

@@ -19,9 +19,13 @@ export class EventHandlerCH1 extends EventHandler {
             {
                 progress: 85, callback: () => {
                     this.uiRenderer.createImage('playground', 'burger', 'main__burger', true, 'burger');
-                    this.dataManager.canInterract = true;
                 }
             },
+            {
+                progress: 90, callback: () => {
+                    this.dataManager.canInterract = true;
+                }
+            }
         ]);
     }
 
@@ -49,6 +53,14 @@ export class EventHandlerCH1 extends EventHandler {
                         this.eglantine.dataset.event = 'eglantine';
                         this.eglantine.src = './assets/tex/eglantineburgz.png';
                         clearInterval(this.interval);
+                        this.timedEvent = setTimeout(() => {
+                            this.triggerEvent('eglantineEatsBurgers');
+                        }, 10000);
+                    }
+                },
+                {
+                    progress: 85, callback: () => {
+                        this.dataManager.canInterract = true;
                     }
                 }
             ]);
@@ -56,17 +68,69 @@ export class EventHandlerCH1 extends EventHandler {
     }
 
     eglantineEvent() {
+        clearTimeout(this.timedEvent);
         this.audioManager.loadAudioFile('eglantinedeath', 'sfx');
         this.uiRenderer.createImage('playground', 'burgers', 'main__burgers', true);
-        this.audioManager.loadAudioFile('hector', 'voiceline', [{
-            // un hector sauvage apparait (pas pokemon hein l'oiseau)
-            progress: 50, callback: () => {
-                this.uiRenderer.createImage('playground', 'hector', 'main__hector', false, 'hector');
+        this.audioManager.loadAudioFile('hector', 'voiceline', [
+            {
+                // un hector sauvage apparait (pas pokemon hein l'oiseau)
+                progress: 50, callback: () => {
+                    this.uiRenderer.createImage('playground', 'hector', 'main__hector', false, 'hector');
+                }
+            },
+            {
+                progress: 55, callback: () => {
+                    this.dataManager.canInterract = true;
+                    this.timedEvent = setTimeout(() => {
+                        this.triggerEvent('hectorEatsBurgers');
+                    }, 6000);
+                }
             }
-        }]);
+        ]);
+    }
+
+    eglantineEatsBurgersEvent() {
+        this.audioManager.loadAudioFile('eglantineEatsBurgers', 'voiceline', [
+            {
+                progress: 1, callback: () => {
+                    this.uiRenderer.getElement('playground').innerHTML = '';
+                }
+            },
+            {
+                progress: 30, callback: () => {
+                    this.uiRenderer.createImage('playground', 'fateglantine', 'main__elleestenorme', true);
+                }
+            },
+            {
+                progress: 99, callback: () => {
+                    this.triggerEvent('introEnd');
+                }
+            }
+        ]);
+    }
+
+    hectorEatsBurgersEvent() {
+        this.audioManager.loadAudioFile('hectordeathburgers', 'voiceline', [
+            {
+                progress: 1, callback: () => {
+                    this.uiRenderer.getElement('playground').innerHTML = '';
+                }
+            },
+            {
+                progress: 80, callback: () => {
+                    this.uiRenderer.createImage('playground', 'hectordeath', 'main__ohnonhectorestmortputaintroptriste', true);
+                }
+            },
+            {
+                progress: 99, callback: () => {
+                    this.triggerEvent('introEnd');
+                }
+            }
+        ]);
     }
 
     hectorEvent() {
+        clearTimeout(this.timedEvent);
         this.uiRenderer.createImage('playground', 'burgers', 'main__burgers', true);
         this.audioManager.loadAudioFile('hectordeath', 'voiceline', [{
             // chat 🐱
@@ -85,28 +149,19 @@ export class EventHandlerCH1 extends EventHandler {
     }
 
     introEndEvent() {
+        this.uiRenderer.getElement('playground').innerHTML = '';
         this.audioManager.loadAudioFile('introEnd', 'voiceline', [
             {
                 progress: 80, callback: () => {
-                    this.uiRenderer.createImage('playground', 'door', 'main__portemagique', true, 'restaurant');
+                    this.uiRenderer.createImage('playground', 'door', 'main__portemagique', true, "", 'restaurant');
+                }
+            },
+            {
+                progress: 85, callback: () => {
+                    this.dataManager.canInterract = true;
                 }
             }
         ]);
-    }
-
-    async restaurantEvent() {
-        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground('restaurant'), this.uiController.cursorPosition);
-        this.audioManager.loadAudioFile('ohnon', 'music');
-    }
-
-    async backroomEvent() {
-        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground('backroom'), this.uiController.cursorPosition);
-        this.audioManager.loadAudioFile('backroom', 'music');
-    }
-
-    async kitchenEvent() {
-        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground('kitchen'), this.uiController.cursorPosition);
-        this.audioManager.loadAudioFile('angel', 'music');
     }
 
     recipeEvent() {
@@ -129,17 +184,10 @@ export class EventHandlerCH1 extends EventHandler {
             },
             {
                 progress: 99, callback: () => {
-                    this.triggerEvent('placeholderEnding');
+                    this.setupPlayground('placeholder', 'ohnon');
                 }
             }
         ]);
 
-    }
-    /**
-     * placeholderEndingEvent()
-     */
-    async placeholderEndingEvent() {
-        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground('placeholder'), this.uiController.cursorPosition);
-        this.audioManager.loadAudioFile('ohnon', 'music');
     }
 }

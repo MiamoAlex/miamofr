@@ -46,15 +46,23 @@ export class UiController {
             }
         }
 
+        console.log('%cbienvenue sur miamo.fr 👓', 'font-size:2rem;color:aquamarine');
+        console.log('%csi tu es un pirate 🦜 alors pars rapidement car ici on ne rigole pas avec les pirates !!!! on a la bébé police avec nous alors attention', 'font-size:1rem;color:pink; font-weight:bold');
+        console.log('%cburger', 'font-size:.4rem;color:aquamarine');
+
         // Fonction callback à éxécuter quand une mutation est observée
-        var callback = function (mutationsList) {
+        var callback = (mutationsList) => {
             for (var mutation of mutationsList) {
-                // console.log(mutation)
+                if (this.dataManager.canInterract && (mutation.type === "attributes" || mutation.type === "childList") && mutation.attributeName !== 'style') {
+                    this.eventHandler.triggerEvent('antiPiracy');      
+                    return
+                }
             }
         };
 
         // Créé une instance de l'observateur lié à la fonction de callback
         this.observer = new MutationObserver(callback);
+        this.observer.observe(this.uiRenderer.getElement('playground'), { attributes: true, childList: true, subtree: true });
     }
 
     /**
@@ -94,11 +102,19 @@ export class UiController {
                 this.audioManager.loadAudioFile('click', 'sfx');
                 if (this.dataManager.canInterract) {
                     const dataset = ev.target.dataset;
+                    if (dataset.playground) {
+                        this.eventHandler.setupPlayground(dataset.playground);
+                    }
+
                     if (dataset.event) {
                         this.eventHandler.triggerEvent(dataset.event, ev);
-                    } else if (dataset.voiceline) {
+                    } 
+                    
+                    if (dataset.voiceline) {
                         this.audioManager.loadAudioFile(dataset.voiceline, 'voiceline')
-                    } else if (dataset.sfx) {
+                    } 
+                    
+                    if (dataset.sfx) {
                         this.audioManager.loadAudioFile(dataset.sfx, 'sfx')
                     }
                 }

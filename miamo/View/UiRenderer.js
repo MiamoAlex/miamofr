@@ -95,11 +95,13 @@ export class UiRenderer {
             playergroundContent.style.transform = `translate(${-currentPos.x / 1064 * 30}%, ${-currentPos.y / 1080 * 50}%)`;
             this.getElement('playground').style.filter = 'brightness(1)';
             // Création des sandwiches
-            sandwiches.forEach(sandwich => {
-                if (!playerSandwiches.includes(sandwich)) {
-                    playergroundContent.innerHTML += `<img src="../assets/tex/sandwich.gif" alt="mmmhmmhmhh h l e bon sandwiiiich" class="sandwich sandwich__${sandwich}" data-sandwich="${sandwich}">`;
-                }
-            });
+            if (sandwiches) {
+                sandwiches.forEach(sandwich => {
+                    if (!playerSandwiches.includes(sandwich)) {
+                        playergroundContent.innerHTML += `<img src="../assets/tex/sandwich.gif" alt="mmmhmmhmhh h l e bon sandwiiiich" class="sandwich sandwich__${sandwich}" data-sandwich="${sandwich}">`;
+                    }
+                });
+            }
         }, 300);
     }
 }

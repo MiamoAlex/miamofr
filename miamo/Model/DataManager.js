@@ -7,20 +7,9 @@ export class DataManager {
         if (localStorage.getItem('miamoSave')) {
             this.save = JSON.parse(localStorage.getItem('miamoSave'));
             // Conversion des vielles sauvegardes
-            if (!this.save.sandwiches) {
-                this.save.sandwiches = [];
-            }
-            if (!this.save.minigameStats) {
-                this.save.minigameStats = {};
-            }
             if (!this.save.storyAdvancement) {
-                this.save.storyAdvancement = 0;
-            }
-            if (!this.save.tools) {
-                this.save.tools = [];
-            }
-            if (!this.save.discoveries) {
-                this.save.discoveries = [];
+                localStorage.clear();
+                document.location.reload();
             }
         } else {
             this.save = {

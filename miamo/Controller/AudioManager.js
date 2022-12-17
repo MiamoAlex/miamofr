@@ -38,8 +38,6 @@ export class AudioManager {
         audio.play();
         this.currentSounds.push(audio);
 
-
-
         audio.addEventListener('timeupdate', (ev) => {
             let progress = Math.floor(ev.target.currentTime / audio.duration * 100)
 

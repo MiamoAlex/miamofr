@@ -217,7 +217,7 @@ ul {
 }
 .sandwich__0 {
   top: 60%;
-  left: 50%;
+  left: 33%;
 }
 .sandwich__1 {
   right: 10%;
@@ -242,6 +242,16 @@ ul {
   right: 3%;
   top: 3%;
 }
+.sandwich__7 {
+  right: 44%;
+  bottom: 25%;
+  transform: scale(4);
+  z-index: 10;
+}
+.sandwich__8 {
+  bottom: 32%;
+  left: 40%;
+}
 
 .header {
   position: fixed;
@@ -252,6 +262,14 @@ ul {
 }
 .header__sound {
   accent-color: rgb(32, 32, 32);
+}
+.header__reset {
+  opacity: 0;
+  font-size: 0.8rem;
+  transition: opacity 300ms;
+}
+.header:hover .header__reset {
+  opacity: 1;
 }
 
 .main {
@@ -280,6 +298,16 @@ ul {
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
+}
+.main__tools {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  gap: 1rem;
+}
+.main__distributeur {
+  width: 17rem;
 }
 .main__playground {
   width: 100vw;
@@ -335,6 +363,9 @@ ul {
 .tools__glasses {
   width: 5rem;
 }
+.tools__flashlight {
+  width: 5rem;
+}
 
 .worldmap__restaurant {
   top: 13%;
@@ -364,9 +395,33 @@ ul {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   transition: transform 100ms;
+  transform: translate(var(--cursorX), var(--cursorY));
 }
 .playground__content > * {
   position: absolute;
+}
+.playground__dark [data-sandwich], .playground__dark [data-event], .playground__dark [data-sfx], .playground__dark [data-voiceline] {
+  pointer-events: none;
+}
+.playground__dark::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.96);
+  z-index: 10;
+}
+.playground__flashlight::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  pointer-events: none;
+  background: radial-gradient(circle 10vmax at var(--flashLightX) var(--flashLightY), rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 80%, rgba(0, 0, 0, 0.95) 100%);
+  z-index: 10;
 }
 
 .kitchen__door {
@@ -415,6 +470,11 @@ ul {
   left: 15%;
   top: 10%;
 }
+.restaurant__distributeur {
+  width: 15rem;
+  bottom: 6%;
+  right: 42%;
+}
 
 .backroom__eglantine {
   position: absolute;
@@ -438,8 +498,54 @@ ul {
 
 .poolroom__return {
   bottom: 0;
-  height: 5rem;
+  height: 13rem;
   width: 100%;
+}
+.poolroom__teleporter {
+  width: 10rem;
+  height: 10rem;
+  left: 46%;
+  top: 40%;
+}
+.poolroom__teleporter2 {
+  width: 9rem;
+  height: 23rem;
+  left: 22%;
+  top: 32%;
+}
+.poolroom__eglantine {
+  bottom: 18%;
+  left: 23%;
+  width: 10rem;
+}
+.poolroom__teleporter3 {
+  bottom: 43%;
+  left: 46%;
+  width: 13rem;
+  height: 15rem;
+}
+.poolroom__teleporter4 {
+  bottom: 28%;
+  right: 20%;
+  width: 10rem;
+  height: 32rem;
+}
+.poolroom__burger {
+  position: absolute;
+  left: 35%;
+  bottom: 32%;
+  width: 25rem;
+}
+.poolroom__clown {
+  width: 10rem;
+  left: 45%;
+  top: 40%;
+}
+
+.secretcave__man {
+  right: 45%;
+  bottom: 15%;
+  width: 6rem;
 }
 
 .mageforest__teleporter {

@@ -23,6 +23,15 @@
         @include flex(space-between, center, row);
     }
 
+    &__tools {
+        @include flex(flex-start, center, row);
+        gap: 1rem;
+    }
+
+    &__distributeur{
+        width: 17rem;
+    }
+
     &__playground {
         width: 100vw;
         height: 100vh;

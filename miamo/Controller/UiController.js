@@ -101,10 +101,10 @@ export class UiController {
             x: ev.clientX - rect.left,
             y: ev.clientY - rect.top
         }
-        const playground = ev.currentTarget.children[0];
-        if (playground && playground.classList[0] == 'playground__content') {
-            playground.style.transform = `translate(${-this.cursorPosition.x / 1064 * 30}%, ${-this.cursorPosition.y / 1080 * 50}%)`
-        }
+        document.documentElement.style.setProperty('--cursorX', -this.cursorPosition.x / 1064 * 30 + '%')
+        document.documentElement.style.setProperty('--cursorY', -this.cursorPosition.y / 1080 * 50 + '%')
+        document.documentElement.style.setProperty('--flashLightX', this.cursorPosition.x + 'px')
+        document.documentElement.style.setProperty('--flashLightY', this.cursorPosition.y + 'px')
     }
 
     /**
@@ -182,8 +182,27 @@ export class UiController {
     toolsHandler(ev) {
         if (this.dataManager.canInterract === true) {
             switch (ev.target.dataset.tool) {
+                // Lunettes
                 case 'glasses':
                     this.eventHandler.setupPlayground('worldmap');
+                    break;
+                // Lampe torche
+                case 'flashlight':
+                    if (this.eventHandler.currentPlayground.flashlight && this.uiRenderer.getElement('playground').classList[1] == 'playground__dark') {
+                        this.dataManager.canInterract = false;
+                        this.audioManager.loadAudioFile('flashlightOn', 'sfx');
+                        this.uiRenderer.getElement('playground').className = 'main__playground playground__flashlight';
+                        setTimeout(() => {
+                            this.dataManager.canInterract = true;
+                        }, 300);
+                    } else if (this.uiRenderer.getElement('playground').classList[1] == 'playground__flashlight') {
+                        this.dataManager.canInterract = false;
+                        this.audioManager.loadAudioFile('flashlightOff', 'sfx');
+                        this.uiRenderer.getElement('playground').className = 'main__playground playground__dark';
+                        setTimeout(() => {
+                            this.dataManager.canInterract = true;
+                        }, 300);
+                    }
                     break;
             }
         }

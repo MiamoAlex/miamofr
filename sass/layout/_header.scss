@@ -7,4 +7,16 @@
     &__sound {
         accent-color: rgb(32, 32, 32);
     }
+
+    &__reset {
+        opacity: 0;
+        font-size: 0.8rem;
+        transition: opacity 300ms;
+    }
+
+    &:hover {
+        & .header__reset {
+            opacity: 1;
+        }
+    }
 }

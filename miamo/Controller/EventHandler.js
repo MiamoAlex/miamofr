@@ -38,6 +38,13 @@ export class EventHandler {
      * @param {Evenement au clic} ev Clic sur miamo.fr 
      */
     introEvent(ev) {
+        // this.dataManager.setMiamoState(this.dataManager.save.state);
+        // if (this[`${this.dataManager.getMiamoState()}Event`]) {
+        //     this.triggerEvent(this.dataManager.getMiamoState());
+        // } else {
+        //     this.setupPlayground(this.dataManager.getMiamoState());
+        // }
+        // this.uiRenderer.renderTools(this.dataManager.save.tools);
         if (document.body.requestFullscreen) {
             document.body.requestFullscreen();
         }
@@ -97,6 +104,7 @@ export class EventHandler {
         this.dataManager.canInterract = false;
         this.dataManager.playMode = 'playground';
         const playgroundData = this.playgroundModels[playgroundName];
+        this.currentPlayground = playgroundData;
         // Musique ou ambiance de fond
         if (playgroundData.music) {
             this.audioManager.loadAudioFile(playgroundData.music, 'music');
@@ -105,13 +113,25 @@ export class EventHandler {
         if (playgroundData.discovery && !this.dataManager.save.discoveries.includes(playgroundName)) {
             this.dataManager.save.discoveries.push(playgroundName);
         }
+
         this.dataManager.setMiamoState(playgroundName);
         this.dataManager.saveData();
         if (playgroundData.storyCheck) {
             this[`${playgroundName}Check`](playgroundData);
         } else {
-            this.uiRenderer.loadPlayground(await this.requestManager.getPlayground(playgroundName), this.uiController.cursorPosition, playgroundData.sandwiches, this.dataManager.save.sandwiches);
+            this.uiRenderer.loadPlayground(await this.requestManager.getPlayground(playgroundName), playgroundData.sandwiches, this.dataManager.save.sandwiches);
         }
+
+        setTimeout(() => {
+            if (playgroundData.flashlight) {
+                if (this.uiRenderer.getElement('playground').classList[1] !== 'playground__flashlight') {
+                    this.uiRenderer.getElement('playground').classList.add('playground__dark');
+                }
+            } else {
+                this.uiRenderer.getElement('playground').classList.remove('playground__flashlight');
+                this.uiRenderer.getElement('playground').classList.remove('playground__dark');
+            }
+        }, 300);
 
         setTimeout(() => {
             this.dataManager.canInterract = true;

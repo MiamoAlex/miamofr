@@ -96,14 +96,13 @@ export class UiRenderer {
      * Chargement d'un nouveau playgorund à l'écran 
      * @param {String} playground Contenu html du playground
      */
-    loadPlayground(playground, currentPos, sandwiches, playerSandwiches) {
+    loadPlayground(playground, sandwiches, playerSandwiches) {
         this.getElement('playground').style.filter = 'brightness(0)';
         // Après l'animation, création du playground
         setTimeout(() => {
             this.getElement('playground').innerHTML = playground;
             const playergroundContent = document.querySelector('.playground__content');
             playergroundContent.style.backgroundImage = `url(../../assets/backgrounds/${playergroundContent.dataset.background}.png)`
-            playergroundContent.style.transform = `translate(${-currentPos.x / 1064 * 30}%, ${-currentPos.y / 1080 * 50}%)`;
             this.getElement('playground').style.filter = 'brightness(1)';
             // Création des sandwiches
             if (sandwiches) {

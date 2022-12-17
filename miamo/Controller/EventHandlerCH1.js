@@ -228,7 +228,7 @@ export class EventHandlerCH1 extends EventHandler {
                 break;
         }
         if (this.currentCountEvent < 7) {
-            grandma.style.transform = `scale(${1 + this.currentCountEvent / 8})`;
+            grandma.style.transform = `scale(${1 + this.currentCountEvent / 3})`;
             this.audioManager.loadAudioFile(grandmaLine, 'voiceline', [
                 {
                     progress: 99, callback: () => {
@@ -309,12 +309,12 @@ export class EventHandlerCH1 extends EventHandler {
         if (this.dataManager.save.storyAdvancement > 1) {
             this.setupPlayground('firekitchen');
         } else {
-            this.uiRenderer.loadPlayground(await this.requestManager.getPlayground('kitchen'), this.uiController.cursorPosition, playgroundData.sandwiches, this.dataManager.save.sandwiches);
+            this.uiRenderer.loadPlayground(await this.requestManager.getPlayground('kitchen'), playgroundData.sandwiches, this.dataManager.save.sandwiches);
         }
     }
 
     async worldmapCheck(playgroundData) {
-        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground('worldmap'), this.uiController.cursorPosition, playgroundData.sandwiches, this.dataManager.save.sandwiches);
+        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground('worldmap'), playgroundData.sandwiches, this.dataManager.save.sandwiches);
         setTimeout(() => {
             this.dataManager.save.discoveries.forEach(discovery => {
                 document.querySelector('.playground__content').innerHTML += `<img class="worldmap__${discovery}" src="./assets/tex/${discovery}.png" data-playground="${discovery}">`;
@@ -323,7 +323,7 @@ export class EventHandlerCH1 extends EventHandler {
     }
 
     async mageforestCheck(playgroundData) {
-        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground('mageforest'), this.uiController.cursorPosition, playgroundData.sandwiches, this.dataManager.save.sandwiches);
+        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground('mageforest'), playgroundData.sandwiches, this.dataManager.save.sandwiches);
         setTimeout(() => {
             if (this.dataManager.save.storyAdvancement > 4) {
                 document.querySelector('.mageforest__eglantine').dataset.voiceline = 'eglantinekiller';
@@ -335,7 +335,7 @@ export class EventHandlerCH1 extends EventHandler {
     }
 
     async weirdhouseCheck(playgroundData) {
-        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground('weirdhouse'), this.uiController.cursorPosition, playgroundData.sandwiches, this.dataManager.save.sandwiches);
+        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground('weirdhouse'), playgroundData.sandwiches, this.dataManager.save.sandwiches);
         setTimeout(() => {
             switch (this.dataManager.save.storyAdvancement) {
                 case 4:
@@ -346,18 +346,52 @@ export class EventHandlerCH1 extends EventHandler {
                     document.querySelector('.weirdhouse__nerd').remove();
                     document.querySelector('.playground__content').innerHTML += '<img class="weirdhouse__scroll" src="../assets/tex/soon.png">';
                     break;
-                }            
-            }, 300);
+            }
+        }, 300);
     }
 
     async networksCheck(playgroundData) {
-        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground('networks'), this.uiController.cursorPosition, playgroundData.sandwiches, this.dataManager.save.sandwiches);
+        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground('networks'), playgroundData.sandwiches, this.dataManager.save.sandwiches);
         setTimeout(() => {
             if (this.dataManager.save.storyAdvancement > 3) {
                 document.querySelector('.networks__glasses').remove();
             }
         }, 300);
 
+    }
+
+    async secretcaveCheck(playgroundData) {
+        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground('secretcave'), playgroundData.sandwiches, this.dataManager.save.sandwiches);
+        setTimeout(() => {
+            if (this.dataManager.save.secrets.man1) {
+                document.querySelector('.secretcave__man').remove();
+            }
+        }, 300);
+    }
+
+
+    distributeurEvent() {
+        this.uiRenderer.createImage('playground', 'distributeur', 'main__distributeur', true);
+        if (!this.dataManager.save.tools.includes('flashlight')) {
+            this.audioManager.loadAudioFile('gotflashlight', 'sfx', [
+                {
+                    progress: 50, callback: () => {
+                        this.uiRenderer.createImage('playground', 'flashlight', 'YESSSSSSSSSSS', true);
+                    }
+                },
+                {
+                    progress: 99, callback: () => {
+                        this.dataManager.save.tools.push('flashlight');
+                        this.uiRenderer.renderTools(this.dataManager.save.tools);
+                        this.setupPlayground('restaurant');
+                    }
+                }
+            ]);
+        } else {
+            setTimeout(() => {
+                this.setupPlayground('restaurant');
+            }, 600);
+        }
     }
 
     /**
@@ -518,6 +552,18 @@ export class EventHandlerCH1 extends EventHandler {
         }, 300);
     }
 
+    man1Event() {
+        this.uiRenderer.createImage('playground', 'man', '????', true);
+        setTimeout(() => {
+            window.open('./assets/hello.txt', '_blank');
+        }, 600);
+
+        setTimeout(() => {
+            this.dataManager.save.secrets.man1 = true;
+            this.setupPlayground('secretcave');
+        }, 1200);
+    }
+
     killNerdEvent() {
         this.uiRenderer.createImage('playground', 'eglantineterroriste', 'eglantinewsh', true);
         this.audioManager.loadAudioFile('attaquesurprise', 'voiceline', [
@@ -563,6 +609,63 @@ export class EventHandlerCH1 extends EventHandler {
                 }
             },
         ]);
+
+    }
+
+    creepyClownEvent() {
+        this.uiRenderer.createImage('playground', 'scaryclown', 'main__boss', true, 'killNerd');
+        this.audioManager.loadAudioFile('clown', 'voiceline', [
+            {
+                progress: 99, callback: () => {
+                    this.setupPlayground('poolroom3');
+                }
+            }
+        ])
+    }
+
+    async tableroomCheck(playgroundData) {
+        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground('tableroom'), playgroundData.sandwiches, this.dataManager.save.sandwiches);
+        setTimeout(() => {
+            if (this.dataManager.save.secrets.poisonBurger) {
+                document.querySelector('.poolroom__burger').remove();
+            }
+        }, 300);
+    }
+
+    poisonburgerEvent() {
+        this.uiRenderer.getElement('playground').innerHTML = '';
+        this.audioManager.loadAudioFile('eating', 'sfx');
+        this.currentCountEvent++;
+        setTimeout(() => {
+            if (this.currentCountEvent === 3) {
+                this.dataManager.save.secrets.poisonBurger = true;
+                this.audioManager.loadAudioFile('poisondeath', 'voiceline', [
+                    {
+                        progress: 1, callback: () => {
+                            this.uiRenderer.createImage('playground', 'triste', 'hahaa mdr trop bon', true);
+                        }
+                    },
+                    {
+                        progress: 99, callback: () => {
+                            this.setupPlayground('tableroom')
+                        }
+                    }
+                ]);
+            } else {
+                this.audioManager.loadAudioFile('poison', 'voiceline', [
+                    {
+                        progress: 1, callback: () => {
+                            this.uiRenderer.createImage('playground', 'rire', 'hahaa mdr trop bon', true);
+                        }
+                    },
+                    {
+                        progress: 99, callback: () => {
+                            this.setupPlayground('tableroom')
+                        }
+                    }
+                ]);
+            }
+        }, 1500);
 
     }
 }

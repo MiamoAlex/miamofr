@@ -24,7 +24,31 @@
         "discovery": true
     },
     "poolroom": {
-        "music": "water"
+        "music": "water",
+        "flashlight": true
+    },
+    "poolroom2": {
+        "music": "water",
+        "flashlight": true,
+        "sandwiches": [
+            8
+        ]
+    },
+    "poolroom3": {
+        "music": "water",
+        "flashlight": true
+    },
+    "tableroom": {
+        "flashlight": true,
+        "storyCheck": true
+    },
+    "secretcave": {
+        "music": "secretcave",
+        "sandwiches": [
+            7
+        ],
+        "storyCheck": true,
+        "flashlight": true
     },
     "firekitchen": {
         "music": "fire"

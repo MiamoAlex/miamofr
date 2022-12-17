@@ -11,6 +11,9 @@ export class DataManager {
                 localStorage.clear();
                 document.location.reload();
             }
+            if (this.save.secrets == undefined) {
+                this.save.secrets = {};
+            }
         } else {
             this.save = {
                 state: "miamoIntro",
@@ -18,6 +21,7 @@ export class DataManager {
                 tools: [],
                 discoveries: [],
                 minigameStats: {},
+                secrets: {},
                 storyAdvancement: 0
             }
         }

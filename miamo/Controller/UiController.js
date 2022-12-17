@@ -12,6 +12,11 @@ export class UiController {
             events: ['input']
         },
 
+        header: {
+            element: '.header',
+            events: ['click']
+        },
+
         main: {
             element: '.main'
         },
@@ -117,6 +122,19 @@ export class UiController {
         this.audioManager.currentSounds.forEach(audio => {
             audio.volume = this.audioManager.volume;
         });
+    }
+
+    /**
+     * headerHandler() gère les clicks sur le header du site
+     * @param {Event} ev click sur le header
+     */
+    headerHandler(ev) {
+        switch (ev.target.className) {
+            case 'header__reset':
+                localStorage.clear();
+                document.location.reload();
+                break;
+        }
     }
 
     /**

@@ -11,7 +11,7 @@
         background-repeat: no-repeat;
         transition: transform 100ms;
 
-        &>* {
+        & > * {
             position: absolute;
         }
     }

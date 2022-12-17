@@ -32,6 +32,7 @@
         max-height: 720px;
         position: relative;
         overflow: hidden;
+        isolation: isolate;
         transition: filter 300ms;
     }
 
@@ -42,6 +43,28 @@
 
         &-anim {
             animation: grow 30s forwards;
+        }
+    }
+
+    &__psychedelic {
+        width: 100vw;
+        z-index: -1;
+    }
+
+    &__boss {
+        position: absolute;
+        inset: 0;
+        margin: auto;
+        z-index: 10;
+
+        &-health {
+            position: absolute;
+            bottom: 3rem;
+            width: 44rem;
+            left: 0;
+            right: 0;
+            margin: auto;
+            animation: float 4500ms infinite;
         }
     }
 

@@ -7,7 +7,7 @@ export class DataManager {
         if (localStorage.getItem('miamoSave')) {
             this.save = JSON.parse(localStorage.getItem('miamoSave'));
             // Conversion des vielles sauvegardes
-            if (!this.save.storyAdvancement) {
+            if (!this.save.storyAdvancement == undefined) {
                 localStorage.clear();
                 document.location.reload();
             }

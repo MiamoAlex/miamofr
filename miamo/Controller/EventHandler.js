@@ -17,11 +17,6 @@ export class EventHandler {
     triggerEvent(event, ev) {
         this.dataManager.canInterract = false;
         this.dataManager.playMode = 'playground';
-        this[`${event}Event`](ev);
-        if (this.lastEvent !== event) {
-            this.lastEvent = event;
-            this.currentCountEvent = 0;
-        }
         if (event !== 'intro' && event !== 'antiPiracy') {
             this.dataManager.setMiamoState(event);
             this.dataManager.saveData();
@@ -30,6 +25,12 @@ export class EventHandler {
                 this.audioManager.currentMusic = undefined
             }
         }
+        this[`${event}Event`](ev);
+        if (this.lastEvent !== event) {
+            this.lastEvent = event;
+            this.currentCountEvent = 0;
+        }
+
     };
 
     /**
@@ -37,7 +38,6 @@ export class EventHandler {
      * @param {Evenement au clic} ev Clic sur miamo.fr 
      */
     introEvent(ev) {
-
         if (document.body.requestFullscreen) {
             document.body.requestFullscreen();
         }
@@ -107,12 +107,12 @@ export class EventHandler {
         }
         this.dataManager.setMiamoState(playgroundName);
         this.dataManager.saveData();
-        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground(playgroundName), this.uiController.cursorPosition, playgroundData.sandwiches, this.dataManager.save.sandwiches);
-        setTimeout(() => {
-            if (playgroundData.storyCheck) {
-                this[`${playgroundName}Check`]();
-            }
-        }, 300);
+        if (playgroundData.storyCheck) {
+            this[`${playgroundName}Check`](playgroundData);
+        } else {
+            this.uiRenderer.loadPlayground(await this.requestManager.getPlayground(playgroundName), this.uiController.cursorPosition, playgroundData.sandwiches, this.dataManager.save.sandwiches);
+        }
+
         setTimeout(() => {
             this.dataManager.canInterract = true;
         }, 800);

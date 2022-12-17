@@ -14,7 +14,6 @@ export class MiniGameController {
         this.dataManager.playMode = 'minigame';
         if (this.dataManager.save.minigameStats[this.constructor.name]) {
             this.stats = this.dataManager.save.minigameStats[this.constructor.name];
-            console.log(this.stats);
         }
 
         this.loadMinigame();

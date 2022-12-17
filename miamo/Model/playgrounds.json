@@ -23,6 +23,12 @@
         ],
         "discovery": true
     },
+    "poolroom": {
+        "music": "water"
+    },
+    "firekitchen": {
+        "music": "fire"
+    },
     "magelake": {
         "music": "forestambient",
         "sandwiches": [
@@ -38,11 +44,11 @@
         "music": "forestambient",
         "sandwiches": [
             4
-        ],
-        "storyCheck": true
+        ]
     },
     "weirdhouse": {
-        "music": "weirdhouse"
+        "music": "weirdhouse",
+        "storyCheck": true
     },
     "rainbowtunnel": {
         "music": "networks",

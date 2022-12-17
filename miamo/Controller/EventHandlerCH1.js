@@ -305,29 +305,59 @@ export class EventHandlerCH1 extends EventHandler {
         ]);
     }
 
-    kitchenCheck() {
-        console.log(this.dataManager.save.storyAdvancement)
+    async kitchenCheck(playgroundData) {
         if (this.dataManager.save.storyAdvancement > 1) {
-            document.querySelector('.kitchen__recipe').remove();
+            this.setupPlayground('firekitchen');
+        } else {
+            this.uiRenderer.loadPlayground(await this.requestManager.getPlayground('kitchen'), this.uiController.cursorPosition, playgroundData.sandwiches, this.dataManager.save.sandwiches);
         }
     }
 
-    worldmapCheck() {
-        this.dataManager.save.discoveries.forEach(discovery => {
-            document.querySelector('.playground__content').innerHTML += `<img class="worldmap__${discovery}" src="./assets/tex/${discovery}.png" data-playground="${discovery}">`;
-        });
+    async worldmapCheck(playgroundData) {
+        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground('worldmap'), this.uiController.cursorPosition, playgroundData.sandwiches, this.dataManager.save.sandwiches);
+        setTimeout(() => {
+            this.dataManager.save.discoveries.forEach(discovery => {
+                document.querySelector('.playground__content').innerHTML += `<img class="worldmap__${discovery}" src="./assets/tex/${discovery}.png" data-playground="${discovery}">`;
+            });
+        }, 300);
     }
 
-    mageforestCheck() {
-        if (this.dataManager.save.storyAdvancement > 2) {
-            document.querySelector('.mageforest__eglantine').dataset.voiceline = 'eglantineforestend';
-        }
+    async mageforestCheck(playgroundData) {
+        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground('mageforest'), this.uiController.cursorPosition, playgroundData.sandwiches, this.dataManager.save.sandwiches);
+        setTimeout(() => {
+            if (this.dataManager.save.storyAdvancement > 4) {
+                document.querySelector('.mageforest__eglantine').dataset.voiceline = 'eglantinekiller';
+            } else if (this.dataManager.save.storyAdvancement > 2) {
+                document.querySelector('.mageforest__eglantine').dataset.voiceline = 'eglantineforestend';
+            }
+        }, 300);
+
     }
 
-    networksCheck() {
-        if (this.dataManager.save.storyAdvancement > 3) {
-            document.querySelector('.networks__glasses').remove();
-        }
+    async weirdhouseCheck(playgroundData) {
+        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground('weirdhouse'), this.uiController.cursorPosition, playgroundData.sandwiches, this.dataManager.save.sandwiches);
+        setTimeout(() => {
+            switch (this.dataManager.save.storyAdvancement) {
+                case 4:
+                    document.querySelector('.weirdhouse__nerd').dataset.event = 'nerdFight';
+                    break;
+
+                case 5:
+                    document.querySelector('.weirdhouse__nerd').remove();
+                    document.querySelector('.playground__content').innerHTML += '<img class="weirdhouse__scroll" src="../assets/tex/soon.png">';
+                    break;
+                }            
+            }, 300);
+    }
+
+    async networksCheck(playgroundData) {
+        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground('networks'), this.uiController.cursorPosition, playgroundData.sandwiches, this.dataManager.save.sandwiches);
+        setTimeout(() => {
+            if (this.dataManager.save.storyAdvancement > 3) {
+                document.querySelector('.networks__glasses').remove();
+            }
+        }, 300);
+
     }
 
     /**
@@ -379,10 +409,8 @@ export class EventHandlerCH1 extends EventHandler {
             {
                 progress: 60, callback: () => {
                     this.uiRenderer.getElement('playground').innerHTML += '<input class="robotspell" type="text">';
-
                     setTimeout(() => {
                         const input = document.querySelector('.robotspell');
-                        console.log(input.value)
                         if (input.value.toLowerCase() == 'grombluchoire') {
                             this.triggerEvent('robotSpellSucess');
                         } else {
@@ -458,4 +486,84 @@ export class EventHandlerCH1 extends EventHandler {
             }
         ]);
     }
+
+    nerdFightEvent() {
+        this.uiRenderer.createImage('playground', 'nerd', 'enzopleure', true);
+        this.audioManager.loadAudioFile('enzoduel', 'voiceline', [
+            {
+                progress: 26, callback: () => {
+                    this.uiRenderer.createImage('playground', 'eglantine', 'roboto', true);
+                }
+            },
+            {
+                progress: 46, callback: () => {
+                    this.uiRenderer.createImage('playground', 'nerd', 'oula', true);
+                }
+            },
+            {
+                progress: 99, callback: () => {
+                    this.triggerEvent('nerdBoss');
+                }
+            }
+        ]);
+    }
+
+    nerdBossEvent() {
+        this.audioManager.loadAudioFile('duel', 'music');
+        this.uiRenderer.createImage('playground', 'nerd', 'main__boss', true, 'killNerd');
+        this.uiRenderer.createImage('playground', 'nerdhealth', 'main__boss-health', false);
+        this.uiRenderer.getElement('playground').innerHTML += '<img class="main__psychedelic" src="../assets/tex/wtf.gif">';
+        setTimeout(() => {
+            this.dataManager.canInterract = true;
+        }, 300);
+    }
+
+    killNerdEvent() {
+        this.uiRenderer.createImage('playground', 'eglantineterroriste', 'eglantinewsh', true);
+        this.audioManager.loadAudioFile('attaquesurprise', 'voiceline', [
+            {
+                progress: 3, callback: () => {
+                    this.uiRenderer.createImage('playground', 'nuclear', '??', true);
+                }
+            },
+            {
+                progress: 12, callback: () => {
+                    this.uiRenderer.createImage('playground', 'nerddeath', 'kaboomlenerd', true);
+                }
+            },
+            {
+                progress: 38, callback: () => {
+                    this.uiRenderer.createImage('playground', 'eglantineterroriste', 'eglantinewsh', true);
+                }
+            },
+            {
+                progress: 40, callback: () => {
+                    this.uiRenderer.createImage('playground', 'nuclear', '??', true);
+                }
+            },
+            {
+                progress: 52, callback: () => {
+                    this.uiRenderer.createImage('playground', 'triste', '??', true);
+                }
+            },
+            {
+                progress: 64, callback: () => {
+                    this.uiRenderer.createImage('playground', 'eglantineterroriste', 'eglantinewsh', true);
+                }
+            },
+            {
+                progress: 68, callback: () => {
+                    this.uiRenderer.createImage('playground', 'rire', 'eglantinewsh', true);
+                }
+            },
+            {
+                progress: 99, callback: () => {
+                    this.dataManager.save.storyAdvancement = 5;
+                    this.setupPlayground('weirdhouse');
+                }
+            },
+        ]);
+
+    }
 }
+

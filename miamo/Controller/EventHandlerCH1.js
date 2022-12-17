@@ -185,6 +185,9 @@ export class EventHandlerCH1 extends EventHandler {
         ]);
     }
 
+    /**
+     * tu as cliqué sur mamie
+     */
     grandmaEvent() {
         this.currentCountEvent++;
         const grandma = this.uiRenderer.createImage('playground', 'grandma', 'GRAND MAMIE', true, "");
@@ -236,6 +239,9 @@ export class EventHandlerCH1 extends EventHandler {
         }
     }
 
+    /**
+     * meilleur mangeur burger 2023
+     */
     rewardburgersEvent() {
         this.uiRenderer.createImage('playground', 'eglantine', 'bravoooo !!', true, "");
         this.audioManager.loadAudioFile('rewardburgers', 'voiceline', [
@@ -247,6 +253,7 @@ export class EventHandlerCH1 extends EventHandler {
         ]);
     }
 
+    // fin grand mère..
     grandmaEndingEvent() {
         this.uiRenderer.createImage('playground', 'triste', 'ooh nonn snifff', true, "");
         this.audioManager.loadAudioFile('grandmaEnding', 'voiceline', [
@@ -291,12 +298,41 @@ export class EventHandlerCH1 extends EventHandler {
             },
             {
                 progress: 99, callback: () => {
+                    this.dataManager.save.storyAdvancement = 2;
                     this.setupPlayground('mageforest', 'forestambient');
                 }
             }
         ]);
     }
 
+    kitchenCheck() {
+        console.log(this.dataManager.save.storyAdvancement)
+        if (this.dataManager.save.storyAdvancement > 1) {
+            document.querySelector('.kitchen__recipe').remove();
+        }
+    }
+
+    worldmapCheck() {
+        this.dataManager.save.discoveries.forEach(discovery => {
+            document.querySelector('.playground__content').innerHTML += `<img class="worldmap__${discovery}" src="./assets/tex/${discovery}.png" data-playground="${discovery}">`;
+        });
+    }
+
+    mageforestCheck() {
+        if (this.dataManager.save.storyAdvancement > 2) {
+            document.querySelector('.mageforest__eglantine').dataset.voiceline = 'eglantineforestend';
+        }
+    }
+
+    networksCheck() {
+        if (this.dataManager.save.storyAdvancement > 3) {
+            document.querySelector('.networks__glasses').remove();
+        }
+    }
+
+    /**
+     * Le développeur étrange rentre en scène et nous envoie dans internet !!!!!!!!!!!!!!!!!
+     */
     weirdhousenerdEvent() {
         this.uiRenderer.createImage('playground', 'nerd', 'main__nzodev', true);
         this.audioManager.loadAudioFile('enzo1', 'voiceline', [
@@ -327,7 +363,97 @@ export class EventHandlerCH1 extends EventHandler {
             },
             {
                 progress: 99, callback: () => {
-                    this.setupPlayground('placeholder');
+                    this.dataManager.save.storyAdvancement = 3;
+                    this.setupPlayground('robots');
+                }
+            }
+        ]);
+    }
+
+    /**
+     * robotétrange
+     */
+    robotSpellEvent() {
+        this.uiRenderer.createImage('playground', 'grombl', 'ROBOT', true);
+        this.audioManager.loadAudioFile('robotspell', 'voiceline', [
+            {
+                progress: 60, callback: () => {
+                    this.uiRenderer.getElement('playground').innerHTML += '<input class="robotspell" type="text">';
+
+                    setTimeout(() => {
+                        const input = document.querySelector('.robotspell');
+                        console.log(input.value)
+                        if (input.value.toLowerCase() == 'grombluchoire') {
+                            this.triggerEvent('robotSpellSucess');
+                        } else {
+                            this.triggerEvent('robotSpellFailed');
+                        }
+                    }, 7500);
+                }
+            }
+        ]);
+    }
+
+    robotSpellFailedEvent() {
+        this.uiRenderer.createImage('playground', 'grombl', 'ROBOT PAS BRAVO', true);
+        this.audioManager.loadAudioFile('robotspellfailed', 'voiceline', [
+            {
+                progress: 45, callback: () => {
+                    this.uiRenderer.createImage('playground', 'eglantinebomb', 'euh églantine ça va?', true);
+                }
+            },
+            {
+                progress: 65, callback: () => {
+                    this.uiRenderer.createImage('playground', 'boom', 'oula non ça va pas', true);
+                }
+            },
+            {
+                progress: 80, callback: () => {
+                    this.uiRenderer.createImage('playground', 'eglantine', 'super eglantine a super fait exploser le robot', true);
+                }
+            },
+            {
+                progress: 99, callback: () => {
+                    this.setupPlayground('rainbowtunnel');
+                }
+            }
+        ]);
+    }
+
+    robotSpellSucessEvent() {
+        this.uiRenderer.createImage('playground', 'grombl', 'ROBOT BRAVO', true);
+        this.audioManager.loadAudioFile('robotspellsuccess', 'voiceline', [
+            {
+                progress: 99, callback: () => {
+                    this.setupPlayground('rainbowtunnel');
+                }
+            }
+        ]);
+    }
+
+    /**
+     * on a trouvé des lunettes !!!!!
+     */
+    glassesfoundEvent() {
+        this.dataManager.save.storyAdvancement = 4;
+        this.uiRenderer.createImage('playground', 'glasses', 'lunete', true);
+
+        this.audioManager.loadAudioFile('glassesfound', 'voiceline', [
+            {
+                progress: 23, callback: () => {
+                    this.uiRenderer.createImage('playground', 'robot', 'roboto', true);
+                }
+            },
+            {
+                progress: 73, callback: () => {
+                    this.uiRenderer.createImage('playground', 'rire', 'TROP CONTENT !!', true);
+                }
+            },
+            {
+                progress: 99, callback: () => {
+                    this.dataManager.save.tools.push('glasses');
+                    this.uiRenderer.renderTools(this.dataManager.save.tools);
+                    this.setupPlayground('networks');
                 }
             }
         ]);

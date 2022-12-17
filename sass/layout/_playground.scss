@@ -10,5 +10,9 @@
         background-size: 100% 100%;
         background-repeat: no-repeat;
         transition: transform 100ms;
+
+        &>* {
+            position: absolute;
+        }
     }
 }

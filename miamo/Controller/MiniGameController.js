@@ -43,6 +43,6 @@ export class MiniGameController {
         this.uiController.dataManager.saveData();
         setTimeout(() => {
             this.dataManager.canInterract = true;
-        }, 600);
+        }, 500);
     }
 }

@@ -15,9 +15,6 @@ export class AudioManager {
     loadAudioFile(audioName, type, callbacks) {
         const audio = new Audio(`./assets/audio/${type}/${audioName}.mp3`);
         audio.volume = this.volume;
-        audio.play();
-        this.currentSounds.push(audio);
-
         switch (type) {
             case 'voiceline':
                 if (this.currentVoiceLine) {
@@ -27,14 +24,20 @@ export class AudioManager {
                 break;
 
             case 'music':
-                if (this.currentMusic) {
+                if (this.currentMusic && this.currentMusic.src !== audio.src) {
                     this.currentMusic.pause();
+                } else if (this.currentMusic && this.currentMusic.src == audio.src) {
+                    return
                 }
                 audio.volume = this.volume * .65;
                 this.currentMusic = audio;
                 audio.loop = true;
                 break;
         }
+
+        audio.play();
+        this.currentSounds.push(audio);
+
 
 
         audio.addEventListener('timeupdate', (ev) => {

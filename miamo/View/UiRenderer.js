@@ -31,6 +31,17 @@ export class UiRenderer {
     }
 
     /**
+     * renderTools() fait le rendu des outils du joueur sur le menu des outils
+     * @param {Array<String>} tools Outils du joueur
+     */
+    renderTools(tools) {
+        this.getElement('tools').innerHTML = '';
+        tools.forEach(tool => {
+            this.getElement('tools').innerHTML += `<img src="./assets/tex/${tool}.png" alt="lunettes magiques" class="tools__${tool}" data-tool="${tool}">`
+        });
+    }
+
+    /**
      * renderTemplate() formatte une template à partir d'un tableau d'objet et l'envoie dans le dom destination
      * @param {Node} template 
      * @param {Array<Object>} arrayObj 

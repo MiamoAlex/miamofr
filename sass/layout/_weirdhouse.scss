@@ -1,12 +1,10 @@
 .weirdhouse {
     &__nerd {
-        position: absolute;
         left: 45%;
         bottom: 23%;
         animation: float 1s infinite;
     }
     &__return {
-        position: absolute;
         left: 0;
         width: 12rem;
         height: 100%;

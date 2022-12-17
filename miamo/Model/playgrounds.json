@@ -1,21 +1,27 @@
 {
+    "worldmap": {
+        "storyCheck": true
+    },
     "restaurant": {
         "music": "ohnon",
         "sandwiches": [
             0
-        ]
+        ],
+        "discovery": true
     },
     "kitchen": {
         "music": "angel",
         "sandwiches": [
             2
-        ]
+        ],
+        "storyCheck": true
     },
     "backroom": {
         "music": "backroom",
         "sandwiches": [
             1
-        ]
+        ],
+        "discovery": true
     },
     "magelake": {
         "music": "forestambient",
@@ -24,16 +30,33 @@
         ]
     },
     "mageforest": {
-        "music": "forestambient"
+        "music": "forestambient",
+        "discovery": true,
+        "storyCheck": true
     },
     "traphouse": {
         "music": "forestambient",
         "sandwiches": [
             4
-        ]
+        ],
+        "storyCheck": true
     },
     "weirdhouse": {
         "music": "weirdhouse"
+    },
+    "rainbowtunnel": {
+        "music": "networks",
+        "sandwiches": [
+            6
+        ]
+    },
+    "robots": {
+        "music": "networks",
+        "discovery": true
+    },
+    "networks": {
+        "music": "networks",
+        "storyCheck": true
     },
     "placeholder": {
         "music": "ohnon"

@@ -27,6 +27,7 @@ export class EventHandler {
             this.dataManager.saveData();
             if (this.audioManager.currentMusic) {
                 this.audioManager.currentMusic.pause();
+                this.audioManager.currentMusic = undefined
             }
         }
     };
@@ -36,6 +37,7 @@ export class EventHandler {
      * @param {Evenement au clic} ev Clic sur miamo.fr 
      */
     introEvent(ev) {
+
         if (document.body.requestFullscreen) {
             document.body.requestFullscreen();
         }
@@ -57,6 +59,7 @@ export class EventHandler {
                     } else {
                         this.setupPlayground(this.dataManager.getMiamoState());
                     }
+                    this.uiRenderer.renderTools(this.dataManager.save.tools);
                 }
             }
         ]);
@@ -94,15 +97,25 @@ export class EventHandler {
         this.dataManager.canInterract = false;
         this.dataManager.playMode = 'playground';
         const playgroundData = this.playgroundModels[playgroundName];
+        // Musique ou ambiance de fond
         if (playgroundData.music) {
             this.audioManager.loadAudioFile(playgroundData.music, 'music');
+        }
+        // Le joueur à découvert une zone importante
+        if (playgroundData.discovery && !this.dataManager.save.discoveries.includes(playgroundName)) {
+            this.dataManager.save.discoveries.push(playgroundName);
         }
         this.dataManager.setMiamoState(playgroundName);
         this.dataManager.saveData();
         this.uiRenderer.loadPlayground(await this.requestManager.getPlayground(playgroundName), this.uiController.cursorPosition, playgroundData.sandwiches, this.dataManager.save.sandwiches);
         setTimeout(() => {
+            if (playgroundData.storyCheck) {
+                this[`${playgroundName}Check`]();
+            }
+        }, 300);
+        setTimeout(() => {
             this.dataManager.canInterract = true;
-        }, 600);
+        }, 800);
     }
 
 }

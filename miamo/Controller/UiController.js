@@ -16,6 +16,11 @@ export class UiController {
             element: '.main'
         },
 
+        tools: {
+            element: '.main__tools',
+            events: ['click']
+        },
+
         sandwiches: {
             element: '.main__sandwiches'
         },
@@ -167,6 +172,20 @@ export class UiController {
                     this.audioManager.loadAudioFile(ev.key, 'keys');
                 }
                 break;
+        }
+    }
+
+    /**
+     * toolsHandler() gère les clics sur la section des outils du jeu
+     * @param {Event} ev Evenement au clic sur les outils 
+     */
+    toolsHandler(ev) {
+        if (this.dataManager.canInterract === true) {
+            switch (ev.target.dataset.tool) {
+                case 'glasses':
+                    this.eventHandler.setupPlayground('worldmap');
+                    break;
+            }
         }
     }
 }

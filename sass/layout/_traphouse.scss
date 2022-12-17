@@ -1,6 +1,5 @@
 .traphouse {
     &__teleporter {
-        position: absolute;
         width: 10rem;
         height: 22rem;
         right: 42%;
@@ -8,7 +7,6 @@
     }
 
     &__return {
-        position: absolute;
         left: 0;
         width: 12rem;
         height: 100%;

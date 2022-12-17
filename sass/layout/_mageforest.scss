@@ -1,6 +1,5 @@
 .mageforest {
     &__teleporter {
-        position: absolute;
         width: 12rem;
         height: 14rem;
         left: 38%;
@@ -8,14 +7,12 @@
     }
 
     &__eglantine {
-        position: absolute;
         left: 15%;
         bottom: 25%;
         width: 15rem;
     }
 
     &__poster {
-        position: absolute;
         right: 30%;
         top: 20%;
         width: 10rem;

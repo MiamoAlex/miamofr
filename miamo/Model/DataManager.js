@@ -8,18 +8,46 @@ export class DataManager {
             this.save = JSON.parse(localStorage.getItem('miamoSave'));
             // Conversion des vielles sauvegardes
             if (!this.save.sandwiches) {
-                this.save.sandwiches = []
+                this.save.sandwiches = [];
             }
             if (!this.save.minigameStats) {
-                this.save.minigameStats = {}
+                this.save.minigameStats = {};
+            }
+            if (!this.save.storyAdvancement) {
+                this.save.storyAdvancement = 0;
+            }
+            if (!this.save.tools) {
+                this.save.tools = [];
+            }
+            if (!this.save.discoveries) {
+                this.save.discoveries = [];
             }
         } else {
             this.save = {
                 state: "miamoIntro",
                 sandwiches: [],
-                minigameStats: {}
+                tools: [],
+                discoveries: [],
+                minigameStats: {},
+                storyAdvancement: 0
             }
         }
+    }
+
+    /**
+     * Mise à jour de l'avancée de l'histoire
+     * @param {Number} advancement 
+     */
+    setStoryAdvancement(advancement) {
+        this.save.storyAdvancement = advancement;
+    }
+
+    /**
+     * getStoryAdvancement() retourne l'avancée de l'histoire
+     * @returns {Number}
+     */
+    getStoryAdvancement() {
+        return this.save.storyAdvancement;
     }
 
     /**
@@ -45,5 +73,5 @@ export class DataManager {
         this.save.state = this.currentState;
         localStorage.setItem('miamoSave', JSON.stringify(this.save));
     }
-    
+
 }

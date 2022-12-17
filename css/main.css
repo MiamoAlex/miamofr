@@ -108,7 +108,8 @@ body {
 [data-sfx],
 [data-playground],
 [data-sandwich],
-[data-minigame] {
+[data-minigame],
+[data-tool] {
   cursor: url("/assets/tex/hover.cur"), default;
 }
 
@@ -236,6 +237,11 @@ ul {
   right: -5%;
   width: 15rem;
 }
+.sandwich__6 {
+  transform: scaleY(-1);
+  right: 3%;
+  top: 3%;
+}
 
 .header {
   position: fixed;
@@ -269,6 +275,12 @@ ul {
 .main__sandwiches-img {
   width: 4rem;
 }
+.main__menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
 .main__playground {
   width: 100vw;
   height: 100vh;
@@ -300,6 +312,27 @@ ul {
   position: absolute;
 }
 
+.tools__glasses {
+  width: 5rem;
+}
+
+.worldmap__restaurant {
+  top: 13%;
+  left: 12%;
+}
+.worldmap__backroom {
+  top: 13%;
+  left: 28%;
+}
+.worldmap__mageforest {
+  top: 40%;
+  left: 10%;
+}
+.worldmap__robots {
+  left: 35%;
+  top: 33%;
+}
+
 .playground__content {
   width: 150%;
   height: 150%;
@@ -312,9 +345,11 @@ ul {
   background-repeat: no-repeat;
   transition: transform 100ms;
 }
+.playground__content > * {
+  position: absolute;
+}
 
 .kitchen__door {
-  position: absolute;
   right: 12%;
   top: 29%;
   width: 10rem;
@@ -322,47 +357,40 @@ ul {
 }
 .kitchen__recipe {
   width: 15rem;
-  position: absolute;
   left: 50%;
   top: 30%;
   animation: float infinite 1s;
 }
 
 .restaurant__eglantine {
-  position: absolute;
   right: 15%;
   bottom: 10%;
   width: 10rem;
 }
 .restaurant__burgers {
-  position: absolute;
   left: 0%;
   bottom: 13%;
   width: 10rem;
 }
 .restaurant__door {
-  position: absolute;
   right: 5%;
   top: 40%;
   width: 10rem;
   height: 15rem;
 }
 .restaurant__grandma {
-  position: absolute;
   width: 12rem;
   height: 18rem;
   right: 0;
   bottom: 10%;
 }
 .restaurant__gustave {
-  position: absolute;
   bottom: 4%;
   left: 30%;
   width: 8rem;
 }
 .restaurant__kitchen {
   transform: rotate(75deg);
-  position: absolute;
   width: 8rem;
   left: 15%;
   top: 10%;
@@ -390,20 +418,17 @@ ul {
 }
 
 .mageforest__teleporter {
-  position: absolute;
   width: 12rem;
   height: 14rem;
   left: 38%;
   top: 36%;
 }
 .mageforest__eglantine {
-  position: absolute;
   left: 15%;
   bottom: 25%;
   width: 15rem;
 }
 .mageforest__poster {
-  position: absolute;
   right: 30%;
   top: 20%;
   width: 10rem;
@@ -415,26 +440,47 @@ ul {
 }
 
 .traphouse__teleporter {
-  position: absolute;
   width: 10rem;
   height: 22rem;
   right: 42%;
   bottom: 15%;
 }
 .traphouse__return {
-  position: absolute;
   left: 0;
   width: 12rem;
   height: 100%;
 }
 
+.robots__eglantine {
+  bottom: 20%;
+  left: 30%;
+  width: 10rem;
+}
+.robots__teleporter {
+  left: 25%;
+  top: 25%;
+  width: 10rem;
+  height: 20rem;
+}
+
+.rainbowtunnel__teleporter {
+  width: 15rem;
+  height: 15rem;
+  left: 25%;
+  top: 39%;
+}
+
+.networks__glasses {
+  left: 45%;
+  top: 45%;
+  animation: float 1s infinite;
+}
+
 .magelake__return {
-  position: absolute;
   right: 0;
   height: 100%;
 }
 .magelake__frog {
-  position: absolute;
   bottom: 5%;
   right: 10%;
   transform: scaleX(-1);
@@ -442,13 +488,11 @@ ul {
 }
 
 .weirdhouse__nerd {
-  position: absolute;
   left: 45%;
   bottom: 23%;
   animation: float 1s infinite;
 }
 .weirdhouse__return {
-  position: absolute;
   left: 0;
   width: 12rem;
   height: 100%;

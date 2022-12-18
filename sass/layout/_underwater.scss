@@ -1,0 +1,72 @@
+.underwater {
+    &__return {
+        top: 0;
+        width: 100%;
+        height: 10rem;
+    }
+
+    &__return2{
+        left: 0;
+        height: 100%;
+        width: 13rem;
+    }
+
+    &__pillar {
+        bottom: 5%;
+        left: 40%;
+    }
+
+    &__eglantine {
+        width: 10rem;
+        top: 42%;
+        left: 22%;
+        transform: rotate(-16deg);
+        animation: float 6s infinite;
+    }
+
+    &__teleport2 {
+        width: 19rem;
+        height: 19rem;
+        top: 40%;
+        left: 40%;
+    }
+    
+    &__teleport3 {
+        width: 19rem;
+        height: 19rem;
+        bottom: 0;
+        left: 0%;
+    }
+    
+    &__teleport4 {
+        width: 19rem;
+        height: 19rem;
+        bottom: 30%;
+        left: 45%;
+    }
+    
+    &__bouche {
+        bottom: 2%;
+        left: 43%;
+    }
+    
+    &__mermaid {
+        right: 15%;
+        bottom: 10%;
+        animation: float 13s infinite;
+    }
+
+    &__creature {
+        top: 10%;
+        left: 32%;
+        width: 32rem;
+        height: 23rem;
+    }
+
+    &__key {
+        bottom: 15%;
+        right: 50%;
+        animation: float 2s infinite;
+    }
+
+}

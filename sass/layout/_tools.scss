@@ -6,4 +6,10 @@
     &__flashlight {
         width: 5rem;
     }
+    
+    &__key {
+        width: 1.5rem;
+        margin: 0 2rem 0 2rem;
+        transform: rotate(90deg);
+    }
 }

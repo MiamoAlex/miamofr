@@ -59,6 +59,36 @@
             3
         ]
     },
+    "underlake": {
+        "music": "underwater",
+        "sandwiches": [
+            9
+        ]
+    },
+    "mermaidclose": {
+        "music": "underwater",
+        "discovery": true
+    },
+    "watercorridor": {},
+    "waterwall": {
+        "sandwiches": [
+            10
+        ]
+    },
+    "abyss": {
+        "music": "underwater",
+        "flashlight": true
+    },
+    "abysscreature": {
+        "music": "underwater",
+        "flashlight": true,
+        "sandwiches": [
+            11
+        ]
+    },
+    "watercave": {
+        "storyCheck": true
+    },
     "mageforest": {
         "music": "forestambient",
         "discovery": true,

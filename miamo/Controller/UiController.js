@@ -112,7 +112,7 @@ export class UiController {
                 this.cursorPosition = {
                     x: ev.clientX - rect.left,
                     y: ev.clientY - rect.top
-                }
+                };
                 document.documentElement.style.setProperty('--cursorX', -this.cursorPosition.x / 1064 * 30 + '%');
                 document.documentElement.style.setProperty('--cursorY', -this.cursorPosition.y / 1080 * 50 + '%');
                 document.documentElement.style.setProperty('--flashLightX', this.cursorPosition.x + 'px');

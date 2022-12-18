@@ -150,6 +150,11 @@ export class EventHandler {
         if (!this.dataManager.save.achievements.includes(achievementId)) {
             this.audioManager.loadAudioFile('achievement', 'sfx')
             this.dataManager.save.achievements.push(achievementId);
+            let currentAchievements = [];
+            this.dataManager.save.achievements.forEach(achievement => {
+                currentAchievements.push(this.dataManager.achievements[achievement]);
+            });
+            this.uiRenderer.renderTemplate(document.querySelector('.template__achievement'), currentAchievements, this.uiRenderer.getElement('achievements'));
             this.uiRenderer.renderAchievement([this.dataManager.achievements[achievementId]]);
             this.dataManager.saveData();
         }

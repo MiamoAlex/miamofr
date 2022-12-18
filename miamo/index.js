@@ -10,3 +10,4 @@ export { EventHandlerCH1 } from './Controller/EventHandlerCH1.js';
 
 export { MiniGameController } from './Controller/MiniGameController.js';
 export { BurgerClickerGame } from './Controller/Game/BurgerClickerGame.js';
+export { MermaidPuzzleGame } from './Controller/Game/MermaidPuzzleGame.js';

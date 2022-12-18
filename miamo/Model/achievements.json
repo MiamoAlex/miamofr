@@ -43,5 +43,10 @@
         "name": "Le développeur",
         "description": "églantine l'a fait exploser",
         "picture": "nerddeath"
+    },
+    "mermaidWorld": {
+        "name": "anniversaire marin",
+        "description": "tu as découvert le monde des sirenes",
+        "picture": "sirene"
     }
 }

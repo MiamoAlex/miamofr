@@ -551,6 +551,38 @@ export class EventHandlerCH1 extends EventHandler {
         }, 300);
     }
 
+    mermaidWorldEvent() {
+        this.unlockAchievement('mermaidWorld')
+        this.audioManager.loadAudioFile('harp', 'sfx')
+        this.uiRenderer.createImage('playground', 'sirene', 'oh une sirene !!!', true);
+        setTimeout(() => {
+            this.audioManager.loadAudioFile('mermaidthanks', 'voiceline', [
+                {
+                    progress: 99, callback: () => {
+                        this.setupPlayground('mermaidclose')
+                    }
+                }
+            ])
+        }, 3800);
+    }
+
+    // chanson magique
+    mermaidsongEvent() {
+        this.uiRenderer.createImage('playground', 'sirene', 'oh une sirene !!!', true);
+        this.audioManager.loadAudioFile('mermaidsong', 'sfx', [
+            {
+                progress: 84, callback: () => {
+                    this.uiRenderer.createImage('playground', 'nuclear', 'au revoir sirene', true);
+                }
+            },
+            {
+                progress: 99, callback: () => {
+                    this.setupPlayground('mermaidclose')
+                }
+            }
+        ])
+    }
+
     man1Event() {
         this.uiRenderer.createImage('playground', 'man', '????', true);
         setTimeout(() => {
@@ -668,6 +700,34 @@ export class EventHandlerCH1 extends EventHandler {
             }
         }, 1500);
 
+    }
+
+    creatureEvent() {
+        this.audioManager.loadAudioFile('creature', 'voiceline');
+        this.uiRenderer.createImage('playground', 'creature', 'oula bizarre', true);
+        setTimeout(() => {
+            this.setupPlayground('watercave')
+        }, 5000);
+    }
+
+    async watercaveCheck(playgroundData) {
+        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground('watercave'), playgroundData.sandwiches, this.dataManager.save.sandwiches);
+        setTimeout(() => {
+            if (this.dataManager.save.secrets.waterkey) {
+                document.querySelector('.underwater__key').remove();
+            }
+        }, 300);
+    }
+    
+    watercaveKeyEvent() {
+        this.uiRenderer.createImage('playground', 'key', 'OMG', true);
+        this.audioManager.loadAudioFile('secretkey', 'voiceline');
+        this.dataManager.save.secrets.waterkey = true;
+        this.dataManager.save.tools.push('key');
+        this.dataManager.saveData();
+        setTimeout(() => {
+            this.setupPlayground('watercorridor')
+        }, 5000);
     }
 }
 

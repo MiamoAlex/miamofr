@@ -10,4 +10,11 @@
         transform: scaleX(-1);
         width: 10rem;
     }
+
+    &__bubbles {
+        top: 48%;
+        left: 60%;
+        transform: skew(10deg);
+        width: 10rem;
+    }
 }

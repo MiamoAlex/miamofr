@@ -13,23 +13,21 @@
         left: 12%;
         bottom: 30%;
     }
-    &__3{
+    &__3 {
         top: 30%;
-        width: .8rem;
+        width: 0.8rem;
         right: 40%;
     }
-    &__4{
+    &__4 {
         bottom: -5%;
         right: -5%;
         width: 15rem;
     }
-
     &__6 {
         transform: scaleY(-1);
         right: 3%;
         top: 3%;
     }
-
     &__7 {
         right: 44%;
         bottom: 25%;
@@ -39,5 +37,18 @@
     &__8 {
         bottom: 32%;
         left: 40%;
+    }
+    &__9 {
+        bottom: 5%;
+        left: 8%;
+        filter: blur(5px);
+    }
+    &__10 {
+        bottom: 5%;
+        right: 40%;
+    }
+    &__11 {
+        bottom: 5%;
+        left: 30%;
     }
 }

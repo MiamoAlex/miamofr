@@ -7,9 +7,19 @@
     place-content: center;
     position: relative;
 
+    & > .achievement {
+        position: absolute;
+        width: 18rem;
+        height: 5rem;
+        bottom: 10%;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+
     &__sandwiches {
         @include flex(flex-start, flex-start, row);
-        gap: .5rem;
+        gap: 0.5rem;
         transition: opacity 300ms;
         &-text {
             font-size: 2rem;
@@ -28,7 +38,24 @@
         gap: 1rem;
     }
 
-    &__distributeur{
+    &__achievements {
+        position: absolute;
+        right: 0;
+        width: 20rem;
+        height: 100%;
+        overflow: auto;
+        @include flex(flex-start, flex-start, column);
+        gap: .5rem;
+        transform: translateX(20rem);
+        transition: transform 300ms;
+        background-color: #080808;
+        padding-top: 4rem;
+        &-open {
+            transform: translateX(0);
+        }
+    }
+
+    &__distributeur {
         width: 17rem;
     }
 

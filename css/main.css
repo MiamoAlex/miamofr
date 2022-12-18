@@ -138,11 +138,11 @@ ul {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--clr-main-white);
+  background: var(--clr-main-black);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--clr-main-black);
+  background: #222;
 }
 
 @keyframes grow {
@@ -253,11 +253,29 @@ ul {
   left: 40%;
 }
 
+.achievement {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  width: 100%;
+  z-index: 10;
+  background-color: #111;
+}
+.achievement__icon {
+  width: 4rem;
+  height: 4rem;
+  object-fit: contain;
+}
+
 .header {
   position: fixed;
   top: 0;
   font-size: 1.25rem;
-  width: 100vw;
+  width: calc(100vw - 0.5rem);
+  padding: 0.5rem;
   z-index: 10;
 }
 .header__sound {
@@ -267,6 +285,12 @@ ul {
   opacity: 0;
   font-size: 0.8rem;
   transition: opacity 300ms;
+}
+.header__achievements {
+  position: absolute;
+  right: 0;
+  background: transparent;
+  cursor: pointer;
 }
 .header:hover .header__reset {
   opacity: 1;
@@ -278,6 +302,15 @@ ul {
   display: grid;
   place-content: center;
   position: relative;
+}
+.main > .achievement {
+  position: absolute;
+  width: 18rem;
+  height: 5rem;
+  bottom: 10%;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 .main__sandwiches {
   display: flex;
@@ -305,6 +338,25 @@ ul {
   align-items: center;
   flex-direction: row;
   gap: 1rem;
+}
+.main__achievements {
+  position: absolute;
+  right: 0;
+  width: 20rem;
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.5rem;
+  transform: translateX(20rem);
+  transition: transform 300ms;
+  background-color: #080808;
+  padding-top: 4rem;
+}
+.main__achievements-open {
+  transform: translateX(0);
 }
 .main__distributeur {
   width: 17rem;

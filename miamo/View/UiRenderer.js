@@ -63,7 +63,12 @@ export class UiRenderer {
                 }
             }
         }
-        destination.innerHTML = formattedTemplates;
+        // Retour des données
+        if (destination) {
+            destination.innerHTML = formattedTemplates;
+        } else {
+            return formattedTemplates;
+        }
     }
 
     /**
@@ -90,6 +95,15 @@ export class UiRenderer {
         }
         this.getElement(destination).appendChild(img);
         return img;
+    }
+
+    renderAchievement(achievementObj) {
+        const achievement = this.renderTemplate(document.querySelector('.template__achievement'), achievementObj);
+        this.getElement('main').insertAdjacentHTML('afterbegin', achievement);
+
+        setTimeout(() => {
+            document.querySelector('.achievement').remove();
+        }, 4000);
     }
 
     /**

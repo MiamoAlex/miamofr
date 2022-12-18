@@ -25,4 +25,13 @@ export class RequestManager {
         const req = await fetch(`./minigames/${game}.html`);
         return await req.text();
     }
+
+    /**
+     * getAchievements() récupère tous les succès du jeu
+     * @returns {Object} Succès du jeu
+     */
+    async getAchievements() {
+        const req = await fetch('./miamo/Model/achievements.json');
+        return await req.json();
+    }
 }

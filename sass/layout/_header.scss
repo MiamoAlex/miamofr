@@ -2,7 +2,8 @@
     position: fixed;
     top: 0;
     font-size: 1.25rem;
-    width: 100vw;
+    width: calc(100vw - .5rem);
+    padding: .5rem;
     z-index: 10;
     &__sound {
         accent-color: rgb(32, 32, 32);
@@ -12,6 +13,13 @@
         opacity: 0;
         font-size: 0.8rem;
         transition: opacity 300ms;
+    }
+
+    &__achievements {
+        position: absolute;
+        right: 0;
+        background: transparent;
+        cursor: pointer;
     }
 
     &:hover {

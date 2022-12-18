@@ -123,9 +123,9 @@ ul {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--clr-main-white);
+  background: var(--clr-main-black);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--clr-main-black);
+  background: #222;
 }

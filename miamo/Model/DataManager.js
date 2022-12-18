@@ -14,12 +14,16 @@ export class DataManager {
             if (this.save.secrets == undefined) {
                 this.save.secrets = {};
             }
+            if (this.save.achievements == undefined) {
+                this.save.achievements = [];
+            }
         } else {
             this.save = {
                 state: "miamoIntro",
                 sandwiches: [],
                 tools: [],
                 discoveries: [],
+                achievements: [],
                 minigameStats: {},
                 secrets: {},
                 storyAdvancement: 0

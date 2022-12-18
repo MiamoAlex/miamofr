@@ -4,12 +4,7 @@ export class UiController {
     domElements = {
         body: {
             element: 'body',
-            events: ['keydown', 'click']
-        },
-
-        audioSlider: {
-            element: '.header__sound',
-            events: ['input']
+            events: ['keydown']
         },
 
         header: {
@@ -17,8 +12,17 @@ export class UiController {
             events: ['click']
         },
 
+        achievements: {
+            element: '.main__achievements'
+        },
+
+        audioSlider: {
+            element: '.header__sound',
+            events: ['input']
+        },
+
         main: {
-            element: '.main'
+            element: '.main',
         },
 
         tools: {
@@ -32,10 +36,11 @@ export class UiController {
 
         playground: {
             element: '.main__playground',
-            events: ['mousemove']
+            events: ['mousemove', 'click']
         }
     }
 
+    // Position de la souris
     cursorPosition = {
         x: 0,
         y: 0
@@ -101,48 +106,19 @@ export class UiController {
      * @param {Event} ev 
      */
     playgroundHandler(ev) {
-        const rect = ev.currentTarget.getBoundingClientRect();
-        this.cursorPosition = {
-            x: ev.clientX - rect.left,
-            y: ev.clientY - rect.top
-        }
-        document.documentElement.style.setProperty('--cursorX', -this.cursorPosition.x / 1064 * 30 + '%')
-        document.documentElement.style.setProperty('--cursorY', -this.cursorPosition.y / 1080 * 50 + '%')
-        document.documentElement.style.setProperty('--flashLightX', this.cursorPosition.x + 'px')
-        document.documentElement.style.setProperty('--flashLightY', this.cursorPosition.y + 'px')
-    }
-
-    /**
-     * audioSliderHandler() gère le volume
-     * @param {Event} ev Evenement au clic sur l'input
-     */
-    audioSliderHandler(ev) {
-        this.audioManager.volume = this.dataManager.save.volume = ev.target.value;
-        this.dataManager.saveData();
-        this.audioManager.currentSounds.forEach(audio => {
-            audio.volume = this.audioManager.volume;
-        });
-    }
-
-    /**
-     * headerHandler() gère les clicks sur le header du site
-     * @param {Event} ev click sur le header
-     */
-    headerHandler(ev) {
-        switch (ev.target.className) {
-            case 'header__reset':
-                localStorage.clear();
-                document.location.reload();
-                break;
-        }
-    }
-
-    /**
-     * bodyHandler() s'occupe de gérer les sons rigolos quand tu appuies sur le clavier
-     * @param {Event} ev Appui d'une touche sur le clavier 
-     */
-    bodyHandler(ev) {
         switch (ev.type) {
+            case 'mousemove':
+                const rect = ev.currentTarget.getBoundingClientRect();
+                this.cursorPosition = {
+                    x: ev.clientX - rect.left,
+                    y: ev.clientY - rect.top
+                }
+                document.documentElement.style.setProperty('--cursorX', -this.cursorPosition.x / 1064 * 30 + '%');
+                document.documentElement.style.setProperty('--cursorY', -this.cursorPosition.y / 1080 * 50 + '%');
+                document.documentElement.style.setProperty('--flashLightX', this.cursorPosition.x + 'px');
+                document.documentElement.style.setProperty('--flashLightY', this.cursorPosition.y + 'px');
+                break;
+        
             case 'click':
                 this.audioManager.loadAudioFile('click', 'sfx');
                 if (this.dataManager.canInterract && this.dataManager.playMode === 'playground') {
@@ -184,12 +160,56 @@ export class UiController {
                     }
                 }
                 break;
+        }
+    }
 
-            case 'keydown':
-                if (/^[a-zA-Z0-9_.-]*$/.test(ev.key.toLowerCase()) && ev.key.length === 1) {
-                    this.audioManager.loadAudioFile(ev.key, 'keys');
+    /**
+     * audioSliderHandler() gère le volume
+     * @param {Event} ev Evenement au clic sur l'input
+     */
+    audioSliderHandler(ev) {
+        this.audioManager.volume = this.dataManager.save.volume = ev.target.value;
+        this.dataManager.saveData();
+        this.audioManager.currentSounds.forEach(audio => {
+            audio.volume = this.audioManager.volume;
+        });
+    }
+
+    /**
+     * headerHandler() gère les clicks sur le header du site
+     * @param {Event} ev click sur le header
+     */
+    headerHandler(ev) {
+        switch (ev.target.className) {
+            case 'header__reset':
+                localStorage.clear();
+                document.location.reload();
+                break;
+
+            case 'header__achievements':
+                if (this.uiRenderer.getElement('achievements').classList[1]) {
+                    this.uiRenderer.getElement('achievements').classList.remove('main__achievements-open');
+                    this.audioManager.loadAudioFile('closemenu', 'sfx');
+                } else {
+                    this.uiRenderer.getElement('achievements').classList.add('main__achievements-open');
+                    this.audioManager.loadAudioFile('openmenu', 'sfx');
+                    let currentAchievements = [];
+                    this.dataManager.save.achievements.forEach(achievement => {
+                        currentAchievements.push(this.dataManager.achievements[achievement]);
+                    });
+                    this.uiRenderer.renderTemplate(document.querySelector('.template__achievement'), currentAchievements, this.uiRenderer.getElement('achievements'));
                 }
                 break;
+        }
+    }
+
+    /**
+     * bodyHandler() s'occupe de gérer les sons rigolos quand tu appuies sur le clavier
+     * @param {Event} ev Appui d'une touche sur le clavier 
+     */
+    bodyHandler(ev) {
+        if (/^[a-zA-Z0-9_.-]*$/.test(ev.key.toLowerCase()) && ev.key.length === 1) {
+            this.audioManager.loadAudioFile(ev.key, 'keys');
         }
     }
 

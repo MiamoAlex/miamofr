@@ -76,6 +76,7 @@ export class EventHandler {
      * antiPiracyEvent fait apparaitre un gros bébé énervé contre les méchants pirates
      */
     antiPiracyEvent() {
+        this.unlockAchievement('cheater');
         this.audioManager.loadAudioFile('antipiracy', 'voiceline', [
             {
                 progress: 1, callback: () => {
@@ -105,6 +106,7 @@ export class EventHandler {
         this.dataManager.playMode = 'playground';
         const playgroundData = this.playgroundModels[playgroundName];
         this.currentPlayground = playgroundData;
+       
         // Musique ou ambiance de fond
         if (playgroundData.music) {
             this.audioManager.loadAudioFile(playgroundData.music, 'music');
@@ -121,7 +123,8 @@ export class EventHandler {
         } else {
             this.uiRenderer.loadPlayground(await this.requestManager.getPlayground(playgroundName), playgroundData.sandwiches, this.dataManager.save.sandwiches);
         }
-
+        
+        // Gestion de la flashlight
         setTimeout(() => {
             if (playgroundData.flashlight) {
                 if (this.uiRenderer.getElement('playground').classList[1] !== 'playground__flashlight') {
@@ -133,9 +136,23 @@ export class EventHandler {
             }
         }, 300);
 
+        // On libère le joueur
         setTimeout(() => {
             this.dataManager.canInterract = true;
         }, 800);
+    }
+
+    /**
+     * unlockAchievement() débloque un succès au joueur
+     * @param {String} achievementId identifiant du succès à débloquer 
+     */
+    unlockAchievement(achievementId) {
+        if (!this.dataManager.save.achievements.includes(achievementId)) {
+            this.audioManager.loadAudioFile('achievement', 'sfx')
+            this.dataManager.save.achievements.push(achievementId);
+            this.uiRenderer.renderAchievement([this.dataManager.achievements[achievementId]]);
+            this.dataManager.saveData();
+        }
     }
 
 }

@@ -111,6 +111,7 @@ export class EventHandlerCH1 extends EventHandler {
             {
                 progress: 30, callback: () => {
                     this.uiRenderer.createImage('playground', 'fateglantine', 'main__elleestenorme', true);
+                    this.unlockAchievement('eglanmiam');
                 }
             },
             {
@@ -208,11 +209,6 @@ export class EventHandlerCH1 extends EventHandler {
             case 7:
                 this.audioManager.loadAudioFile('grandmascreamer', 'voiceline', [
                     {
-                        progress: 90, callback: () => {
-                            this.dataManager.save.state = 'grandmaending';
-                        }
-                    },
-                    {
                         progress: 83, callback: () => {
                             this.uiRenderer.createImage('playground', 'killergrandma', 't mort', true, "");
                             setTimeout(() => {
@@ -260,6 +256,7 @@ export class EventHandlerCH1 extends EventHandler {
             {
                 progress: 78, callback: () => {
                     this.uiRenderer.getElement('playground').innerHTML = 'fin grand-mère';
+                    this.unlockAchievement('grandmaEnding');
                 }
             },
             {
@@ -299,6 +296,7 @@ export class EventHandlerCH1 extends EventHandler {
             {
                 progress: 99, callback: () => {
                     this.dataManager.save.storyAdvancement = 2;
+                    this.unlockAchievement('recipeStolen');
                     this.setupPlayground('mageforest', 'forestambient');
                 }
             }
@@ -446,6 +444,7 @@ export class EventHandlerCH1 extends EventHandler {
                     setTimeout(() => {
                         const input = document.querySelector('.robotspell');
                         if (input.value.toLowerCase() == 'grombluchoire') {
+                            this.unlockAchievement('grombluchoire');
                             this.triggerEvent('robotSpellSucess');
                         } else {
                             this.triggerEvent('robotSpellFailed');
@@ -604,6 +603,7 @@ export class EventHandlerCH1 extends EventHandler {
             },
             {
                 progress: 99, callback: () => {
+                    this.unlockAchievement('enzo');
                     this.dataManager.save.storyAdvancement = 5;
                     this.setupPlayground('weirdhouse');
                 }
@@ -642,6 +642,7 @@ export class EventHandlerCH1 extends EventHandler {
                 this.audioManager.loadAudioFile('poisondeath', 'voiceline', [
                     {
                         progress: 1, callback: () => {
+                            this.unlockAchievement('foodDeath');
                             this.uiRenderer.createImage('playground', 'triste', 'hahaa mdr trop bon', true);
                         }
                     },
@@ -660,7 +661,7 @@ export class EventHandlerCH1 extends EventHandler {
                     },
                     {
                         progress: 99, callback: () => {
-                            this.setupPlayground('tableroom')
+                            this.setupPlayground('tableroom');
                         }
                     }
                 ]);

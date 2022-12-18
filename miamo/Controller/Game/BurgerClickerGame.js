@@ -29,7 +29,14 @@ export class BurgerClickerGame extends MiniGameController {
                 this.stats.clicks++;
                 switch (this.stats.clicks) {
                     case 500:
+                        this.uiController.dataManager.save.minigameStats[this.constructor.name] = this.stats;
+                        this.uiController.dataManager.saveData();
+                        this.eventHandler.unlockAchievement('burgerChampion');
                         this.eventHandler.triggerEvent('rewardburgers');
+                        break;
+
+                    case 10000:
+                        this.eventHandler.unlockAchievement('burgerKing');
                         break;
                 }
                 this.counter.textContent = this.stats.clicks;

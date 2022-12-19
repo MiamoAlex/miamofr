@@ -116,7 +116,7 @@ export class UiRenderer {
         setTimeout(() => {
             this.getElement('playground').innerHTML = playground;
             const playergroundContent = document.querySelector('.playground__content');
-            playergroundContent.style.backgroundImage = `url(../../assets/backgrounds/${playergroundContent.dataset.background}.png)`
+            playergroundContent.style.backgroundImage = `url(../../assets/backgrounds/${playergroundContent.dataset.background}.webp)`
             this.getElement('playground').style.filter = 'brightness(1)';
             // Création des sandwiches
             if (sandwiches) {

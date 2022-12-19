@@ -237,7 +237,11 @@ export class UiController {
             switch (ev.target.dataset.tool) {
                 // Lunettes
                 case 'glasses':
-                    this.eventHandler.setupPlayground('worldmap');
+                    if (this.eventHandler.playgroundName === 'worldmap') {
+                        this.eventHandler.setupPlayground(this.dataManager.currentState);
+                    } else {
+                        this.eventHandler.setupPlayground('worldmap');
+                    }
                     break;
                 // Lampe torche
                 case 'flashlight':

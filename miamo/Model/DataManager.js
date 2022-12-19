@@ -56,7 +56,9 @@ export class DataManager {
      * @param {String} state 
      */
     setMiamoState(state) {
-        this.currentState = state;
+        if (state !== 'worldmap') {
+            this.currentState = state;
+        }
     }
 
     /**

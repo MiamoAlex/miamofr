@@ -531,7 +531,7 @@ export class EventHandlerCH1 extends EventHandler {
                 progress: 99, callback: () => {
                     this.dataManager.save.tools.push('glasses');
                     this.uiRenderer.renderTools(this.dataManager.save.tools);
-                    this.setupPlayground('networks');
+                    this.setupPlayground('mageforest');
                 }
             }
         ]);

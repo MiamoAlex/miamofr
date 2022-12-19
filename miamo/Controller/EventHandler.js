@@ -105,6 +105,7 @@ export class EventHandler {
         this.dataManager.canInterract = false;
         this.dataManager.playMode = 'playground';
         const playgroundData = this.playgroundModels[playgroundName];
+        this.playgroundName = playgroundName;
         this.currentPlayground = playgroundData;
        
         // Musique ou ambiance de fond

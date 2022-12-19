@@ -553,6 +553,7 @@ ul {
   top: 29%;
   width: 10rem;
   height: 15rem;
+  cursor: url("/assets/tex/return.cur"), default;
 }
 .kitchen__recipe {
   width: 15rem;
@@ -583,6 +584,7 @@ ul {
   bottom: 0;
   width: 100%;
   height: 6rem;
+  cursor: url("/assets/tex/return.cur"), default;
 }
 .hospital__nimbuffle {
   bottom: 30%;
@@ -615,6 +617,11 @@ ul {
 .hospital__placeholder {
   left: 40%;
   bottom: 30%;
+}
+.hospital__mario {
+  bottom: 1%;
+  right: 21%;
+  width: 13rem;
 }
 
 .restaurant__eglantine {
@@ -667,6 +674,7 @@ ul {
   left: 5%;
   top: 30%;
   width: 14rem;
+  cursor: url("/assets/tex/return.cur"), default;
 }
 .backroom__teleporter {
   position: absolute;
@@ -680,6 +688,7 @@ ul {
   bottom: 0;
   height: 13rem;
   width: 100%;
+  cursor: url("/assets/tex/return.cur"), default;
 }
 .poolroom__teleporter {
   width: 10rem;
@@ -744,6 +753,7 @@ ul {
   width: 12rem;
   height: 100%;
   right: 0%;
+  cursor: url("/assets/tex/mouseright.png"), default;
 }
 .mageforest__teleporter3 {
   width: 35rem;
@@ -776,17 +786,20 @@ ul {
   height: 100%;
   left: 0;
   width: 12rem;
+  cursor: url("/assets/tex/return.cur"), default;
 }
 
 .underwater__return {
   top: 0;
   width: 100%;
   height: 10rem;
+  cursor: url("/assets/tex/return.cur"), default;
 }
 .underwater__return2 {
   left: 0;
   height: 100%;
   width: 13rem;
+  cursor: url("/assets/tex/return.cur"), default;
 }
 .underwater__pillar {
   bottom: 5%;
@@ -820,6 +833,7 @@ ul {
 .underwater__bouche {
   bottom: 2%;
   left: 43%;
+  cursor: url("/assets/tex/mousebottom.png"), default;
 }
 .underwater__mermaid {
   right: 15%;
@@ -848,6 +862,7 @@ ul {
   left: 0;
   width: 12rem;
   height: 100%;
+  cursor: url("/assets/tex/return.cur"), default;
 }
 
 .robots__eglantine {
@@ -878,6 +893,7 @@ ul {
 .magelake__return {
   right: 0;
   height: 100%;
+  cursor: url("/assets/tex/return.cur"), default;
 }
 .magelake__frog {
   bottom: 5%;
@@ -901,6 +917,7 @@ ul {
   left: 0;
   width: 12rem;
   height: 100%;
+  cursor: url("/assets/tex/return.cur"), default;
 }
 .weirdhouse__scroll {
   left: 40%;

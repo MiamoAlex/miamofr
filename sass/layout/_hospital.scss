@@ -4,7 +4,7 @@
         height: 12rem;
         bottom: 8%;
         left: 40%;
-        
+
         &2 {
             width: 8rem;
             height: 8rem;
@@ -24,6 +24,7 @@
         bottom: 0;
         width: 100%;
         height: 6rem;
+        cursor: url("/assets/tex/return.cur"), default;
     }
 
     &__nimbuffle {
@@ -36,7 +37,7 @@
         width: 6rem;
         right: 45%;
         top: 40%;
-        opacity: .3;
+        opacity: 0.3;
     }
 
     &__doctor {
@@ -59,9 +60,14 @@
         left: 40%;
     }
 
-
     &__placeholder {
         left: 40%;
         bottom: 30%;
+    }
+
+    &__mario {
+        bottom: 1%;
+        right: 21%;
+        width: 13rem;
     }
 }

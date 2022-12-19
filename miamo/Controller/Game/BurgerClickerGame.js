@@ -26,6 +26,10 @@ export class BurgerClickerGame extends MiniGameController {
                 break;
 
             case 'burgerclicker__burger':
+                if (this.currentTime && (ev.timeStamp - this.currentTime < 80)) {
+                    this.eventHandler.triggerEvent('burgerCheat');
+                }
+                this.currentTime = ev.timeStamp;
                 this.stats.clicks++;
                 switch (this.stats.clicks) {
                     case 500:

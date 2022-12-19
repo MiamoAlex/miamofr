@@ -1,4 +1,5 @@
 import { EventHandler } from "./EventHandler.js";
+import * as Miamo from '../index.js'
 
 export class EventHandlerCH1 extends EventHandler {
     constructor(uiController) {
@@ -247,6 +248,20 @@ export class EventHandlerCH1 extends EventHandler {
                 }
             }
         ]);
+    }
+
+    burgerCheatEvent() {
+        this.uiRenderer.createImage('playground', 'antipiracy', 'burger triche', true, "");
+        this.uiRenderer.getElement('playground').append('BURGER TRICHEUR BURGER TRICHEUR BURGER TRICHEUR')
+
+        this.audioManager.loadAudioFile('antipiracyminigame', 'voiceline', [
+            {
+                progress: 99, callback: () => {
+                    this.dataManager.save.minigameStats.BurgerClickerGame.clicks = -5000;
+                    this.miniGameController = new Miamo.BurgerClickerGame(this.uiController);
+                }
+            }
+        ])
     }
 
     // fin grand mère..
@@ -718,7 +733,7 @@ export class EventHandlerCH1 extends EventHandler {
             }
         }, 300);
     }
-    
+
     watercaveKeyEvent() {
         this.uiRenderer.createImage('playground', 'key', 'OMG', true);
         this.audioManager.loadAudioFile('secretkey', 'voiceline');

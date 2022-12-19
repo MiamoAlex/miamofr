@@ -48,5 +48,25 @@
         "name": "anniversaire marin",
         "description": "tu as découvert le monde des sirenes",
         "picture": "sirene"
+    },
+    "cheesebird": {
+        "name": "délicieux fromage",
+        "description": "je veux juste un peu de plante a manger",
+        "picture": "bird"
+    },
+    "sandwichCollector": {
+        "name": "chercheur de miam",
+        "description": "tu as trouvé 10 sandwichs secrets",
+        "picture": "rire"
+    },
+    "nimbuffle": {
+        "name": "nimbuffle le cerf",
+        "description": "chapeau nimbuffle",
+        "picture": "nimbuffle"
+    }, 
+    "devroom":{
+        "name": "miamoalex",
+        "description": "tu as trouvé la salle secrete du développeur",
+        "picture": "glasses"
     }
 }

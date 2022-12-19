@@ -59,6 +59,15 @@
             3
         ]
     },
+    "mageriver": {
+        "music": "forestambient"
+    },
+    "magecar": {
+        "music": "forestambient",
+        "sandwiches": [
+            12
+        ]
+    },
     "underlake": {
         "music": "underwater",
         "sandwiches": [
@@ -116,6 +125,31 @@
     },
     "networks": {
         "music": "networks",
+        "storyCheck": true
+    },
+    "hospitalentrance": {
+        "discovery": true,
+        "music": "street",
+        "sandwiches": [
+            13
+        ]
+    },
+    "hospitalcorridor": {
+        "music": "street"
+    },
+    "hospitaldark": {
+        "music": "street",
+        "flashlight": true
+    },
+    "hospitaloffice": {},
+    "secretgarden": {
+        "sandwiches": [
+            14,
+            15,
+            16
+        ]
+    },
+    "devroom": {
         "storyCheck": true
     },
     "placeholder": {

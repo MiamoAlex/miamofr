@@ -252,7 +252,7 @@ export class EventHandlerCH1 extends EventHandler {
 
     burgerCheatEvent() {
         this.uiRenderer.createImage('playground', 'antipiracy', 'burger triche', true, "");
-        this.uiRenderer.getElement('playground').append('BURGER TRICHEUR BURGER TRICHEUR BURGER TRICHEUR')
+        this.uiRenderer.getElement('playground').append('BURGER TRICHEUR BURGER TRICHEUR BURGER TRICHEUR');
 
         this.audioManager.loadAudioFile('antipiracyminigame', 'voiceline', [
             {
@@ -356,9 +356,11 @@ export class EventHandlerCH1 extends EventHandler {
                     break;
 
                 case 5:
-                    document.querySelector('.weirdhouse__nerd').remove();
-                    document.querySelector('.playground__content').innerHTML += '<img class="weirdhouse__scroll" src="../assets/tex/soon.png">';
+                    document.querySelector('.playground__content').innerHTML += '<img class="weirdhouse__scroll" src="../assets/tex/scroll.png" data-event="scroll">';
                     break;
+            }
+            if (this.dataManager.save.storyAdvancement > 5) {
+                document.querySelector('.weirdhouse__nerd').remove();
             }
         }, 300);
     }
@@ -733,16 +735,147 @@ export class EventHandlerCH1 extends EventHandler {
             }
         }, 300);
     }
+    async devroomCheck(playgroundData) {
+        this.uiRenderer.loadPlayground(await this.requestManager.getPlayground('devroom'), playgroundData.sandwiches, this.dataManager.save.sandwiches);
+        this.unlockAchievement('devroom');
+    }
 
     watercaveKeyEvent() {
         this.uiRenderer.createImage('playground', 'key', 'OMG', true);
         this.audioManager.loadAudioFile('secretkey', 'voiceline');
-        this.dataManager.save.secrets.waterkey = true;
         this.dataManager.save.tools.push('key');
+        this.dataManager.save.secrets.waterkey = true;
+        this.uiRenderer.renderTools(this.dataManager.save.tools);
         this.dataManager.saveData();
         setTimeout(() => {
             this.setupPlayground('watercorridor')
         }, 5000);
+    }
+
+    cheesebirdEvent() {
+        this.uiRenderer.createImage('playground', 'bird', 'main__oiseau', true);
+        this.audioManager.loadAudioFile('fromage', 'voiceline', [
+            {
+                progress: 99, callback: () => {
+                    this.unlockAchievement('cheesebird')
+                    this.setupPlayground('mageriver');
+                }
+            }
+        ]);
+    }
+
+    gnomeTimeEvent() {
+        this.uiRenderer.createImage('playground', 'gnome', 'GNOME', true);
+
+        const endDate = new Date();
+        const spentTime = endDate.getTime() - this.uiController.startTime.getTime();
+        this.dataManager.save.time += spentTime;
+        this.uiController.startTime = new Date();
+
+        this.uiRenderer.getElement('playground').append(`Tu as passé ${Math.floor(this.dataManager.save.time / 1000 / 60)} minutes sur miamo.fr !!!`);
+        this.audioManager.loadAudioFile('gnome', 'voiceline', [
+            {
+                progress: 99, callback: () => {
+                    this.setupPlayground('magecar');
+                }
+            }
+        ]);
+    }
+
+    scrollEvent() {
+        this.uiRenderer.createImage('playground', 'scroll', 'gpla perso', true);
+        this.dataManager.save.storyAdvancement = 6;
+        this.audioManager.loadAudioFile('scrollStory', 'voiceline', [
+            {
+                progress: 18, callback: () => {
+                    this.uiRenderer.createImage('playground', 'rire', 'haha cool', true);
+                }
+            },
+            {
+                progress: 40, callback: () => {
+                    this.uiRenderer.createImage('playground', 'scroll', 'gpla perso', true);
+                }
+            },
+            {
+                progress: 57, callback: () => {
+                    this.uiRenderer.createImage('playground', 'rire', 'haha trop marrant', true);
+                }
+            },
+            {
+                progress: 72, callback: () => {
+                    this.uiRenderer.createImage('playground', 'eglantine', 'super lecture eglantine', true);
+                }
+            },
+            {
+                progress: 80, callback: () => {
+                    this.uiRenderer.createImage('playground', 'triste', 'super lecture eglantine', true);
+                }
+            },
+            {
+                progress: 88, callback: () => {
+                    this.uiRenderer.createImage('playground', 'mario', 'italien', true);
+                }
+            },
+            {
+                progress: 99, callback: () => {
+                    this.setupPlayground('hospitalentrance');
+                }
+            }
+        ]);
+    }
+
+    nimbuffleSongEvent() {
+        this.uiRenderer.createImage('playground', 'nimbuffle', 'main__nimbuffle', true);
+        this.audioManager.loadAudioFile('nimbuffle', 'voiceline', [
+            {
+                progress: 41, callback: () => {
+                    this.uiRenderer.createImage('playground', 'triste', 'sniffe il me faut nimbuffle', true);
+                }
+            },
+            {
+                progress: 48, callback: () => {
+                    this.uiRenderer.createImage('playground', 'nimbuffle', 'ouf il est là', true);
+                }
+            },
+            {
+                progress: 52, callback: () => {
+                    this.uiRenderer.createImage('playground', 'pasta', 'ohlesmiamopates', true);
+                }
+            },
+            {
+                progress: 56, callback: () => {
+                    this.uiRenderer.createImage('playground', 'nimbuffle', 'main__nimbuffle', true);
+                }
+            },
+            {
+                progress: 69, callback: () => {
+                    this.uiRenderer.createImage('playground', 'trompette', 'sa swingue', true);
+                }
+            },
+            {
+                progress: 85, callback: () => {
+                    this.uiRenderer.createImage('playground', 'nerd', 'ptn il est chiant lui', true);
+                }
+            },
+            {
+                progress: 99, callback: () => {
+                    this.unlockAchievement('nimbuffle');
+                    this.setupPlayground('hospitalcorridor');
+                }
+            }
+        ]);
+    }
+
+    hospitalDoorEvent() {
+        if (this.dataManager.save.secrets.hospitalDoor) {
+            this.setupPlayground('secretgarden');
+        } else if (this.dataManager.save.tools.includes('key')) {
+            this.dataManager.save.tools.splice(this.dataManager.save.tools.findIndex(tool => tool === 'key'), 1);
+            this.uiRenderer.renderTools(this.dataManager.save.tools);
+            this.dataManager.save.secrets.hospitalDoor = true;
+        } else {
+            this.setupPlayground('hospitalcorridor');
+        }
     }
 }
 

@@ -17,6 +17,9 @@ export class DataManager {
             if (this.save.achievements == undefined) {
                 this.save.achievements = [];
             }
+            if (this.save.time == undefined) {
+                this.save.time = 0;
+            }
         } else {
             this.save = {
                 state: "miamoIntro",
@@ -26,6 +29,7 @@ export class DataManager {
                 achievements: [],
                 minigameStats: {},
                 secrets: {},
+                time: 0,
                 storyAdvancement: 0
             }
         }
@@ -67,7 +71,9 @@ export class DataManager {
      * Sauvegarde dans le cache de l'avancement de la partie et des données du joueur
      */
     saveData() {
-        this.save.state = this.currentState;
+        if (this.currentState !== 'miamoIntro') {
+            this.save.state = this.currentState;
+        }
         localStorage.setItem('miamoSave', JSON.stringify(this.save));
     }
 

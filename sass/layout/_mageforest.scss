@@ -5,6 +5,19 @@
         left: 38%;
         top: 36%;
     }
+    
+    &__teleporter2 {
+        width: 12rem;
+        height: 100%;
+        right: 0%;
+    }
+
+    &__teleporter3 {
+        width: 35rem;
+        height: 16rem;
+        right: 20%;
+        top: 20%;
+    }
 
     &__eglantine {
         left: 15%;
@@ -16,6 +29,19 @@
         right: 30%;
         top: 20%;
         width: 10rem;
+    }
+
+    &__bird {
+        width: 10rem;
+        top: 22%;
+        left: 25%;
+        transform: scaleX(-1);
+    }
+
+    &__gnome {
+        width: 12rem;
+        bottom: 10%;
+        left: 30%;
     }
 
     &__return {

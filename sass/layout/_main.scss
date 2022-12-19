@@ -87,6 +87,15 @@
         z-index: -1;
     }
 
+    &__nimbuffle {
+        animation: 10s infinite dance;
+        transform-origin: bottom;
+    }
+
+    &__oiseau {
+        animation: float 300ms infinite;
+    }
+
     &__boss {
         position: absolute;
         inset: 0;

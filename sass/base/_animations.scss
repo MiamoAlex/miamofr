@@ -35,3 +35,21 @@
         transform: translateY(0);
     }
 }
+
+@keyframes dance {
+    0% {
+        transform: scaleY(1) translateX(0);
+    }
+    20% {
+        transform: scaleY(.2) translateX(10rem);
+    }
+    40% {
+        transform: scaleY(1) translateX(20rem);
+    }
+    60% {
+        transform: scaleX(-1) scaleY(.2) translateX(10rem);
+    }
+    80% {
+        transform: scaleX(-1) scaleY(.2) translateX(-10rem);
+    }
+}

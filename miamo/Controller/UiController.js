@@ -88,12 +88,34 @@ export class UiController {
         // Créé une instance de l'observateur lié à la fonction de callback
         this.observer = new MutationObserver(callback);
         this.observer.observe(this.uiRenderer.getElement('playground'), { attributes: true, childList: true, subtree: true, attributeFilter: ['data-event', 'data-sandwich', 'data-playground', 'data-minigame', 'class'] });
+
+        // Temps écoulé 
+        this.startTime = new Date();
+        window.addEventListener('beforeunload', () => {
+            const endDate = new Date();
+            const spentTime = endDate.getTime() - this.startTime.getTime();
+            if (this.dataManager.save) {
+                this.dataManager.save.time += spentTime;
+                this.dataManager.saveData();
+            }
+        });
+
+        addEventListener('keydown', (ev) => {
+            if (ev.key == 1) {
+                this.eventHandler.triggerEvent('scroll')
+            } else if (ev.key == 2) { 
+                this.eventHandler.setupPlayground('hospitalentrance')
+            }
+        })
     }
 
     /**
      * updateSandwichesCounter() affiche le nombre de sandwiches collectés
      */
     updateSandwichesCounter() {
+        if (this.dataManager.save.sandwiches.length > 9) {
+            this.eventHandler.unlockAchievement('sandwichCollector');
+        }
         this.uiRenderer.getElement('sandwiches').classList.remove('hide');
         this.uiRenderer.getElement('sandwiches').children[1].textContent = this.dataManager.save.sandwiches.length;
         setTimeout(() => {
@@ -118,7 +140,7 @@ export class UiController {
                 document.documentElement.style.setProperty('--flashLightX', this.cursorPosition.x + 'px');
                 document.documentElement.style.setProperty('--flashLightY', this.cursorPosition.y + 'px');
                 break;
-        
+
             case 'click':
                 this.audioManager.loadAudioFile('click', 'sfx');
                 if (this.dataManager.canInterract && this.dataManager.playMode === 'playground') {
@@ -182,6 +204,7 @@ export class UiController {
     headerHandler(ev) {
         switch (ev.target.className) {
             case 'header__reset':
+                this.dataManager.save = undefined;
                 localStorage.clear();
                 document.location.reload();
                 break;

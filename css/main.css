@@ -186,6 +186,23 @@ ul {
     transform: translateY(0);
   }
 }
+@keyframes dance {
+  0% {
+    transform: scaleY(1) translateX(0);
+  }
+  20% {
+    transform: scaleY(0.2) translateX(10rem);
+  }
+  40% {
+    transform: scaleY(1) translateX(20rem);
+  }
+  60% {
+    transform: scaleX(-1) scaleY(0.2) translateX(10rem);
+  }
+  80% {
+    transform: scaleX(-1) scaleY(0.2) translateX(-10rem);
+  }
+}
 .theme__main {
   --clr-name-main: ;
   --clr-main-white: #f3f3f3;
@@ -264,6 +281,26 @@ ul {
 .sandwich__11 {
   bottom: 5%;
   left: 30%;
+}
+.sandwich__12 {
+  bottom: 4%;
+  right: 10%;
+}
+.sandwich__13 {
+  bottom: 0%;
+  left: 2%;
+}
+.sandwich__14 {
+  bottom: 20%;
+  left: 32%;
+}
+.sandwich__15 {
+  bottom: 18%;
+  left: 42%;
+}
+.sandwich__16 {
+  bottom: 20%;
+  left: 52%;
 }
 
 .achievement {
@@ -398,6 +435,13 @@ ul {
   width: 100vw;
   z-index: -1;
 }
+.main__nimbuffle {
+  animation: 10s infinite dance;
+  transform-origin: bottom;
+}
+.main__oiseau {
+  animation: float 300ms infinite;
+}
 .main__boss {
   position: absolute;
   inset: 0;
@@ -458,6 +502,10 @@ ul {
   left: 3%;
   width: 10rem;
 }
+.worldmap__hospitalentrance {
+  top: 53%;
+  left: 25%;
+}
 
 .playground__content {
   width: 150%;
@@ -510,6 +558,62 @@ ul {
   left: 50%;
   top: 30%;
   animation: float infinite 1s;
+}
+
+.hospital__door {
+  width: 24rem;
+  height: 12rem;
+  bottom: 8%;
+  left: 40%;
+}
+.hospital__door2 {
+  width: 8rem;
+  height: 8rem;
+  bottom: 43%;
+  left: 42%;
+}
+.hospital__door3 {
+  width: 12rem;
+  height: 12rem;
+  right: 25%;
+  top: 40%;
+}
+.hospital__return {
+  bottom: 0;
+  width: 100%;
+  height: 6rem;
+}
+.hospital__nimbuffle {
+  bottom: 30%;
+  left: 28%;
+  width: 10rem;
+}
+.hospital__lock {
+  width: 6rem;
+  right: 45%;
+  top: 40%;
+  opacity: 0.3;
+}
+.hospital__doctor {
+  bottom: 30%;
+  transform: rotate(7deg);
+  right: 25%;
+  width: 22rem;
+}
+.hospital__mechant {
+  left: 13%;
+  bottom: 0;
+  width: 18rem;
+  transform: scaleX(-1);
+}
+.hospital__secretdoor {
+  width: 12rem;
+  bottom: 36.4%;
+  left: 40%;
+}
+.hospital__placeholder {
+  left: 40%;
+  bottom: 30%;
 }
 
 .restaurant__eglantine {
@@ -635,6 +739,17 @@ ul {
   left: 38%;
   top: 36%;
 }
+.mageforest__teleporter2 {
+  width: 12rem;
+  height: 100%;
+  right: 0%;
+}
+.mageforest__teleporter3 {
+  width: 35rem;
+  height: 16rem;
+  right: 20%;
+  top: 20%;
+}
 .mageforest__eglantine {
   left: 15%;
   bottom: 25%;
@@ -644,6 +759,17 @@ ul {
   right: 30%;
   top: 20%;
   width: 10rem;
+}
+.mageforest__bird {
+  width: 10rem;
+  top: 22%;
+  left: 25%;
+  transform: scaleX(-1);
+}
+.mageforest__gnome {
+  width: 12rem;
+  bottom: 10%;
+  left: 30%;
 }
 .mageforest__return {
   height: 100%;

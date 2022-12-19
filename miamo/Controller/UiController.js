@@ -99,14 +99,6 @@ export class UiController {
                 this.dataManager.saveData();
             }
         });
-
-        addEventListener('keydown', (ev) => {
-            if (ev.key == 1) {
-                this.eventHandler.triggerEvent('scroll')
-            } else if (ev.key == 2) { 
-                this.eventHandler.setupPlayground('hospitalentrance')
-            }
-        })
     }
 
     /**

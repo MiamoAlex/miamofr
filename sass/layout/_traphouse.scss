@@ -1,0 +1,15 @@
+.traphouse {
+    &__teleporter {
+        width: 10rem;
+        height: 22rem;
+        right: 42%;
+        bottom: 15%;
+    }
+
+    &__return {
+        left: 0;
+        width: 12rem;
+        height: 100%;
+        cursor: url("/assets/tex/return.cur"), default;
+    }
+}

@@ -13,17 +13,42 @@
 <body>
     <header class="header">
         🔉<input type="range" class="header__sound" min="0" max="1" step=".05">
+        <input class="header__reset" type="button" value="Reinitialiser sauvegarde">
+        <input class="header__achievements" type="button" value="🏆">
     </header>
 
     <main class="main">
+        <section class="main__menu">
+            <!-- Nombre de miamo sandwich miam collectés -->
+            <span class="main__sandwiches hide">
+                <img src="./assets/tex/sandwich.gif" alt="compteur a sandwich miam" class="main__sandwiches-img">
+                <span class="main__sandwiches-text"></span>
+            </span>
+            <!-- outils magiques miamo.FR 🥖-->
+            <ul class="main__tools">
+            </ul>
+        </section>
+        <!-- l'endroit où tout le fun se déroule !!!! (chut, la magie opère... 🎩)-->
         <div class="main__playground">
             <h1 class="main__h1" data-event="intro">miamo</h1>
         </div>
+        <!-- succès bravo (médailles) 🏆 -->
+        <ul class="main__achievements"></ul>
     </main>
 
     <div id="templates" hidden>
-    </div>
+        <template class="template__achievement">
+            <li class="achievement">
+                <img src="./assets/tex/{{picture}}.png" alt="Succès {{name}}" class="achievement__icon">
+                <div class="achievement__infos">
+                    <h3 class="achievement__name">{{name}}</h3>
+                    <p class="achievement__description">{{description}}</p>
+                </div>
+            </li>
+        </template>
 
+    </div>
+    <!-- développeur 😎😎😎😎😎-->
     <script type="module" src="./main.js"></script>
 </body>
 

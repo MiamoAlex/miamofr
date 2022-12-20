@@ -1,0 +1,75 @@
+.sandwich {
+    width: 8rem;
+    position: absolute;
+    &__0 {
+        top: 60%;
+        left: 33%;
+    }
+    &__1 {
+        right: 10%;
+        bottom: 5%;
+    }
+    &__2 {
+        left: 12%;
+        bottom: 30%;
+    }
+    &__3 {
+        top: 30%;
+        width: 0.8rem;
+        right: 40%;
+    }
+    &__4 {
+        bottom: -5%;
+        right: -5%;
+        width: 15rem;
+    }
+    &__6 {
+        transform: scaleY(-1);
+        right: 3%;
+        top: 3%;
+    }
+    &__7 {
+        right: 44%;
+        bottom: 25%;
+        transform: scale(4);
+        z-index: 10;
+    }
+    &__8 {
+        bottom: 32%;
+        left: 40%;
+    }
+    &__9 {
+        bottom: 5%;
+        left: 8%;
+        filter: blur(5px);
+    }
+    &__10 {
+        bottom: 5%;
+        right: 40%;
+    }
+    &__11 {
+        bottom: 5%;
+        left: 30%;
+    }
+    &__12 {
+        bottom: 4%;
+        right: 10%;
+    }
+    &__13 {
+        bottom: 0%;
+        left: 2%;
+    }
+    &__14 {
+        bottom: 20%;
+        left: 32%;
+    }
+    &__15 {
+        bottom: 18%;
+        left: 42%;
+    }
+    &__16 {
+        bottom: 20%;
+        left: 52%;
+    }
+    
+}

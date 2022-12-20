@@ -12,10 +12,12 @@
     }
 }
 
-
 .teleporter {
-    opacity: .25;
-    // background-color: #a06de5;
+    opacity: 0.25;
+}
+
+.hide {
+    opacity: 0;
 }
 
 .magic {
@@ -28,3 +30,4 @@
     position: absolute;
     bottom: 30%;
 }
+

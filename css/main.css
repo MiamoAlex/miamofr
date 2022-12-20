@@ -103,12 +103,23 @@ body {
   cursor: url("/assets/tex/arrow.cur"), default;
 }
 
-[data-event], [data-voiceline], [data-sfx] {
+[data-event],
+[data-voiceline],
+[data-sfx],
+[data-playground],
+[data-sandwich],
+[data-minigame],
+[data-tool] {
   cursor: url("/assets/tex/hover.cur"), default;
 }
 
 img {
   user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
 }
 
 use {
@@ -127,11 +138,11 @@ ul {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--clr-main-white);
+  background: var(--clr-main-black);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--clr-main-black);
+  background: #222;
 }
 
 @keyframes grow {
@@ -175,6 +186,23 @@ ul {
     transform: translateY(0);
   }
 }
+@keyframes dance {
+  0% {
+    transform: scaleY(1) translateX(0);
+  }
+  20% {
+    transform: scaleY(0.2) translateX(10rem);
+  }
+  40% {
+    transform: scaleY(1) translateX(20rem);
+  }
+  60% {
+    transform: scaleX(-1) scaleY(0.2) translateX(10rem);
+  }
+  80% {
+    transform: scaleX(-1) scaleY(0.2) translateX(-10rem);
+  }
+}
 .theme__main {
   --clr-name-main: ;
   --clr-main-white: #f3f3f3;
@@ -183,6 +211,10 @@ ul {
 
 .teleporter {
   opacity: 0.25;
+}
+
+.hide {
+  opacity: 0;
 }
 
 .magic {
@@ -196,15 +228,123 @@ ul {
   bottom: 30%;
 }
 
+.sandwich {
+  width: 8rem;
+  position: absolute;
+}
+.sandwich__0 {
+  top: 60%;
+  left: 33%;
+}
+.sandwich__1 {
+  right: 10%;
+  bottom: 5%;
+}
+.sandwich__2 {
+  left: 12%;
+  bottom: 30%;
+}
+.sandwich__3 {
+  top: 30%;
+  width: 0.8rem;
+  right: 40%;
+}
+.sandwich__4 {
+  bottom: -5%;
+  right: -5%;
+  width: 15rem;
+}
+.sandwich__6 {
+  transform: scaleY(-1);
+  right: 3%;
+  top: 3%;
+}
+.sandwich__7 {
+  right: 44%;
+  bottom: 25%;
+  transform: scale(4);
+  z-index: 10;
+}
+.sandwich__8 {
+  bottom: 32%;
+  left: 40%;
+}
+.sandwich__9 {
+  bottom: 5%;
+  left: 8%;
+  filter: blur(5px);
+}
+.sandwich__10 {
+  bottom: 5%;
+  right: 40%;
+}
+.sandwich__11 {
+  bottom: 5%;
+  left: 30%;
+}
+.sandwich__12 {
+  bottom: 4%;
+  right: 10%;
+}
+.sandwich__13 {
+  bottom: 0%;
+  left: 2%;
+}
+.sandwich__14 {
+  bottom: 20%;
+  left: 32%;
+}
+.sandwich__15 {
+  bottom: 18%;
+  left: 42%;
+}
+.sandwich__16 {
+  bottom: 20%;
+  left: 52%;
+}
+
+.achievement {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  width: 100%;
+  height: fit-content;
+  z-index: 10;
+  background-color: #111;
+}
+.achievement__icon {
+  width: 4rem;
+  height: 4rem;
+  object-fit: contain;
+}
+
 .header {
   position: fixed;
   top: 0;
   font-size: 1.25rem;
-  width: 100vw;
+  width: calc(100vw - 0.5rem);
+  padding: 0.5rem;
   z-index: 10;
 }
 .header__sound {
   accent-color: rgb(32, 32, 32);
+}
+.header__reset {
+  opacity: 0;
+  font-size: 0.8rem;
+  transition: opacity 300ms;
+}
+.header__achievements {
+  position: absolute;
+  right: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.header:hover .header__reset {
+  opacity: 1;
 }
 
 .main {
@@ -213,6 +353,64 @@ ul {
   display: grid;
   place-content: center;
   position: relative;
+}
+.main > .achievement {
+  position: absolute;
+  width: 18rem;
+  height: 5rem;
+  bottom: 10%;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.main__sandwiches {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: row;
+  gap: 0.5rem;
+  transition: opacity 300ms;
+}
+.main__sandwiches-text {
+  font-size: 2rem;
+}
+.main__sandwiches-img {
+  width: 4rem;
+}
+.main__menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+.main__tools {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  gap: 1rem;
+}
+.main__achievements {
+  position: absolute;
+  right: 0;
+  width: 20rem;
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.5rem;
+  transform: translateX(20rem);
+  transition: transform 300ms;
+  background-color: #080808;
+  padding-top: 4rem;
+}
+.main__achievements-open {
+  transform: translateX(0);
+}
+.main__distributeur {
+  width: 17rem;
 }
 .main__playground {
   width: 100vw;
@@ -223,6 +421,8 @@ ul {
   max-height: 720px;
   position: relative;
   overflow: hidden;
+  isolation: isolate;
+  transition: filter 300ms;
 }
 .main__h1 {
   font-size: 7rem;
@@ -231,6 +431,32 @@ ul {
 }
 .main__h1-anim {
   animation: grow 30s forwards;
+}
+.main__psychedelic {
+  width: 100vw;
+  z-index: -1;
+}
+.main__nimbuffle {
+  animation: 10s infinite dance;
+  transform-origin: bottom;
+}
+.main__oiseau {
+  animation: float 300ms infinite;
+}
+.main__boss {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  z-index: 10;
+}
+.main__boss-health {
+  position: absolute;
+  bottom: 3rem;
+  width: 44rem;
+  left: 0;
+  right: 0;
+  margin: auto;
+  animation: float 4500ms infinite;
 }
 .main__eglantine-run {
   animation: run infinite 6000ms;
@@ -244,6 +470,44 @@ ul {
   position: absolute;
 }
 
+.tools__glasses {
+  width: 5rem;
+}
+.tools__flashlight {
+  width: 5rem;
+}
+.tools__key {
+  width: 1.5rem;
+  margin: 0 2rem 0 2rem;
+  transform: rotate(90deg);
+}
+
+.worldmap__restaurant {
+  top: 13%;
+  left: 12%;
+}
+.worldmap__backroom {
+  top: 13%;
+  left: 28%;
+}
+.worldmap__mageforest {
+  top: 40%;
+  left: 10%;
+}
+.worldmap__robots {
+  left: 35%;
+  top: 33%;
+}
+.worldmap__mermaidclose {
+  top: 54%;
+  left: 3%;
+  width: 10rem;
+}
+.worldmap__hospitalentrance {
+  top: 53%;
+  left: 25%;
+}
+
 .playground__content {
   width: 150%;
   height: 150%;
@@ -253,52 +517,150 @@ ul {
   right: 0;
   margin: auto;
   background-size: 100% 100%;
+  background-repeat: no-repeat;
   transition: transform 100ms;
+  transform: translate(var(--cursorX), var(--cursorY));
 }
-.playground__restaurant {
-  background: url(../../assets/backgrounds/restaurant.png) no-repeat;
+.playground__content > * {
+  position: absolute;
 }
-.playground__backroom {
-  background: url(../../assets/backgrounds/backroom.png) no-repeat;
+.playground__dark [data-sandwich], .playground__dark [data-event], .playground__dark [data-sfx], .playground__dark [data-voiceline] {
+  pointer-events: none;
 }
-.playground__kitchen {
-  background: url(../../assets/backgrounds/kitchen.png) no-repeat;
+.playground__dark::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.96);
+  z-index: 10;
 }
-.playground__placeholder {
-  background: url(../../assets/backgrounds/placeholder.png) no-repeat;
+.playground__flashlight::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  pointer-events: none;
+  background: radial-gradient(circle 10vmax at var(--flashLightX) var(--flashLightY), rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 80%, rgba(0, 0, 0, 0.95) 100%);
+  z-index: 10;
+}
+
+.kitchen__door {
+  right: 12%;
+  top: 29%;
+  width: 10rem;
+  height: 15rem;
+  cursor: url("/assets/tex/return.cur"), default;
+}
+.kitchen__recipe {
+  width: 15rem;
+  left: 50%;
+  top: 30%;
+  animation: float infinite 1s;
+}
+
+.hospital__door {
+  width: 24rem;
+  height: 12rem;
+  bottom: 8%;
+  left: 40%;
+}
+.hospital__door2 {
+  width: 8rem;
+  height: 8rem;
+  bottom: 43%;
+  left: 42%;
+}
+.hospital__door3 {
+  width: 12rem;
+  height: 12rem;
+  right: 25%;
+  top: 40%;
+}
+.hospital__return {
+  bottom: 0;
+  width: 100%;
+  height: 6rem;
+  cursor: url("/assets/tex/return.cur"), default;
+}
+.hospital__nimbuffle {
+  bottom: 30%;
+  left: 28%;
+  width: 10rem;
+}
+.hospital__lock {
+  width: 6rem;
+  right: 45%;
+  top: 40%;
+  opacity: 0.3;
+}
+.hospital__doctor {
+  bottom: 30%;
+  transform: rotate(7deg);
+  right: 25%;
+  width: 22rem;
+}
+.hospital__mechant {
+  left: 13%;
+  bottom: 0;
+  width: 18rem;
+  transform: scaleX(-1);
+}
+.hospital__secretdoor {
+  width: 12rem;
+  bottom: 36.4%;
+  left: 40%;
+}
+.hospital__placeholder {
+  left: 40%;
+  bottom: 30%;
+}
+.hospital__mario {
+  bottom: 1%;
+  right: 21%;
+  width: 13rem;
 }
 
 .restaurant__eglantine {
-  position: absolute;
   right: 15%;
   bottom: 10%;
   width: 10rem;
 }
 .restaurant__burgers {
-  position: absolute;
   left: 0%;
   bottom: 13%;
   width: 10rem;
 }
 .restaurant__door {
-  position: absolute;
   right: 5%;
   top: 40%;
   width: 10rem;
   height: 15rem;
 }
+.restaurant__grandma {
+  width: 12rem;
+  height: 18rem;
+  right: 0;
+  bottom: 10%;
+}
 .restaurant__gustave {
-  position: absolute;
   bottom: 4%;
   left: 30%;
   width: 8rem;
 }
 .restaurant__kitchen {
   transform: rotate(75deg);
-  position: absolute;
   width: 8rem;
   left: 15%;
   top: 10%;
+}
+.restaurant__distributeur {
+  width: 15rem;
+  bottom: 6%;
+  right: 42%;
 }
 
 .backroom__eglantine {
@@ -312,27 +674,333 @@ ul {
   left: 5%;
   top: 30%;
   width: 14rem;
+  cursor: url("/assets/tex/return.cur"), default;
 }
-.backroom__adzpko {
+.backroom__teleporter {
   position: absolute;
   width: 4rem;
   height: 13rem;
   left: 42%;
   top: 30%;
-  cursor: not-allowed;
 }
 
-.kitchen__door {
-  position: absolute;
-  right: 12%;
-  top: 29%;
+.poolroom__return {
+  bottom: 0;
+  height: 13rem;
+  width: 100%;
+  cursor: url("/assets/tex/return.cur"), default;
+}
+.poolroom__teleporter {
   width: 10rem;
+  height: 10rem;
+  left: 46%;
+  top: 40%;
+}
+.poolroom__teleporter2 {
+  width: 9rem;
+  height: 23rem;
+  left: 22%;
+  top: 32%;
+}
+.poolroom__eglantine {
+  bottom: 18%;
+  left: 23%;
+  width: 10rem;
+}
+.poolroom__teleporter3 {
+  bottom: 43%;
+  left: 46%;
+  width: 13rem;
   height: 15rem;
 }
-.kitchen__recipe {
-  width: 15rem;
+.poolroom__teleporter4 {
+  bottom: 28%;
+  right: 20%;
+  width: 10rem;
+  height: 32rem;
+}
+.poolroom__burger {
   position: absolute;
-  left: 50%;
+  left: 35%;
+  bottom: 32%;
+  width: 25rem;
+}
+.poolroom__clown {
+  width: 10rem;
+  left: 45%;
+  top: 40%;
+}
+.poolroom__code {
+  image-rendering: pixelated;
+  width: 24rem;
+  left: 38%;
+  top: 12%;
+}
+
+.secretcave__man {
+  right: 45%;
+  bottom: 15%;
+  width: 6rem;
+}
+
+.mageforest__teleporter {
+  width: 12rem;
+  height: 14rem;
+  left: 38%;
+  top: 36%;
+}
+.mageforest__teleporter2 {
+  width: 12rem;
+  height: 100%;
+  right: 0%;
+  cursor: url("/assets/tex/mouseright.png"), default;
+}
+.mageforest__teleporter3 {
+  width: 35rem;
+  height: 16rem;
+  right: 20%;
+  top: 20%;
+}
+.mageforest__eglantine {
+  left: 15%;
+  bottom: 25%;
+  width: 15rem;
+}
+.mageforest__poster {
+  right: 30%;
+  top: 20%;
+  width: 10rem;
+}
+.mageforest__bird {
+  width: 10rem;
+  top: 22%;
+  left: 25%;
+  transform: scaleX(-1);
+}
+.mageforest__gnome {
+  width: 12rem;
+  bottom: 10%;
+  left: 30%;
+}
+.mageforest__return {
+  height: 100%;
+  left: 0;
+  width: 12rem;
+  cursor: url("/assets/tex/return.cur"), default;
+}
+
+.underwater__return {
+  top: 0;
+  width: 100%;
+  height: 10rem;
+  cursor: url("/assets/tex/return.cur"), default;
+}
+.underwater__return2 {
+  left: 0;
+  height: 100%;
+  width: 13rem;
+  cursor: url("/assets/tex/return.cur"), default;
+}
+.underwater__pillar {
+  bottom: 5%;
+  left: 40%;
+}
+.underwater__eglantine {
+  width: 10rem;
+  top: 42%;
+  left: 22%;
+  transform: rotate(-16deg);
+  animation: float 6s infinite;
+}
+.underwater__teleport2 {
+  width: 19rem;
+  height: 19rem;
+  top: 40%;
+  left: 40%;
+}
+.underwater__teleport3 {
+  width: 19rem;
+  height: 19rem;
+  bottom: 0;
+  left: 0%;
+}
+.underwater__teleport4 {
+  width: 19rem;
+  height: 19rem;
+  bottom: 30%;
+  left: 45%;
+}
+.underwater__bouche {
+  bottom: 2%;
+  left: 43%;
+  cursor: url("/assets/tex/mousebottom.png"), default;
+}
+.underwater__mermaid {
+  right: 15%;
+  bottom: 10%;
+  animation: float 13s infinite;
+}
+.underwater__creature {
+  top: 10%;
+  left: 32%;
+  width: 32rem;
+  height: 23rem;
+}
+.underwater__key {
+  bottom: 15%;
+  right: 50%;
+  animation: float 2s infinite;
+}
+
+.traphouse__teleporter {
+  width: 10rem;
+  height: 22rem;
+  right: 42%;
+  bottom: 15%;
+}
+.traphouse__return {
+  left: 0;
+  width: 12rem;
+  height: 100%;
+  cursor: url("/assets/tex/return.cur"), default;
+}
+
+.robots__eglantine {
+  bottom: 20%;
+  left: 30%;
+  width: 10rem;
+}
+.robots__teleporter {
+  left: 25%;
+  top: 25%;
+  width: 10rem;
+  height: 20rem;
+}
+
+.rainbowtunnel__teleporter {
+  width: 15rem;
+  height: 15rem;
+  left: 25%;
+  top: 39%;
+}
+
+.networks__glasses {
+  left: 45%;
+  top: 45%;
+  animation: float 1s infinite;
+}
+
+.magelake__return {
+  right: 0;
+  height: 100%;
+  cursor: url("/assets/tex/return.cur"), default;
+}
+.magelake__frog {
+  bottom: 5%;
+  right: 10%;
+  transform: scaleX(-1);
+  width: 10rem;
+}
+.magelake__bubbles {
+  top: 48%;
+  left: 60%;
+  transform: skew(10deg);
+  width: 10rem;
+}
+
+.weirdhouse__nerd {
+  left: 45%;
+  bottom: 23%;
+  animation: float 1s infinite;
+}
+.weirdhouse__return {
+  left: 0;
+  width: 12rem;
+  height: 100%;
+  cursor: url("/assets/tex/return.cur"), default;
+}
+.weirdhouse__scroll {
+  left: 40%;
   top: 30%;
-  animation: float infinite 1s;
+}
+
+.minigame__close {
+  color: #ee1414;
+  font-size: 5rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+.burgerclicker {
+  background: url(../../assets/backgrounds/burgerclick.png) no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 60rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+.burgerclicker__text {
+  font-size: 6rem;
+  position: absolute;
+  bottom: 6rem;
+}
+.burgerclicker__burger {
+  cursor: pointer;
+  width: 30rem;
+  transform: scale(1);
+  transition: transform 300ms;
+}
+.burgerclicker__burger:active {
+  transform: scale(0.9);
+}
+.burgerclicker__logo {
+  position: absolute;
+  width: 16rem;
+  top: 0;
+  right: 4rem;
+}
+
+.mermaidpuzzle__pillar {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 12rem;
+  z-index: -1;
+}
+.mermaidpuzzle__notes {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 1rem;
+  z-index: 11;
+}
+.mermaidpuzzle__note {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 6rem;
+  background-color: red;
+  cursor: pointer;
+}
+.mermaidpuzzle [data-note="6"] {
+  background: green;
+}
+.mermaidpuzzle [data-note="5"] {
+  background: yellow;
+}
+.mermaidpuzzle [data-note="4"] {
+  background: red;
+}
+.mermaidpuzzle [data-note="3"] {
+  background: blue;
+}
+.mermaidpuzzle [data-note="2"] {
+  background: purple;
+}
+.mermaidpuzzle [data-note="1"] {
+  background: orange;
 }/*# sourceMappingURL=main.css.map */

@@ -1,0 +1,158 @@
+{
+    "worldmap": {
+        "storyCheck": true
+    },
+    "restaurant": {
+        "music": "ohnon",
+        "sandwiches": [
+            0
+        ],
+        "discovery": true
+    },
+    "kitchen": {
+        "music": "angel",
+        "sandwiches": [
+            2
+        ],
+        "storyCheck": true
+    },
+    "backroom": {
+        "music": "backroom",
+        "sandwiches": [
+            1
+        ],
+        "discovery": true
+    },
+    "poolroom": {
+        "music": "water",
+        "flashlight": true
+    },
+    "poolroom2": {
+        "music": "water",
+        "flashlight": true,
+        "sandwiches": [
+            8
+        ]
+    },
+    "poolroom3": {
+        "music": "water",
+        "flashlight": true
+    },
+    "tableroom": {
+        "flashlight": true,
+        "storyCheck": true
+    },
+    "secretcave": {
+        "music": "secretcave",
+        "sandwiches": [
+            7
+        ],
+        "storyCheck": true,
+        "flashlight": true
+    },
+    "firekitchen": {
+        "music": "fire"
+    },
+    "magelake": {
+        "music": "forestambient",
+        "sandwiches": [
+            3
+        ]
+    },
+    "mageriver": {
+        "music": "forestambient"
+    },
+    "magecar": {
+        "music": "forestambient",
+        "sandwiches": [
+            12
+        ]
+    },
+    "underlake": {
+        "music": "underwater",
+        "sandwiches": [
+            9
+        ]
+    },
+    "mermaidclose": {
+        "music": "underwater",
+        "discovery": true
+    },
+    "watercorridor": {},
+    "waterwall": {
+        "sandwiches": [
+            10
+        ]
+    },
+    "abyss": {
+        "music": "underwater",
+        "flashlight": true
+    },
+    "abysscreature": {
+        "music": "underwater",
+        "flashlight": true,
+        "sandwiches": [
+            11
+        ]
+    },
+    "watercave": {
+        "storyCheck": true
+    },
+    "mageforest": {
+        "music": "forestambient",
+        "discovery": true,
+        "storyCheck": true
+    },
+    "traphouse": {
+        "music": "forestambient",
+        "sandwiches": [
+            4
+        ]
+    },
+    "weirdhouse": {
+        "music": "weirdhouse",
+        "storyCheck": true
+    },
+    "rainbowtunnel": {
+        "music": "networks",
+        "sandwiches": [
+            6
+        ]
+    },
+    "robots": {
+        "music": "networks",
+        "discovery": true
+    },
+    "networks": {
+        "music": "networks",
+        "storyCheck": true
+    },
+    "hospitalentrance": {
+        "discovery": true,
+        "music": "street",
+        "sandwiches": [
+            13
+        ]
+    },
+    "hospitalcorridor": {
+        "music": "street"
+    },
+    "hospitaldark": {
+        "music": "street",
+        "flashlight": true
+    },
+    "hospitaloffice": {},
+    "secretgarden": {
+        "sandwiches": [
+            14,
+            15,
+            16
+        ]
+    },
+    "devroom": {
+        "storyCheck": true
+    },
+    "placeholder": {
+        "music": "ohnon"
+    }
+}

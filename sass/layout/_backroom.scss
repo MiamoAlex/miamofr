@@ -11,14 +11,14 @@
         left: 5%;
         top: 30%;
         width: 14rem;
+        cursor: url("/assets/tex/return.cur"), default;
     }
 
-    &__adzpko {
+    &__teleporter{
         position: absolute;
         width: 4rem;
         height: 13rem;
         left: 42%;
         top: 30%;
-        cursor: not-allowed;
     }   
 }

@@ -1,0 +1,16 @@
+@use '../abstracts/' as *;
+
+.achievement {
+    @include flex(flex-start, center, row);
+    gap: .5rem;
+    padding: .5rem;
+    width: 100%;
+    height: fit-content;
+    z-index: 10;
+    background-color: #111;
+    &__icon {
+        width: 4rem;
+        height: 4rem;
+        object-fit: contain;
+    }
+}

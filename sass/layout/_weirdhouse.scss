@@ -1,0 +1,17 @@
+.weirdhouse {
+    &__nerd {
+        left: 45%;
+        bottom: 23%;
+        animation: float 1s infinite;
+    }
+    &__return {
+        left: 0;
+        width: 12rem;
+        height: 100%;
+        cursor: url("/assets/tex/return.cur"), default;
+    }
+    &__scroll {
+        left: 40%;
+        top: 30%;
+    }
+}

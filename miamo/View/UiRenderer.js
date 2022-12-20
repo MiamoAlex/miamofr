@@ -31,6 +31,17 @@ export class UiRenderer {
     }
 
     /**
+     * renderTools() fait le rendu des outils du joueur sur le menu des outils
+     * @param {Array<String>} tools Outils du joueur
+     */
+    renderTools(tools) {
+        this.getElement('tools').innerHTML = '';
+        tools.forEach(tool => {
+            this.getElement('tools').innerHTML += `<img src="./assets/tex/${tool}.png" alt="lunettes magiques" class="tools__${tool}" data-tool="${tool}">`
+        });
+    }
+
+    /**
      * renderTemplate() formatte une template à partir d'un tableau d'objet et l'envoie dans le dom destination
      * @param {Node} template 
      * @param {Array<Object>} arrayObj 
@@ -52,10 +63,24 @@ export class UiRenderer {
                 }
             }
         }
-        destination.innerHTML = formattedTemplates;
+        // Retour des données
+        if (destination) {
+            destination.innerHTML = formattedTemplates;
+        } else {
+            return formattedTemplates;
+        }
     }
 
-    createImage(destination, src, className, clear, event) {
+    /**
+     * createImage() génére une image avec certains parametres à l'écran
+     * @param {Node} destination Destinatino de l'image
+     * @param {String} src Nom de l'image pour remplir l'url
+     * @param {String} className Classe css à donner à l'image
+     * @param {boolean} clear Faut-il nettoyer l'écran (propre)
+     * @param {Event} event Dataset à remplir sur l'image qui doit déclencher un evenement
+     * @returns 
+     */
+    createImage(destination, src, className, clear, event, playground) {
         if (clear) {
             this.getElement('playground').innerHTML = '';
         }
@@ -65,15 +90,42 @@ export class UiRenderer {
         if (event) {
             img.dataset.event = event;
         }
+        if (playground) {
+            img.dataset.playground = playground;
+        }
         this.getElement(destination).appendChild(img);
         return img;
+    }
+
+    renderAchievement(achievementObj) {
+        const achievement = this.renderTemplate(document.querySelector('.template__achievement'), achievementObj);
+        this.getElement('main').insertAdjacentHTML('afterbegin', achievement);
+
+        setTimeout(() => {
+            document.querySelector('.achievement').remove();
+        }, 4000);
     }
 
     /**
      * Chargement d'un nouveau playgorund à l'écran 
      * @param {String} playground Contenu html du playground
      */
-    loadPlayground(playground) {
-        this.getElement('playground').innerHTML = playground;
+    loadPlayground(playground, sandwiches, playerSandwiches) {
+        this.getElement('playground').style.filter = 'brightness(0)';
+        // Après l'animation, création du playground
+        setTimeout(() => {
+            this.getElement('playground').innerHTML = playground;
+            const playergroundContent = document.querySelector('.playground__content');
+            playergroundContent.style.backgroundImage = `url(../../assets/backgrounds/${playergroundContent.dataset.background}.webp)`
+            this.getElement('playground').style.filter = 'brightness(1)';
+            // Création des sandwiches
+            if (sandwiches) {
+                sandwiches.forEach(sandwich => {
+                    if (!playerSandwiches.includes(sandwich)) {
+                        playergroundContent.innerHTML += `<img src="../assets/tex/sandwich.gif" alt="mmmhmmhmhh h l e bon sandwiiiich" class="sandwich sandwich__${sandwich}" data-sandwich="${sandwich}">`;
+                    }
+                });
+            }
+        }, 300);
     }
 }

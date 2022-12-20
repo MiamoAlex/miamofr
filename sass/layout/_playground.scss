@@ -8,19 +8,47 @@
         right: 0;
         margin: auto;
         background-size: 100% 100%;
+        background-repeat: no-repeat;
         transition: transform 100ms;
+        transform: translate(var(--cursorX), var(--cursorY));
+
+        & > * {
+            position: absolute;
+        }
     }
-    &__restaurant
-    {
-        background: url(../../assets/backgrounds/restaurant.png) no-repeat;
+
+    &__dark {
+        & [data-sandwich], [data-event], [data-sfx], [data-voiceline] {
+            pointer-events: none;
+        }
+
+        &::before {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            pointer-events: none;
+            background: rgba(0, 0, 0, 0.960);
+            z-index: 10;
+        }
     }
-    &__backroom {
-        background: url(../../assets/backgrounds/backroom.png) no-repeat;
-    }
-    &__kitchen {
-        background: url(../../assets/backgrounds/kitchen.png) no-repeat;
-    }
-    &__placeholder {
-        background: url(../../assets/backgrounds/placeholder.png) no-repeat;
+
+    &__flashlight {
+        &::before {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            pointer-events: none;
+            background: radial-gradient(
+                circle 10vmax at var(--flashLightX) var(--flashLightY),
+                rgba(0, 0, 0, 0) 0%,
+                rgba(0, 0, 0, 0.5) 80%,
+                rgba(0, 0, 0, 0.95) 100%
+            );
+            z-index: 10;
+        }
     }
 }

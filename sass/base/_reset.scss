@@ -85,15 +85,26 @@ body {
   background-color: var(--clr-main-black);
   color: var(--clr-main-white);
   user-select: none;
-  cursor: url('/assets/tex/arrow.cur'), default;
+  cursor: url("/assets/tex/arrow.cur"), default;
 }
 
-[data-event], [data-voiceline], [data-sfx] {
-  cursor: url('/assets/tex/hover.cur'), default;
+[data-event],
+[data-voiceline],
+[data-sfx],
+[data-playground],
+[data-sandwich],
+[data-minigame],
+[data-tool] {
+  cursor: url("/assets/tex/hover.cur"), default;
 }
 
 img {
   user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
 }
 
 use {
@@ -112,9 +123,9 @@ ul {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--clr-main-white);
+  background: var(--clr-main-black);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--clr-main-black);
+  background: #222;
 }

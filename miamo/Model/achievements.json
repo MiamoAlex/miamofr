@@ -1,0 +1,72 @@
+{
+    "eglanmiam": {
+        "name": "Églan-miam",
+        "description": "églantine, la souris de miamo.fr, a dévorée les burgers",
+        "picture": "eglantine"
+    },
+    "grandmaEnding": {
+        "name": "fin grand-mère",
+        "description": "mauvaise décision....",
+        "picture": "grandma"
+    },
+    "burgerChampion": {
+        "name": "meilleur mangeur burger miamo.fr",
+        "description": "bravo 🍔🐭",
+        "picture": "burger"
+    },
+    "burgerKing": {
+        "name": "Burger King",
+        "description": "euh ça va?????",
+        "picture": "burgers"
+    },
+    "foodDeath": {
+        "name": "intoxication 🤮",
+        "description": "tu es mort d'intoxication alimentaire !!",
+        "picture": "alerte"
+    },
+    "recipeStolen": {
+        "name": "la recette !!!",
+        "description": "la recette secrete miamo burger à été volée!!",
+        "picture": "mechant"
+    },
+    "cheater": {
+        "name": "tricheur",
+        "description": "tu as essayé de tricher sur miamo.fr",
+        "picture": "antipiracy"
+    },
+    "grombluchoire": {
+        "name": "Grombluchoire",
+        "description": "Tu as bien épellé grombluchoire !!!",
+        "picture": "grombl"
+    },
+    "enzo": {
+        "name": "Le développeur",
+        "description": "églantine l'a fait exploser",
+        "picture": "nerddeath"
+    },
+    "mermaidWorld": {
+        "name": "anniversaire marin",
+        "description": "tu as découvert le monde des sirenes",
+        "picture": "sirene"
+    },
+    "cheesebird": {
+        "name": "délicieux fromage",
+        "description": "je veux juste un peu de plante a manger",
+        "picture": "bird"
+    },
+    "sandwichCollector": {
+        "name": "chercheur de miam",
+        "description": "tu as trouvé 10 sandwichs secrets",
+        "picture": "rire"
+    },
+    "nimbuffle": {
+        "name": "nimbuffle le cerf",
+        "description": "chapeau nimbuffle",
+        "picture": "nimbuffle"
+    }, 
+    "devroom":{
+        "name": "miamoalex",
+        "description": "tu as trouvé la salle secrete du développeur",
+        "picture": "glasses"
+    }
+}

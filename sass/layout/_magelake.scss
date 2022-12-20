@@ -1,0 +1,21 @@
+.magelake {
+    &__return {
+        right: 0;
+        height: 100%;
+        cursor: url("/assets/tex/return.cur"), default;
+    }
+
+    &__frog {
+        bottom: 5%;
+        right: 10%;
+        transform: scaleX(-1);
+        width: 10rem;
+    }
+
+    &__bubbles {
+        top: 48%;
+        left: 60%;
+        transform: skew(10deg);
+        width: 10rem;
+    }
+}

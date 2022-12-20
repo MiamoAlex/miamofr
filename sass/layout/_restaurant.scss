@@ -1,28 +1,31 @@
 .restaurant {
     &__eglantine {
-        position: absolute;
         right: 15%;
         bottom: 10%;
         width: 10rem;
     }
 
     &__burgers {
-        position: absolute;
         left: 0%;
         bottom: 13%;
         width: 10rem;
     }
 
     &__door {
-        position: absolute;
         right: 5%;
         top: 40%;
         width: 10rem;
         height: 15rem;
     }
 
+    &__grandma{
+        width: 12rem;
+        height: 18rem;
+        right: 0;
+        bottom: 10%;
+    }
+
     &__gustave {
-        position: absolute;
         bottom: 4%;
         left: 30%;
         width: 8rem;
@@ -30,9 +33,14 @@
 
     &__kitchen {
         transform: rotate(75deg);
-        position: absolute;
         width: 8rem;
         left: 15%;
         top: 10%;
+    }
+
+    &__distributeur {
+        width: 15rem;
+        bottom: 6%;
+        right: 42%;
     }
 }

@@ -233,7 +233,7 @@ ul {
 }
 
 .cursor__left {
-  cursor: url("../assets/tex/mouseLeft.png"), default;
+  cursor: url("../assets/tex/mouseleft.png"), default;
 }
 .cursor__right {
   cursor: url("../assets/tex/mouseright.png"), default;

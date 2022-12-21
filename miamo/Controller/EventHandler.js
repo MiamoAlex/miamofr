@@ -38,38 +38,38 @@ export class EventHandler {
      * @param {Evenement au clic} ev Clic sur miamo.fr 
      */
     introEvent(ev) {
-        this.dataManager.setMiamoState(this.dataManager.save.state);
-        if (this[`${this.dataManager.getMiamoState()}Event`]) {
-            this.triggerEvent(this.dataManager.getMiamoState());
-        } else {
-            this.setupPlayground(this.dataManager.getMiamoState());
-        }
-        this.uiRenderer.renderTools(this.dataManager.save.tools);
-        // if (document.body.requestFullscreen) {
-        //     document.body.requestFullscreen();
+        // this.dataManager.setMiamoState(this.dataManager.save.state);
+        // if (this[`${this.dataManager.getMiamoState()}Event`]) {
+        //     this.triggerEvent(this.dataManager.getMiamoState());
+        // } else {
+        //     this.setupPlayground(this.dataManager.getMiamoState());
         // }
+        // this.uiRenderer.renderTools(this.dataManager.save.tools);
+        if (document.body.requestFullscreen) {
+            document.body.requestFullscreen();
+        }
 
-        // ev.target.classList.add('main__h1-anim')
-        // this.audioManager.loadAudioFile('intro', 'voiceline', [
-        //     // le logo devient .fr
-        //     {
-        //         progress: 80, callback: () => {
-        //             ev.target.textContent = '.fr';
-        //         }
-        //     },
-        //     // chargement de la sauvegarde ou début de la partie
-        //     {
-        //         progress: 95, callback: () => {
-        //             this.dataManager.setMiamoState(this.dataManager.save.state);
-        //             if (this[`${this.dataManager.getMiamoState()}Event`]) {
-        //                 this.triggerEvent(this.dataManager.getMiamoState());
-        //             } else {
-        //                 this.setupPlayground(this.dataManager.getMiamoState());
-        //             }
-        //             this.uiRenderer.renderTools(this.dataManager.save.tools);
-        //         }
-        //     }
-        // ]);
+        ev.target.classList.add('main__h1-anim')
+        this.audioManager.loadAudioFile('intro', 'voiceline', [
+            // le logo devient .fr
+            {
+                progress: 80, callback: () => {
+                    ev.target.textContent = '.fr';
+                }
+            },
+            // chargement de la sauvegarde ou début de la partie
+            {
+                progress: 95, callback: () => {
+                    this.dataManager.setMiamoState(this.dataManager.save.state);
+                    if (this[`${this.dataManager.getMiamoState()}Event`]) {
+                        this.triggerEvent(this.dataManager.getMiamoState());
+                    } else {
+                        this.setupPlayground(this.dataManager.getMiamoState());
+                    }
+                    this.uiRenderer.renderTools(this.dataManager.save.tools);
+                }
+            }
+        ]);
     }
 
     /**

@@ -17,7 +17,7 @@ export class EventHandler {
     triggerEvent(event, ev) {
         this.dataManager.canInterract = false;
         this.dataManager.playMode = 'playground';
-        if (event !== 'intro' && event !== 'antiPiracy') {
+        if (event !== 'intro' && event !== 'antiPiracy' && event !== 'resetSave') {
             this.dataManager.setMiamoState(event);
             this.dataManager.saveData();
             if (this.audioManager.currentMusic) {
@@ -38,38 +38,38 @@ export class EventHandler {
      * @param {Evenement au clic} ev Clic sur miamo.fr 
      */
     introEvent(ev) {
-        // this.dataManager.setMiamoState(this.dataManager.save.state);
-        // if (this[`${this.dataManager.getMiamoState()}Event`]) {
-        //     this.triggerEvent(this.dataManager.getMiamoState());
-        // } else {
-        //     this.setupPlayground(this.dataManager.getMiamoState());
-        // }
-        // this.uiRenderer.renderTools(this.dataManager.save.tools);
-        if (document.body.requestFullscreen) {
-            document.body.requestFullscreen();
+        this.dataManager.setMiamoState(this.dataManager.save.state);
+        if (this[`${this.dataManager.getMiamoState()}Event`]) {
+            this.triggerEvent(this.dataManager.getMiamoState());
+        } else {
+            this.setupPlayground(this.dataManager.getMiamoState());
         }
+        this.uiRenderer.renderTools(this.dataManager.save.tools);
+        // if (document.body.requestFullscreen) {
+        //     document.body.requestFullscreen();
+        // }
 
-        ev.target.classList.add('main__h1-anim')
-        this.audioManager.loadAudioFile('intro', 'voiceline', [
-            // le logo devient .fr
-            {
-                progress: 80, callback: () => {
-                    ev.target.textContent = '.fr';
-                }
-            },
-            // chargement de la sauvegarde ou début de la partie
-            {
-                progress: 95, callback: () => {
-                    this.dataManager.setMiamoState(this.dataManager.save.state);
-                    if (this[`${this.dataManager.getMiamoState()}Event`]) {
-                        this.triggerEvent(this.dataManager.getMiamoState());
-                    } else {
-                        this.setupPlayground(this.dataManager.getMiamoState());
-                    }
-                    this.uiRenderer.renderTools(this.dataManager.save.tools);
-                }
-            }
-        ]);
+        // ev.target.classList.add('main__h1-anim')
+        // this.audioManager.loadAudioFile('intro', 'voiceline', [
+        //     // le logo devient .fr
+        //     {
+        //         progress: 80, callback: () => {
+        //             ev.target.textContent = '.fr';
+        //         }
+        //     },
+        //     // chargement de la sauvegarde ou début de la partie
+        //     {
+        //         progress: 95, callback: () => {
+        //             this.dataManager.setMiamoState(this.dataManager.save.state);
+        //             if (this[`${this.dataManager.getMiamoState()}Event`]) {
+        //                 this.triggerEvent(this.dataManager.getMiamoState());
+        //             } else {
+        //                 this.setupPlayground(this.dataManager.getMiamoState());
+        //             }
+        //             this.uiRenderer.renderTools(this.dataManager.save.tools);
+        //         }
+        //     }
+        // ]);
     }
 
     /**
@@ -97,6 +97,33 @@ export class EventHandler {
         ]);
     }
 
+    resetSaveEvent() {
+        this.uiRenderer.createImage('playground', 'alerte', 'danger', true)
+        this.audioManager.loadAudioFile('resetSave', 'voiceline', [
+            {
+                progress: 80, callback: () => {
+                    this.uiRenderer.getElement('playground').innerHTML += '<input class="gagoug" type="text" placeholder="ECRIRE GAGOUG">';
+                    setTimeout(() => {
+                        const input = document.querySelector('.gagoug');
+                        if (input.value.toLowerCase() == 'gagoug') {
+                            this.dataManager.save = undefined;
+                            localStorage.clear();
+                            document.location.reload();
+                        } else {
+                            if (this[`${this.dataManager.getMiamoState()}Event`]) {
+                                this.triggerEvent(this.dataManager.getMiamoState());
+                            } else {
+                                this.setupPlayground(this.dataManager.getMiamoState());
+                            }
+                            this.uiRenderer.renderTools(this.dataManager.save.tools);
+                        }
+                    }, 7500);
+                }
+            }
+        ])
+
+    }
+
     /**
      * Evenement général de génération des playgrounds
      * @param {String} playgroundName 
@@ -107,10 +134,13 @@ export class EventHandler {
         const playgroundData = this.playgroundModels[playgroundName];
         this.playgroundName = playgroundName;
         this.currentPlayground = playgroundData;
-       
+
         // Musique ou ambiance de fond
         if (playgroundData.music) {
             this.audioManager.loadAudioFile(playgroundData.music, 'music');
+        } else if (this.audioManager.currentMusic) {
+            this.audioManager.currentMusic.pause();
+            this.audioManager.currentMusic = undefined;
         }
         // Le joueur à découvert une zone importante
         if (playgroundData.discovery && !this.dataManager.save.discoveries.includes(playgroundName)) {
@@ -124,7 +154,7 @@ export class EventHandler {
         } else {
             this.uiRenderer.loadPlayground(await this.requestManager.getPlayground(playgroundName), playgroundData.sandwiches, this.dataManager.save.sandwiches);
         }
-        
+
         // Gestion de la flashlight
         setTimeout(() => {
             if (playgroundData.flashlight) {

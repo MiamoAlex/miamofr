@@ -196,9 +196,7 @@ export class UiController {
     headerHandler(ev) {
         switch (ev.target.className) {
             case 'header__reset':
-                this.dataManager.save = undefined;
-                localStorage.clear();
-                document.location.reload();
+                this.eventHandler.triggerEvent('resetSave')
                 break;
 
             case 'header__achievements':

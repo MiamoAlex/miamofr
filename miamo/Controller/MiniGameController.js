@@ -33,6 +33,7 @@ export class MiniGameController {
      * exitMinigame() gère la fermeture du minijeu et transporte le joueur au prochain evenement / playground
      */
     exitMinigame() {
+        this.dataManager.canInterract = false;
         if (this.eventHandler[`${this.exitState}Event`]) {
             this.eventHandler[`${this.exitState}Event`]();
         } else {

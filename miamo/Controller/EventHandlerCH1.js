@@ -62,7 +62,7 @@ export class EventHandlerCH1 extends EventHandler {
                         clearInterval(this.interval);
                         this.timedEvent = setTimeout(() => {
                             this.triggerEvent('eglantineEatsBurgers');
-                        }, 10000);
+                        }, 18000);
                     }
                 },
                 {
@@ -258,7 +258,7 @@ export class EventHandlerCH1 extends EventHandler {
             {
                 progress: 99, callback: () => {
                     this.dataManager.save.minigameStats.BurgerClickerGame.clicks = -5000;
-                    this.miniGameController = new Miamo.BurgerClickerGame(this.uiController);
+                    this.setupPlayground('restaurant');
                 }
             }
         ])
@@ -359,7 +359,7 @@ export class EventHandlerCH1 extends EventHandler {
                     document.querySelector('.playground__content').innerHTML += '<img class="weirdhouse__scroll" src="../assets/tex/scroll.png" data-event="scroll">';
                     break;
             }
-            if (this.dataManager.save.storyAdvancement > 5) {
+            if (this.dataManager.save.storyAdvancement > 4) {
                 document.querySelector('.weirdhouse__nerd').remove();
             }
         }, 300);
@@ -531,7 +531,7 @@ export class EventHandlerCH1 extends EventHandler {
                 progress: 99, callback: () => {
                     this.dataManager.save.tools.push('glasses');
                     this.uiRenderer.renderTools(this.dataManager.save.tools);
-                    this.setupPlayground('mageforest');
+                    this.setupPlayground('networks');
                 }
             }
         ]);
@@ -873,6 +873,7 @@ export class EventHandlerCH1 extends EventHandler {
             this.dataManager.save.tools.splice(this.dataManager.save.tools.findIndex(tool => tool === 'key'), 1);
             this.uiRenderer.renderTools(this.dataManager.save.tools);
             this.dataManager.save.secrets.hospitalDoor = true;
+            this.setupPlayground('secretgarden');
         } else {
             this.setupPlayground('hospitalcorridor');
         }

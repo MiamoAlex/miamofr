@@ -27,6 +27,10 @@
         &-img {
             width: 4rem;
         }
+
+        &:hover {
+            opacity: 1
+        }
     }
 
     &__menu {

@@ -31,3 +31,24 @@
     bottom: 30%;
 }
 
+.gagoug{
+    text-align: center;
+}
+
+.cursor {
+    &__left {
+        cursor: url('../assets/tex/mouseLeft.png'), default;
+    }
+    &__right {
+        cursor: url('../assets/tex/mouseright.png'), default;
+    }
+    &__bottom {
+        cursor: url('../assets/tex/mousebottom.png'), default;
+    }
+    &__top {
+        cursor: url('../assets/tex/mousetop.png'), default;
+    }
+    &__depth {
+        cursor: url('../assets/tex/mousedepth.png'), default;
+    }
+}

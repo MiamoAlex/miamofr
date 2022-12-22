@@ -257,7 +257,9 @@ export class EventHandlerCH1 extends EventHandler {
         this.audioManager.loadAudioFile('antipiracyminigame', 'voiceline', [
             {
                 progress: 99, callback: () => {
-                    this.dataManager.save.minigameStats.BurgerClickerGame.clicks = -5000;
+                    this.dataManager.save.minigameStats.BurgerClickerGame = {
+                        clicks: -5000
+                    };
                     this.setupPlayground('restaurant');
                 }
             }

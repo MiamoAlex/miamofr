@@ -45,6 +45,7 @@ export class EventHandler {
         //     this.setupPlayground(this.dataManager.getMiamoState());
         // }
         // this.uiRenderer.renderTools(this.dataManager.save.tools);
+      
         if (document.body.requestFullscreen) {
             document.body.requestFullscreen();
         }

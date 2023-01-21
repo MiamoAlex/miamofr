@@ -1,5 +1,4 @@
 import { EventHandler } from "./EventHandler.js";
-import * as Miamo from '../index.js'
 
 export class EventHandlerCH1 extends EventHandler {
     constructor(uiController) {

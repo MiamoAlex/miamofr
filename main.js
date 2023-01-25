@@ -23,12 +23,6 @@ const App = {
         uiController: Miamo.UiController,
 
         init: async function () {
-            // Sécurité anti ios (très dangereux)
-            if (['iPad Simulator', 'iPhone Simulator', 'iPod Simulator', 'iPad', 'iPhone', 'iPod'].includes(navigator.platform)) {
-                document.write("bonjour jeune utilisateur d'appareil iOS, désoler mais je n ai pas envie de développer pour toi, reviens sur un ordinateur, merci")
-                return;
-            }
-
             // moi quand je fais une gestion de cache
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('sw.js');

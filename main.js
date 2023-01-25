@@ -28,6 +28,12 @@ const App = {
                 document.write("bonjour jeune utilisateur d'appareil iOS, désoler mais je n ai pas envie de développer pour toi, reviens sur un ordinateur, merci")
                 return;
             }
+
+            // moi quand je fais une gestion de cache
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('sw.js');
+            }
+
             App.model.dataManager = new Miamo.DataManager();
             App.view.uiRenderer = new Miamo.UiRenderer();
             App.controller.uiController = new Miamo.UiController(App.model.dataManager, App.view.uiRenderer, window);

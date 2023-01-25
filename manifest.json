@@ -1,0 +1,22 @@
+{
+  "name": "miamo.fr",
+  "short_name": "miamo.fr",
+  "description": "il y a plein de choses à faire sur miamo.fr",
+  "icons": [
+    {
+      "src": "/assets/splash.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/splash512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "fullscreen",
+  "theme_color": "#0a0a0a",
+  "background_color": "#0a0a0a"
+}

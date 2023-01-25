@@ -192,7 +192,7 @@ ul {
 .theme__main {
   --clr-name-main: ;
   --clr-main-white: #f3f3f3;
-  --clr-main-black: #030303;
+  --clr-main-black: #111;
 }
 
 .teleporter {
@@ -348,6 +348,7 @@ ul {
   right: 0;
   background: transparent;
   cursor: pointer;
+  color: var(--clr-main-white);
 }
 .header:hover .header__reset {
   opacity: 1;
@@ -435,7 +436,7 @@ ul {
 }
 .main__h1 {
   font-size: 7rem;
-  opacity: 0.06;
+  opacity: 0.35;
   transform: scaleY(2);
 }
 .main__h1-anim {

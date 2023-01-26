@@ -25,6 +25,11 @@ export class UiController {
             element: '.main',
         },
 
+        mobilePrompt: {
+            element: '.mobileprompt',
+            events: ['click']
+        },
+
         tools: {
             element: '.main__tools',
             events: ['click']
@@ -36,7 +41,7 @@ export class UiController {
 
         playground: {
             element: '.main__playground',
-            events: ['mousemove', 'click']
+            events: ['mousemove', 'touchmove', 'click']
         }
     }
 
@@ -45,6 +50,8 @@ export class UiController {
         x: 0,
         y: 0
     };
+
+    defferedPrompt;
 
     constructor(dataManager, uiRenderer, window) {
         this.window = window;
@@ -120,60 +127,57 @@ export class UiController {
      * @param {Event} ev 
      */
     playgroundHandler(ev) {
-        switch (ev.type) {
-            case 'mousemove':
-                const rect = ev.currentTarget.getBoundingClientRect();
-                this.cursorPosition = {
-                    x: ev.clientX - rect.left,
-                    y: ev.clientY - rect.top
-                };
-                document.documentElement.style.setProperty('--cursorX', -this.cursorPosition.x / 1064 * 30 + '%');
-                document.documentElement.style.setProperty('--cursorY', -this.cursorPosition.y / 1080 * 50 + '%');
-                document.documentElement.style.setProperty('--flashLightX', this.cursorPosition.x + 'px');
-                document.documentElement.style.setProperty('--flashLightY', this.cursorPosition.y + 'px');
-                break;
 
-            case 'click':
-                this.audioManager.loadAudioFile('click', 'sfx');
-                if (this.dataManager.canInterract && this.dataManager.playMode === 'playground') {
-                    const dataset = ev.target.dataset;
-                    // L'objet cliqué ouvre un nouveau playground
-                    if (dataset.playground) {
-                        this.eventHandler.setupPlayground(dataset.playground);
-                    }
-                    // L'objet cliqué ouvre un nouvel event
-                    if (dataset.event) {
-                        this.eventHandler.triggerEvent(dataset.event, ev);
-                    }
-                    // L'objet cliqué lance une nouvelle voiceline
-                    if (dataset.voiceline) {
-                        this.audioManager.loadAudioFile(dataset.voiceline, 'voiceline')
-                    }
-                    // L'objet cliqué fait un son
-                    if (dataset.sfx) {
-                        this.audioManager.loadAudioFile(dataset.sfx, 'sfx')
-                    }
-                    // L'objet cliqué ouvre un minijeu
-                    if (dataset.minigame) {
-                        this.eventHandler.miniGameController = new Miamo[dataset.minigame](this);
-                    }
-                    // L'objet cliqué ajoute un sandwich
-                    if (dataset.sandwich) {
-                        this.dataManager.canInterract = false;
-                        this.audioManager.loadAudioFile('eating', 'sfx');
-                        if (this.dataManager.save.sandwiches) {
-                            this.dataManager.save.sandwiches.push(parseInt(dataset.sandwich));
-                        } else {
-                            this.dataManager.save.sandwiches = [parseInt(dataset.sandwich)];
-                        }
-                        this.updateSandwichesCounter();
-                        ev.target.remove();
-                        setTimeout(() => {
-                            this.dataManager.canInterract = true;
-                        }, 300);
-                    }
+        if (ev.type == 'mousemove' || ev.type == 'touchmove') {
+            const rect = ev.currentTarget.getBoundingClientRect();
+            this.cursorPosition = {
+                x: (ev.clientX || ev.touches[0].clientX) - rect.left,
+                y: (ev.clientY || ev.touches[0].clientY) - rect.top
+            };
+            document.documentElement.style.setProperty('--cursorX', -this.cursorPosition.x / 1064 * 30 + '%');
+            document.documentElement.style.setProperty('--cursorY', -this.cursorPosition.y / 1080 * 50 + '%');
+            document.documentElement.style.setProperty('--flashLightX', this.cursorPosition.x + 'px');
+            document.documentElement.style.setProperty('--flashLightY', this.cursorPosition.y + 'px');
+        } else if (ev.type == 'click') {
+            this.audioManager.loadAudioFile('click', 'sfx');
+            if (this.dataManager.canInterract && this.dataManager.playMode === 'playground') {
+                const dataset = ev.target.dataset;
+                // L'objet cliqué ouvre un nouveau playground
+                if (dataset.playground) {
+                    this.eventHandler.setupPlayground(dataset.playground);
                 }
-                break;
+                // L'objet cliqué ouvre un nouvel event
+                if (dataset.event) {
+                    this.eventHandler.triggerEvent(dataset.event, ev);
+                }
+                // L'objet cliqué lance une nouvelle voiceline
+                if (dataset.voiceline) {
+                    this.audioManager.loadAudioFile(dataset.voiceline, 'voiceline')
+                }
+                // L'objet cliqué fait un son
+                if (dataset.sfx) {
+                    this.audioManager.loadAudioFile(dataset.sfx, 'sfx')
+                }
+                // L'objet cliqué ouvre un minijeu
+                if (dataset.minigame) {
+                    this.eventHandler.miniGameController = new Miamo[dataset.minigame](this);
+                }
+                // L'objet cliqué ajoute un sandwich
+                if (dataset.sandwich) {
+                    this.dataManager.canInterract = false;
+                    this.audioManager.loadAudioFile('eating', 'sfx');
+                    if (this.dataManager.save.sandwiches) {
+                        this.dataManager.save.sandwiches.push(parseInt(dataset.sandwich));
+                    } else {
+                        this.dataManager.save.sandwiches = [parseInt(dataset.sandwich)];
+                    }
+                    this.updateSandwichesCounter();
+                    ev.target.remove();
+                    setTimeout(() => {
+                        this.dataManager.canInterract = true;
+                    }, 300);
+                }
+            }
         }
     }
 
@@ -183,10 +187,10 @@ export class UiController {
      */
     audioSliderHandler(ev) {
         this.audioManager.volume = this.dataManager.save.volume = ev.target.value;
+        if (this.audioManager.gainNode) {
+            this.audioManager.gainNode.value = ev.target.value;
+        }
         this.dataManager.saveData();
-        this.audioManager.currentSounds.forEach(audio => {
-            audio.volume = this.audioManager.volume;
-        });
     }
 
     /**
@@ -261,5 +265,12 @@ export class UiController {
                     break;
             }
         }
+    }
+
+    /**
+     * mobilePromptHandler() gère les évenements au clic sur la section d'introduction aux appareils mobiles
+     * @param {Event} ev Evenement au clic
+     */
+    async mobilePromptHandler(ev) {
     }
 }

@@ -6,18 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>miamo.fr</title>
-    <meta name="description" content="il y a plein de choses à faire sur miamo.fr">
+    <meta name="description" content="bienvenue sur miamo.fr, il y a plein de choses à faire sur miamo.fr, tu peux par exemple manger, un hamburger">
     <link rel="stylesheet" href="./css/main.css">
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="/assets/apple-touch.jpg">
     <meta property="og:image" content="https://miamo.fr/assets/apple-touch.jpg">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <meta name="theme-color" content="#0a0a0a">
 </head>
 
 <body>
     <header class="header">
         <label for="sound">🔉</label>
-        <input type="range" id="sound" class="header__sound" min="0" max="1" step=".05">
+        <input type="range" id="sound" class="header__sound" min="0.05" max="1" step=".05">
         <input class="header__reset" type="button" value="Reinitialiser sauvegarde">
         <input class="header__achievements" type="button" value="🏆">
     </header>
@@ -40,6 +41,13 @@
         <!-- succès bravo (médailles) 🏆 -->
         <ul class="main__achievements"></ul>
     </main>
+
+    <!-- pour les joueurs mobiles !!!! (oui allo téléphone)-->
+    <section class="mobileprompt">
+        <h2 class="mobileprompt__title">bonjoure</h2>
+        <span class="mobileprompt__text">tu peux tourner ton téléphone stp merci</span>
+        <!-- <button class="mobileprompt__install">installer miamo.fr</button> -->
+    </section>
 
     <div id="templates" hidden>
         <template class="template__achievement">

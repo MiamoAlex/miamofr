@@ -481,6 +481,29 @@ ul {
   position: absolute;
 }
 
+.mobileprompt {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+}
+
+@media screen and (orientation: portrait) {
+  .mobileprompt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    height: 100vh;
+    z-index: 100;
+    background-color: var(--clr-main-black);
+  }
+}
+@media screen and (orientation: landscape) {
+  .mobileprompt {
+    display: none;
+  }
+}
 .tools__glasses {
   width: 5rem;
 }

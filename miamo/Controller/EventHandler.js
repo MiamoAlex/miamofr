@@ -21,7 +21,7 @@ export class EventHandler {
             this.dataManager.setMiamoState(event);
             this.dataManager.saveData();
             if (this.audioManager.currentMusic) {
-                this.audioManager.currentMusic.pause();
+                this.audioManager.currentMusic.stop();
                 this.audioManager.currentMusic = undefined
             }
         }
@@ -34,10 +34,10 @@ export class EventHandler {
     };
 
     /**
-     * introEvent() gère l'animatino du lancement de la page et la suite
+     * introEvent() gère l'animation du lancement de la page et la suite
      * @param {Evenement au clic} ev Clic sur miamo.fr 
      */
-    introEvent(ev) {
+    async introEvent(ev) {
         // this.dataManager.setMiamoState(this.dataManager.save.state);
         // if (this[`${this.dataManager.getMiamoState()}Event`]) {
         //     this.triggerEvent(this.dataManager.getMiamoState());
@@ -45,32 +45,36 @@ export class EventHandler {
         //     this.setupPlayground(this.dataManager.getMiamoState());
         // }
         // this.uiRenderer.renderTools(this.dataManager.save.tools);
-      
+
         if (document.body.requestFullscreen) {
             document.body.requestFullscreen();
         }
 
-        ev.target.classList.add('main__h1-anim')
-        this.audioManager.loadAudioFile('intro', 'voiceline', [
-            // le logo devient .fr
-            {
-                progress: 80, callback: () => {
-                    ev.target.textContent = '.fr';
-                }
-            },
-            // chargement de la sauvegarde ou début de la partie
-            {
-                progress: 95, callback: () => {
-                    this.dataManager.setMiamoState(this.dataManager.save.state);
-                    if (this[`${this.dataManager.getMiamoState()}Event`]) {
-                        this.triggerEvent(this.dataManager.getMiamoState());
-                    } else {
-                        this.setupPlayground(this.dataManager.getMiamoState());
+        this.audioManager.unlockContext();
+
+        setTimeout(() => {
+            ev.target.classList.add('main__h1-anim')
+            this.audioManager.loadAudioFile('intro', 'voiceline', [
+                // le logo devient .fr
+                {
+                    progress: 85, callback: () => {
+                        ev.target.textContent = '.fr';
                     }
-                    this.uiRenderer.renderTools(this.dataManager.save.tools);
+                },
+                // chargement de la sauvegarde ou début de la partie
+                {
+                    progress: 99, callback: () => {
+                        this.dataManager.setMiamoState(this.dataManager.save.state);
+                        if (this[`${this.dataManager.getMiamoState()}Event`]) {
+                            this.triggerEvent(this.dataManager.getMiamoState());
+                        } else {
+                            this.setupPlayground(this.dataManager.getMiamoState());
+                        }
+                        this.uiRenderer.renderTools(this.dataManager.save.tools);
+                    }
                 }
-            }
-        ]);
+            ]);
+        }, 200);
     }
 
     /**
@@ -140,7 +144,7 @@ export class EventHandler {
         if (playgroundData.music) {
             this.audioManager.loadAudioFile(playgroundData.music, 'music');
         } else if (this.audioManager.currentMusic) {
-            this.audioManager.currentMusic.pause();
+            this.audioManager.currentMusic.stop();
             this.audioManager.currentMusic = undefined;
         }
         // Le joueur à découvert une zone importante

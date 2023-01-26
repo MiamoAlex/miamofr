@@ -1,3 +1,9 @@
 {
-    "liveServer.settings.port": 5501
+    "liveServer.settings.port": 5501,
+    // "liveServer.settings.https": {
+    //     "enable": true, //set it true to enable the feature.
+    //     "cert": "D:\\Https\\localhost.pem", //full path of the certificate
+    //     "key": "D:\\Https\\localhost.key", //full path of the private key
+    //     "passphrase": "miamo"
+    // }
 }

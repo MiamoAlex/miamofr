@@ -1,4 +1,4 @@
-const version = "v0.1";
+const version = "v0.2";
 const cacheName = `miamofr-${version}`;
 
 self.addEventListener("install", (event) => {

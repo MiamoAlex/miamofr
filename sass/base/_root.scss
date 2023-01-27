@@ -1,7 +1,6 @@
 @use "../abstracts/"as *;
 
 :root {
-
     @each $font,
     $style in $fonts {
 

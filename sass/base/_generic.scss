@@ -12,23 +12,9 @@
     }
 }
 
-.teleporter {
-    opacity: 0.25;
-}
-
 .hide {
     opacity: 0;
-}
-
-.magic {
-    background-color: purple;
-    width: 10rem;
-    height: 4rem;
-    left: 0;
-    right: 0;
-    margin: auto;
-    position: absolute;
-    bottom: 30%;
+    pointer-events: none;
 }
 
 .gagoug{

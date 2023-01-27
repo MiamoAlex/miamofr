@@ -1,15 +1,25 @@
+@use '../abstracts/' as *;
+
 .tools {
-    &__glasses {
-        width: 5rem;
+    &__glasses, &__flashlight, &__settings, &__achievements {
+        width: 3.5rem;
+        height: 3.5rem;
+        object-fit: contain;
     }
 
-    &__flashlight {
-        width: 5rem;
-    }
-    
     &__key {
         width: 1.5rem;
-        margin: 0 2rem 0 2rem;
+        height: 3.5rem;
         transform: rotate(90deg);
+    }
+}
+
+@include mq(medium) {
+    .tools {
+        &__glasses, &__flashlight, &__settings, &__achievements {
+            width: 4.5rem;
+            height: 4.5rem;
+            object-fit: contain;
+        }
     }
 }

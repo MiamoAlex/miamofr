@@ -3,19 +3,22 @@
 .burgerclicker {
     background: url(../../assets/backgrounds/burgerclick.webp) no-repeat;
     background-position: center;
-    background-size: cover;
-    width: 60rem;
+    background-size: contain;
+    width: 80vw;
+    height: 60vh;
     @include flex(center, center, row);
 
     &__text {
-        font-size: 6rem;
+        font-size: 4rem;
         position: absolute;
-        bottom: 6rem;
+        z-index: 10;
+        bottom: 10%;
     }
 
     &__burger {
         cursor: pointer;
-        width: 30rem;
+        width: 40vw;
+        max-width: 30rem;
         transform: scale(1);
         transition: transform 300ms;
 
@@ -26,8 +29,17 @@
 
     &__logo {
         position: absolute;
-        width: 16rem;
+        width: 16vw;
         top: 0;
-        right: 4rem;
+        right: 6%;
+    }
+}
+
+@include mq(medium){
+    .burgerclicker {
+        &__text {
+            font-size: 6rem;
+            bottom: 8rem;
+        }
     }
 }

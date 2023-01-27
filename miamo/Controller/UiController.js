@@ -7,22 +7,13 @@ export class UiController {
             events: ['keydown']
         },
 
-        header: {
-            element: '.header',
-            events: ['click']
-        },
-
         achievements: {
             element: '.main__achievements'
         },
 
-        audioSlider: {
-            element: '.header__sound',
-            events: ['input']
-        },
-
         main: {
             element: '.main',
+            events: ['click', 'mousemove', 'touchmove']
         },
 
         mobilePrompt: {
@@ -30,9 +21,21 @@ export class UiController {
             events: ['click']
         },
 
+        menu: {
+            element: '.main__menu'
+        },
+
         tools: {
-            element: '.main__tools',
-            events: ['click']
+            element: '.main__tools'
+        },
+
+        settings: {
+            element: '.main__settings',
+            events: ['click', 'input']
+        },
+
+        audioSlider: {
+            element: '.settings__volume-input'
         },
 
         sandwiches: {
@@ -41,7 +44,7 @@ export class UiController {
 
         playground: {
             element: '.main__playground',
-            events: ['mousemove', 'touchmove', 'click']
+            events: ['click']
         }
     }
 
@@ -72,6 +75,13 @@ export class UiController {
                 });
             }
         }
+
+        window.addEventListener('beforeinstallprompt', (ev) => {
+            ev.preventDefault();
+            this.installPromptEvent = ev;
+            this.uiRenderer.getElement('settings').children[3].style.display = "block";
+            this.uiRenderer.getElement('menu').children[2].style.display = "block";
+        });
 
         // Chargement du volume sonore
         if (this.dataManager.save.volume) {
@@ -127,96 +137,44 @@ export class UiController {
      * @param {Event} ev 
      */
     playgroundHandler(ev) {
-
-        if (ev.type == 'mousemove' || ev.type == 'touchmove') {
-            const rect = ev.currentTarget.getBoundingClientRect();
-            this.cursorPosition = {
-                x: (ev.clientX || ev.touches[0].clientX) - rect.left,
-                y: (ev.clientY || ev.touches[0].clientY) - rect.top
-            };
-            document.documentElement.style.setProperty('--cursorX', -this.cursorPosition.x / 1064 * 30 + '%');
-            document.documentElement.style.setProperty('--cursorY', -this.cursorPosition.y / 1080 * 50 + '%');
-            document.documentElement.style.setProperty('--flashLightX', this.cursorPosition.x + 'px');
-            document.documentElement.style.setProperty('--flashLightY', this.cursorPosition.y + 'px');
-        } else if (ev.type == 'click') {
-            this.audioManager.loadAudioFile('click', 'sfx');
-            if (this.dataManager.canInterract && this.dataManager.playMode === 'playground') {
-                const dataset = ev.target.dataset;
-                // L'objet cliqué ouvre un nouveau playground
-                if (dataset.playground) {
-                    this.eventHandler.setupPlayground(dataset.playground);
-                }
-                // L'objet cliqué ouvre un nouvel event
-                if (dataset.event) {
-                    this.eventHandler.triggerEvent(dataset.event, ev);
-                }
-                // L'objet cliqué lance une nouvelle voiceline
-                if (dataset.voiceline) {
-                    this.audioManager.loadAudioFile(dataset.voiceline, 'voiceline')
-                }
-                // L'objet cliqué fait un son
-                if (dataset.sfx) {
-                    this.audioManager.loadAudioFile(dataset.sfx, 'sfx')
-                }
-                // L'objet cliqué ouvre un minijeu
-                if (dataset.minigame) {
-                    this.eventHandler.miniGameController = new Miamo[dataset.minigame](this);
-                }
-                // L'objet cliqué ajoute un sandwich
-                if (dataset.sandwich) {
-                    this.dataManager.canInterract = false;
-                    this.audioManager.loadAudioFile('eating', 'sfx');
-                    if (this.dataManager.save.sandwiches) {
-                        this.dataManager.save.sandwiches.push(parseInt(dataset.sandwich));
-                    } else {
-                        this.dataManager.save.sandwiches = [parseInt(dataset.sandwich)];
-                    }
-                    this.updateSandwichesCounter();
-                    ev.target.remove();
-                    setTimeout(() => {
-                        this.dataManager.canInterract = true;
-                    }, 300);
-                }
+        this.audioManager.loadAudioFile('click', 'sfx');
+        if (this.dataManager.canInterract && this.dataManager.playMode === 'playground') {
+            const dataset = ev.target.dataset;
+            // L'objet cliqué ouvre un nouveau playground
+            if (dataset.playground) {
+                this.eventHandler.setupPlayground(dataset.playground);
             }
-        }
-    }
-
-    /**
-     * audioSliderHandler() gère le volume
-     * @param {Event} ev Evenement au clic sur l'input
-     */
-    audioSliderHandler(ev) {
-        this.audioManager.volume = this.dataManager.save.volume = ev.target.value;
-        if (this.audioManager.gainNode) {
-            this.audioManager.gainNode.value = ev.target.value;
-        }
-        this.dataManager.saveData();
-    }
-
-    /**
-     * headerHandler() gère les clicks sur le header du site
-     * @param {Event} ev click sur le header
-     */
-    headerHandler(ev) {
-        switch (ev.target.className) {
-            case 'header__reset':
-                this.eventHandler.triggerEvent('resetSave')
-                break;
-
-            case 'header__achievements':
-                if (this.uiRenderer.getElement('achievements').classList[1]) {
-                    this.uiRenderer.getElement('achievements').classList.remove('main__achievements-open');
-                    this.audioManager.loadAudioFile('closemenu', 'sfx');
+            // L'objet cliqué ouvre un nouvel event
+            if (dataset.event) {
+                this.eventHandler.triggerEvent(dataset.event, ev);
+            }
+            // L'objet cliqué lance une nouvelle voiceline
+            if (dataset.voiceline) {
+                this.audioManager.loadAudioFile(dataset.voiceline, 'voiceline')
+            }
+            // L'objet cliqué fait un son
+            if (dataset.sfx) {
+                this.audioManager.loadAudioFile(dataset.sfx, 'sfx')
+            }
+            // L'objet cliqué ouvre un minijeu
+            if (dataset.minigame) {
+                this.eventHandler.miniGameController = new Miamo[dataset.minigame](this);
+            }
+            // L'objet cliqué ajoute un sandwich
+            if (dataset.sandwich) {
+                this.dataManager.canInterract = false;
+                this.audioManager.loadAudioFile('eating', 'sfx');
+                if (this.dataManager.save.sandwiches) {
+                    this.dataManager.save.sandwiches.push(parseInt(dataset.sandwich));
                 } else {
-                    this.uiRenderer.getElement('achievements').classList.add('main__achievements-open');
-                    this.audioManager.loadAudioFile('openmenu', 'sfx');
-                    let currentAchievements = [];
-                    this.dataManager.save.achievements.forEach(achievement => {
-                        currentAchievements.push(this.dataManager.achievements[achievement]);
-                    });
-                    this.uiRenderer.renderTemplate(document.querySelector('.template__achievement'), currentAchievements, this.uiRenderer.getElement('achievements'));
+                    this.dataManager.save.sandwiches = [parseInt(dataset.sandwich)];
                 }
-                break;
+                this.updateSandwichesCounter();
+                ev.target.remove();
+                setTimeout(() => {
+                    this.dataManager.canInterract = true;
+                }, 300);
+            }
         }
     }
 
@@ -225,17 +183,27 @@ export class UiController {
      * @param {Event} ev Appui d'une touche sur le clavier 
      */
     bodyHandler(ev) {
-        if (/^[a-zA-Z0-9_.-]*$/.test(ev.key.toLowerCase()) && ev.key.length === 1) {
+        if (/^[a-zA-Z0-9_-]*$/.test(ev.key.toLowerCase()) && ev.key.length === 1) {
             this.audioManager.loadAudioFile(ev.key, 'keys');
         }
     }
 
     /**
-     * toolsHandler() gère les clics sur la section des outils du jeu
+     * mainHandler() gère les clics sur la section des outils du jeu
      * @param {Event} ev Evenement au clic sur les outils 
      */
-    toolsHandler(ev) {
-        if (this.dataManager.canInterract === true) {
+    mainHandler(ev) {
+        if (ev.type == 'mousemove' || ev.type == 'touchmove') {
+            const rect = ev.currentTarget.getBoundingClientRect();
+            this.cursorPosition = {
+                x: Math.min(Math.max((ev.clientX || ev.touches[0].clientX), 0), rect.width) - rect.left,
+                y: Math.min(Math.max((ev.clientY || ev.touches[0].clientY), 0), rect.height) - rect.top
+            };
+            document.documentElement.style.setProperty('--cursorX', -this.cursorPosition.x * 0.5 + 'px');
+            document.documentElement.style.setProperty('--cursorY', -this.cursorPosition.y * 0.5 + 'px');
+            document.documentElement.style.setProperty('--flashLightX', this.cursorPosition.x - 64 + 'px');
+            document.documentElement.style.setProperty('--flashLightY', this.cursorPosition.y + 'px');
+        } else {
             switch (ev.target.dataset.tool) {
                 // Lunettes
                 case 'glasses':
@@ -263,14 +231,54 @@ export class UiController {
                         }, 300);
                     }
                     break;
+                case 'achievements':
+                    if (this.uiRenderer.getElement('achievements').classList[1]) {
+                        this.uiRenderer.getElement('achievements').classList.remove('main__achievements-open');
+                        this.audioManager.loadAudioFile('closemenu', 'sfx');
+                    } else {
+                        this.uiRenderer.getElement('achievements').classList.add('main__achievements-open');
+                        this.audioManager.loadAudioFile('openmenu', 'sfx');
+                        const currentAchievements = [];
+                        this.dataManager.save.achievements.forEach(achievement => {
+                            currentAchievements.push(this.dataManager.achievements[achievement]);
+                        });
+                        this.uiRenderer.renderTemplate(document.querySelector('.template__achievement'), currentAchievements, this.uiRenderer.getElement('achievements'));
+                    }
+                    break;
+
+                case 'settings':
+                    this.uiRenderer.getElement('settings').classList.toggle('hide');
+                    break;
             }
         }
     }
+
+    settingsHandler(ev) {
+        switch (ev.target.className) {
+            case 'settings__reset':
+                this.eventHandler.triggerEvent('resetSave')
+                this.uiRenderer.getElement('settings').classList.add('hide');
+                break;
+
+            case 'settings__volume-input':
+                this.audioManager.gainNode.gain.value = this.dataManager.save.volume = ev.target.value;
+                break;
+
+            case 'mobileprompt__install':
+                this.installPromptEvent.prompt();
+            break;
+        }
+
+    }
+
 
     /**
      * mobilePromptHandler() gère les évenements au clic sur la section d'introduction aux appareils mobiles
      * @param {Event} ev Evenement au clic
      */
     async mobilePromptHandler(ev) {
+        if (ev.target.className == 'mobileprompt__install') {
+            this.installPromptEvent.prompt();
+        }
     }
 }

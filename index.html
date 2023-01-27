@@ -16,37 +16,47 @@
 </head>
 
 <body>
-    <header class="header">
-        <label for="sound">🔉</label>
-        <input type="range" id="sound" class="header__sound" min="0.05" max="1" step=".05">
-        <input class="header__reset" type="button" value="Reinitialiser sauvegarde">
-        <input class="header__achievements" type="button" value="🏆">
-    </header>
-
     <main class="main">
-        <section class="main__menu">
+        <section class="main__menu hide">
             <!-- Nombre de miamo sandwich miam collectés -->
             <span class="main__sandwiches hide">
                 <img src="./assets/tex/sandwich.gif" alt="compteur a sandwich miam" class="main__sandwiches-img">
                 <span class="main__sandwiches-text">???</span>
             </span>
-            <!-- outils magiques miamo.FR 🥖-->
-            <ul class="main__tools">
-            </ul>
+            <img src="./assets/tex/trophee.png" data-tool="achievements" alt="moi quand j'ai accès aux succès de miamo.fr" class="tools__achievements">
+            <img src="./assets/tex/settings.png" data-tool="settings" alt="Icone pour acceder aux maxi paramètres !!!" class="tools__settings">
         </section>
+
         <!-- l'endroit où tout le fun se déroule !!!! (chut, la magie opère... 🎩)-->
         <div class="main__playground">
             <h1 class="main__h1" data-event="intro">miamo</h1>
         </div>
-        <!-- succès bravo (médailles) 🏆 -->
-        <ul class="main__achievements"></ul>
+        
+        <!-- outils magiques miamo.FR 🥖-->
+        <ul class="main__tools hide"></ul>
     </main>
 
-    <!-- pour les joueurs mobiles !!!! (oui allo téléphone)-->
+    <!-- succès bravo (médailles) 🏆 -->
+    <ul class="main__achievements"></ul>
+
+    <!-- paramètres du jeu (on règle les choses) -->
+    <section class="main__settings hide">
+        <h2 class="main__settings-title">Réglages</h2>
+        <div class="settings__volume">
+            <label for="volume" class="settings__volume-label">son (oreilles)</label>
+            <input type="range" name="volume" class="settings__volume-input" min="0" value="0.5" max="1" step="0.05">
+        </div>
+
+        <button class="settings__reset">reinitialiser sauvegarde</button>
+        <button class="mobileprompt__install">installer miamo.fr</button>
+        <a href="https://alexsounalet.com" target="_blank" class="settings__credits">Designé & Développé par Alexandre Sounalet</a>
+    </section>
+
+    <!-- pour les joueurs mobiles !!!! (oui allo téléphone) -->
     <section class="mobileprompt">
         <h2 class="mobileprompt__title">bonjoure</h2>
         <span class="mobileprompt__text">tu peux tourner ton téléphone stp merci</span>
-        <!-- <button class="mobileprompt__install">installer miamo.fr</button> -->
+        <button class="mobileprompt__install">installer miamo.fr</button>
     </section>
 
     <div id="templates" hidden>

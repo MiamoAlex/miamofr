@@ -1,11 +1,12 @@
 @use "../abstracts/" as *;
 
 .main {
-    width: 100vw;
-    height: 100vh;
-    display: grid;
-    place-content: center;
+    width: 90vw;
+    height: 90vh;
+    max-width: 1470px;
+    max-height: 950px;
     position: relative;
+    @include flex(center, center, row);
 
     & > .achievement {
         position: absolute;
@@ -18,8 +19,7 @@
     }
 
     &__sandwiches {
-        @include flex(flex-start, flex-start, row);
-        gap: 0.5rem;
+        @include flex(center, center, column);
         transition: opacity 300ms;
         &-text {
             font-size: 2rem;
@@ -29,34 +29,54 @@
         }
 
         &:hover {
-            opacity: 1
+            opacity: 1;
         }
     }
 
     &__menu {
-        @include flex(space-between, center, row);
+        @include flex(flex-end, center, column);
+        gap: 1rem;
+        height: 100%;
+        width: 6rem;
     }
 
     &__tools {
-        @include flex(flex-start, center, row);
+        @include flex(flex-end, center, column);
         gap: 1rem;
+        width: 6rem;
+        height: 100%;
     }
 
     &__achievements {
         position: absolute;
         right: 0;
-        width: 20rem;
+        width: 35vw;
+        max-width: 20rem;
         height: 100%;
         overflow: auto;
         @include flex(flex-start, flex-start, column);
-        gap: .5rem;
+        gap: 0.5rem;
         transform: translateX(20rem);
         transition: transform 300ms;
         background-color: #080808;
         padding-top: 4rem;
+
         &-open {
             transform: translateX(0);
         }
+    }
+
+    &__settings {
+        position: absolute;
+        inset: 0;
+        min-width: 23rem;
+        min-height: 15rem;
+        margin: auto;
+        @include flex(center, center, column);
+        gap: 2rem;
+        width: 40vw;
+        background-color: var(--clr-main-black);
+        height: 40vh;
     }
 
     &__distributeur {
@@ -64,12 +84,10 @@
     }
 
     &__playground {
-        width: 100vw;
-        height: 100vh;
         display: grid;
         place-content: center;
-        max-width: 1064px;
-        max-height: 720px;
+        width: 100%;
+        height: 100%;
         position: relative;
         overflow: hidden;
         isolation: isolate;
@@ -91,6 +109,13 @@
         z-index: -1;
     }
 
+    &__portemagique,
+    &__distributeur {
+        min-height: 15rem;
+        width: 20vw;
+        height: 60vh;
+    }
+
     &__nimbuffle {
         animation: 10s infinite dance;
         transform-origin: bottom;
@@ -100,16 +125,21 @@
         animation: float 300ms infinite;
     }
 
+    &__bebz {
+        width: 20vw;
+    }
+
     &__boss {
         position: absolute;
         inset: 0;
         margin: auto;
         z-index: 10;
+        width: 20vw;
 
         &-health {
             position: absolute;
-            bottom: 3rem;
-            width: 44rem;
+            bottom: 1rem;
+            width: 65vw;
             left: 0;
             right: 0;
             margin: auto;
@@ -125,11 +155,19 @@
 
     &__hector {
         position: absolute;
+        width: 23vw;
         animation: hector 15000ms forwards;
     }
 
     &__alert {
         transform: scale(0.2);
         position: absolute;
+    }
+}
+
+@include mq(medium) {
+    .main {
+        width: 80vw;
+        height: 80vh;
     }
 }

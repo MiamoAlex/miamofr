@@ -66,6 +66,8 @@ html,
 body {
   position: relative;
   overflow: hidden;
+  display: grid;
+  place-content: center;
   background-color: var(--clr-main-black);
   color: var(--clr-main-white);
   user-select: none;

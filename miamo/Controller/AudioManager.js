@@ -1,6 +1,5 @@
 export class AudioManager {
 
-    volume = .5;
     loadedSounds = {};
 
     startTime = 0;
@@ -14,6 +13,7 @@ export class AudioManager {
             this.context = new AudioContext();
 
             this.gainNode = this.context.createGain();
+            this.gainNode.gain.value = 0.3;
             this.gainNode.connect(this.context.destination);
 
             const buffer = this.context.createBuffer(1, 1, 22050);
@@ -57,7 +57,6 @@ export class AudioManager {
                     if (this.currentMusic) {
                         this.currentMusic.stop();
                     }
-                    source.volume = this.volume * .65;
                     this.currentMusic = source;
                     this.currentMusicLabel = file;
                     source.loop = true;

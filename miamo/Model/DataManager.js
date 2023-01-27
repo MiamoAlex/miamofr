@@ -7,18 +7,10 @@ export class DataManager {
         if (localStorage.getItem('miamoSave')) {
             this.save = JSON.parse(localStorage.getItem('miamoSave'));
             // Conversion des vielles sauvegardes
-            if (!this.save.storyAdvancement == undefined) {
+            if (!this.save.storyAdvancement || !this.save.volume) {
+                this.save = {};
                 localStorage.clear();
                 document.location.reload();
-            }
-            if (this.save.secrets == undefined) {
-                this.save.secrets = {};
-            }
-            if (this.save.achievements == undefined) {
-                this.save.achievements = [];
-            }
-            if (this.save.time == undefined) {
-                this.save.time = 0;
             }
         } else {
             this.save = {
@@ -30,6 +22,7 @@ export class DataManager {
                 minigameStats: {},
                 secrets: {},
                 time: 0,
+                volume: 0.3,
                 storyAdvancement: 0
             }
         }

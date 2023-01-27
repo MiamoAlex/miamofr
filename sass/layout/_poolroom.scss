@@ -1,25 +1,25 @@
 .poolroom {
     &__return {
         bottom: 0;
-        height: 13rem;
+        height: 30vh;
         width: 100%;
     }
     &__teleporter {
-        width: 10rem;
-        height: 10rem;
-        left: 46%;
-        top: 40%;
+        width: 16vw;
+        height: 29vh;
+        left: 42%;
+        top: 36%;
     }
     &__teleporter2 {
-        width: 9rem;
-        height: 23rem;
+        width: 9vw;
+        height: 47vh;
         left: 22%;
         top: 32%;
     }
     &__eglantine {
         bottom: 18%;
         left: 23%;
-        width: 10rem;
+        width: 12svw;
     }
 
     &__teleporter3 {
@@ -31,24 +31,24 @@
     &__teleporter4 {
         bottom: 28%;
         right: 20%;
-        width: 10rem;
-        height: 32rem;
+        width: 10vw;
+        height: 65vh;
     }
     &__burger {
         position: absolute;
         left: 35%;
         bottom: 32%;
-        width: 25rem;
+        width: 32vw;
     }
     &__clown {
-        width: 10rem;
+        width: 12vw;
         left: 45%;
         top: 40%;
     }
     &__code{
         image-rendering: pixelated;
-        width: 24rem;
-        left: 38%;
+        width: 35vw;
+        left: 34%;
         top: 12%;
     }
 }

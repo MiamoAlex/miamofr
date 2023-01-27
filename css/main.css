@@ -83,6 +83,8 @@ html,
 body {
   position: relative;
   overflow: hidden;
+  display: grid;
+  place-content: center;
   background-color: var(--clr-main-black);
   color: var(--clr-main-white);
   user-select: none;
@@ -195,23 +197,9 @@ ul {
   --clr-main-black: #0a0a0a;
 }
 
-.teleporter {
-  opacity: 0.25;
-}
-
 .hide {
   opacity: 0;
-}
-
-.magic {
-  background-color: purple;
-  width: 10rem;
-  height: 4rem;
-  left: 0;
-  right: 0;
-  margin: auto;
-  position: absolute;
-  bottom: 30%;
+  pointer-events: none;
 }
 
 .gagoug {
@@ -235,7 +223,7 @@ ul {
 }
 
 .sandwich {
-  width: 8rem;
+  width: 8vw;
   position: absolute;
 }
 .sandwich__0 {
@@ -252,13 +240,13 @@ ul {
 }
 .sandwich__3 {
   top: 30%;
-  width: 0.8rem;
+  width: 1vw;
   right: 40%;
 }
 .sandwich__4 {
   bottom: -5%;
   right: -5%;
-  width: 15rem;
+  width: 12vw;
 }
 .sandwich__6 {
   transform: scaleY(-1);
@@ -356,11 +344,15 @@ ul {
 }
 
 .main {
-  width: 100vw;
-  height: 100vh;
-  display: grid;
-  place-content: center;
+  width: 90vw;
+  height: 90vh;
+  max-width: 1470px;
+  max-height: 950px;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
 }
 .main > .achievement {
   position: absolute;
@@ -373,10 +365,9 @@ ul {
 }
 .main__sandwiches {
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-direction: row;
-  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   transition: opacity 300ms;
 }
 .main__sandwiches-text {
@@ -390,21 +381,27 @@ ul {
 }
 .main__menu {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
-  flex-direction: row;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+  width: 6rem;
 }
 .main__tools {
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-items: center;
-  flex-direction: row;
+  flex-direction: column;
   gap: 1rem;
+  width: 6rem;
+  height: 100%;
 }
 .main__achievements {
   position: absolute;
   right: 0;
-  width: 20rem;
+  width: 35vw;
+  max-width: 20rem;
   height: 100%;
   overflow: auto;
   display: flex;
@@ -420,16 +417,29 @@ ul {
 .main__achievements-open {
   transform: translateX(0);
 }
+.main__settings {
+  position: absolute;
+  inset: 0;
+  min-width: 23rem;
+  min-height: 15rem;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+  width: 40vw;
+  background-color: var(--clr-main-black);
+  height: 40vh;
+}
 .main__distributeur {
   width: 17rem;
 }
 .main__playground {
-  width: 100vw;
-  height: 100vh;
   display: grid;
   place-content: center;
-  max-width: 1064px;
-  max-height: 720px;
+  width: 100%;
+  height: 100%;
   position: relative;
   overflow: hidden;
   isolation: isolate;
@@ -447,6 +457,11 @@ ul {
   width: 100vw;
   z-index: -1;
 }
+.main__portemagique, .main__distributeur {
+  min-height: 15rem;
+  width: 20vw;
+  height: 60vh;
+}
 .main__nimbuffle {
   animation: 10s infinite dance;
   transform-origin: bottom;
@@ -454,16 +469,20 @@ ul {
 .main__oiseau {
   animation: float 300ms infinite;
 }
+.main__bebz {
+  width: 20vw;
+}
 .main__boss {
   position: absolute;
   inset: 0;
   margin: auto;
   z-index: 10;
+  width: 20vw;
 }
 .main__boss-health {
   position: absolute;
-  bottom: 3rem;
-  width: 44rem;
+  bottom: 1rem;
+  width: 65vw;
   left: 0;
   right: 0;
   margin: auto;
@@ -474,6 +493,7 @@ ul {
 }
 .main__hector {
   position: absolute;
+  width: 23vw;
   animation: hector 15000ms forwards;
 }
 .main__alert {
@@ -481,10 +501,19 @@ ul {
   position: absolute;
 }
 
+@media (min-width: 60em) {
+  .main {
+    width: 80vw;
+    height: 80vh;
+  }
+}
 .mobileprompt {
   position: absolute;
   inset: 0;
   margin: auto;
+}
+.mobileprompt__install {
+  display: none;
 }
 
 @media screen and (orientation: portrait) {
@@ -504,42 +533,53 @@ ul {
     display: none;
   }
 }
-.tools__glasses {
-  width: 5rem;
-}
-.tools__flashlight {
-  width: 5rem;
+.tools__glasses, .tools__flashlight, .tools__settings, .tools__achievements {
+  width: 3.5rem;
+  height: 3.5rem;
+  object-fit: contain;
 }
 .tools__key {
   width: 1.5rem;
-  margin: 0 2rem 0 2rem;
+  height: 3.5rem;
   transform: rotate(90deg);
 }
 
+@media (min-width: 60em) {
+  .tools__glasses, .tools__flashlight, .tools__settings, .tools__achievements {
+    width: 4.5rem;
+    height: 4.5rem;
+    object-fit: contain;
+  }
+}
 .worldmap__restaurant {
   top: 13%;
   left: 12%;
+  width: 18vw;
 }
 .worldmap__backroom {
   top: 13%;
   left: 28%;
+  width: 18vw;
 }
 .worldmap__mageforest {
   top: 40%;
   left: 10%;
+  width: 18vw;
 }
 .worldmap__robots {
   left: 35%;
   top: 33%;
+  width: 18vw;
 }
 .worldmap__mermaidclose {
   top: 54%;
   left: 3%;
-  width: 10rem;
+  width: 18vw;
 }
 .worldmap__hospitalentrance {
   top: 53%;
   left: 25%;
+  width: 18vw;
 }
 
 .playground__content {
@@ -585,46 +625,46 @@ ul {
 .kitchen__door {
   right: 12%;
   top: 29%;
-  width: 10rem;
-  height: 15rem;
+  width: 10vw;
+  height: 30vh;
 }
 .kitchen__recipe {
-  width: 15rem;
+  width: 16vw;
   left: 50%;
   top: 30%;
   animation: float infinite 1s;
 }
 
 .hospital__door {
-  width: 24rem;
-  height: 12rem;
+  width: 22vw;
+  height: 25vh;
   bottom: 8%;
   left: 40%;
 }
 .hospital__door2 {
-  width: 8rem;
-  height: 8rem;
+  width: 8vw;
+  height: 14vh;
   bottom: 43%;
   left: 42%;
 }
 .hospital__door3 {
-  width: 12rem;
-  height: 12rem;
+  width: 10vw;
+  height: 28vh;
   right: 25%;
   top: 40%;
 }
 .hospital__return {
   bottom: 0;
   width: 100%;
-  height: 6rem;
+  height: 20vh;
 }
 .hospital__nimbuffle {
   bottom: 30%;
   left: 28%;
-  width: 10rem;
+  width: 14vw;
 }
 .hospital__lock {
-  width: 6rem;
+  width: 14vw;
   right: 45%;
   top: 40%;
   opacity: 0.3;
@@ -633,23 +673,23 @@ ul {
   bottom: 30%;
   transform: rotate(7deg);
   right: 25%;
-  width: 22rem;
+  width: 12vw;
 }
 .hospital__mechant {
   left: 13%;
   bottom: 0;
-  width: 18rem;
+  width: 22vw;
   transform: scaleX(-1);
 }
 .hospital__secretdoor {
-  width: 12rem;
+  width: 14vw;
   bottom: 36.4%;
   left: 40%;
 }
 .hospital__link {
   position: absolute;
-  width: 10rem;
-  height: 15rem;
+  width: 13vw;
+  height: 25vw;
   left: 47%;
   top: 24%;
 }
@@ -660,89 +700,90 @@ ul {
 .hospital__mario {
   bottom: 1%;
   right: 21%;
-  width: 13rem;
+  width: 13vw;
 }
 
 .restaurant__eglantine {
   right: 15%;
   bottom: 10%;
-  width: 10rem;
+  width: 13vw;
 }
 .restaurant__burgers {
-  left: 0%;
-  bottom: 13%;
-  width: 10rem;
+  left: 6%;
+  bottom: 17%;
+  width: 10vw;
 }
 .restaurant__door {
   right: 5%;
   top: 40%;
-  width: 10rem;
-  height: 15rem;
+  width: 10vw;
+  height: 28vh;
 }
 .restaurant__grandma {
-  width: 12rem;
-  height: 18rem;
+  width: 12vw;
+  height: 31vh;
   right: 0;
   bottom: 10%;
 }
 .restaurant__gustave {
   bottom: 4%;
   left: 30%;
-  width: 8rem;
+  width: 8vw;
 }
 .restaurant__kitchen {
   transform: rotate(75deg);
-  width: 8rem;
+  width: 12vw;
   left: 15%;
-  top: 10%;
+  top: 4%;
 }
 .restaurant__distributeur {
-  width: 15rem;
+  height: 37vw;
   bottom: 6%;
-  right: 42%;
+  right: 39%;
+  max-height: 32rem;
 }
 
 .backroom__eglantine {
   position: absolute;
   left: 10%;
   bottom: 5%;
-  width: 9rem;
+  width: 15vw;
 }
 .backroom__sign {
   position: absolute;
   left: 5%;
   top: 30%;
-  width: 14rem;
+  width: 14vw;
 }
 .backroom__teleporter {
   position: absolute;
-  width: 4rem;
-  height: 13rem;
+  width: 11vw;
+  height: 29vh;
   left: 42%;
   top: 30%;
 }
 
 .poolroom__return {
   bottom: 0;
-  height: 13rem;
+  height: 30vh;
   width: 100%;
 }
 .poolroom__teleporter {
-  width: 10rem;
-  height: 10rem;
-  left: 46%;
-  top: 40%;
+  width: 16vw;
+  height: 29vh;
+  left: 42%;
+  top: 36%;
 }
 .poolroom__teleporter2 {
-  width: 9rem;
-  height: 23rem;
+  width: 9vw;
+  height: 47vh;
   left: 22%;
   top: 32%;
 }
 .poolroom__eglantine {
   bottom: 18%;
   left: 23%;
-  width: 10rem;
+  width: 12svw;
 }
 .poolroom__teleporter3 {
   bottom: 43%;
@@ -753,164 +794,168 @@ ul {
 .poolroom__teleporter4 {
   bottom: 28%;
   right: 20%;
-  width: 10rem;
-  height: 32rem;
+  width: 10vw;
+  height: 65vh;
 }
 .poolroom__burger {
   position: absolute;
   left: 35%;
   bottom: 32%;
-  width: 25rem;
+  width: 32vw;
 }
 .poolroom__clown {
-  width: 10rem;
+  width: 12vw;
   left: 45%;
   top: 40%;
 }
 .poolroom__code {
   image-rendering: pixelated;
-  width: 24rem;
-  left: 38%;
+  width: 35vw;
+  left: 34%;
   top: 12%;
 }
 
 .secretcave__man {
   right: 45%;
   bottom: 15%;
-  width: 6rem;
+  height: 40vh;
 }
 
 .mageforest__teleporter {
-  width: 12rem;
-  height: 14rem;
-  left: 38%;
+  width: 21vw;
+  height: 40vh;
+  left: 30%;
   top: 36%;
 }
 .mageforest__teleporter2 {
-  width: 12rem;
+  width: 10vw;
   height: 100%;
   right: 0%;
 }
 .mageforest__teleporter3 {
-  width: 35rem;
-  height: 16rem;
+  width: 13vw;
+  height: 16vh;
   right: 20%;
   top: 20%;
 }
 .mageforest__eglantine {
   left: 15%;
   bottom: 25%;
-  width: 15rem;
+  width: 15vw;
 }
 .mageforest__poster {
   right: 30%;
   top: 20%;
-  width: 10rem;
+  width: 10vw;
 }
 .mageforest__bird {
-  width: 10rem;
+  width: 11vw;
   top: 22%;
   left: 25%;
   transform: scaleX(-1);
 }
 .mageforest__gnome {
-  width: 12rem;
+  width: 21vw;
   bottom: 10%;
   left: 30%;
 }
 .mageforest__return {
   height: 100%;
   left: 0;
-  width: 12rem;
+  width: 12vw;
 }
 
 .underwater__return {
   top: 0;
   width: 100%;
-  height: 10rem;
+  height: 10vh;
 }
 .underwater__return2 {
   left: 0;
   height: 100%;
-  width: 13rem;
+  width: 12vw;
 }
 .underwater__pillar {
   bottom: 5%;
   left: 40%;
+  width: 10vw;
 }
 .underwater__eglantine {
-  width: 10rem;
+  width: 10vw;
   top: 42%;
   left: 22%;
   transform: rotate(-16deg);
   animation: float 6s infinite;
 }
 .underwater__teleport2 {
-  width: 19rem;
-  height: 19rem;
+  width: 25vw;
+  height: 29vh;
   top: 40%;
   left: 40%;
 }
 .underwater__teleport3 {
-  width: 19rem;
-  height: 19rem;
+  width: 16vw;
+  height: 20vh;
   bottom: 0;
   left: 0%;
 }
 .underwater__teleport4 {
-  width: 19rem;
-  height: 19rem;
+  width: 19vw;
+  height: 30vh;
   bottom: 30%;
   left: 45%;
 }
 .underwater__bouche {
   bottom: 2%;
   left: 43%;
+  width: 16vw;
 }
 .underwater__mermaid {
   right: 15%;
   bottom: 10%;
+  width: 12vw;
   animation: float 13s infinite;
 }
 .underwater__creature {
   top: 10%;
   left: 32%;
-  width: 32rem;
-  height: 23rem;
+  width: 30vw;
+  height: 40vh;
 }
 .underwater__key {
   bottom: 15%;
   right: 50%;
+  width: 4vw;
   animation: float 2s infinite;
 }
 
 .traphouse__teleporter {
-  width: 10rem;
-  height: 22rem;
+  width: 10vw;
+  height: 27vw;
   right: 42%;
   bottom: 15%;
 }
 .traphouse__return {
   left: 0;
-  width: 12rem;
+  width: 12vw;
   height: 100%;
 }
 
 .robots__eglantine {
   bottom: 20%;
   left: 30%;
-  width: 10rem;
+  width: 19vw;
 }
 .robots__teleporter {
-  left: 25%;
+  left: 19%;
   top: 25%;
-  width: 10rem;
-  height: 20rem;
+  width: 22vw;
+  height: 38vh;
 }
 
 .rainbowtunnel__teleporter {
-  width: 15rem;
-  height: 15rem;
+  width: 15vw;
+  height: 15vh;
   left: 25%;
   top: 39%;
 }
@@ -918,6 +963,7 @@ ul {
 .networks__glasses {
   left: 45%;
   top: 45%;
+  width: 13vw;
   animation: float 1s infinite;
 }
 
@@ -929,27 +975,29 @@ ul {
   bottom: 5%;
   right: 10%;
   transform: scaleX(-1);
-  width: 10rem;
+  width: 10vw;
 }
 .magelake__bubbles {
   top: 48%;
   left: 60%;
   transform: skew(10deg);
-  width: 10rem;
+  width: 10vw;
 }
 
 .weirdhouse__nerd {
   left: 45%;
   bottom: 23%;
+  width: 14vw;
   animation: float 1s infinite;
 }
 .weirdhouse__return {
   left: 0;
-  width: 12rem;
+  width: 12vw;
   height: 100%;
 }
 .weirdhouse__scroll {
   left: 40%;
+  width: 30vw;
   top: 30%;
 }
 
@@ -965,21 +1013,24 @@ ul {
 .burgerclicker {
   background: url(../../assets/backgrounds/burgerclick.webp) no-repeat;
   background-position: center;
-  background-size: cover;
-  width: 60rem;
+  background-size: contain;
+  width: 80vw;
+  height: 60vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
 }
 .burgerclicker__text {
-  font-size: 6rem;
+  font-size: 4rem;
   position: absolute;
-  bottom: 6rem;
+  z-index: 10;
+  bottom: 10%;
 }
 .burgerclicker__burger {
   cursor: pointer;
-  width: 30rem;
+  width: 40vw;
+  max-width: 30rem;
   transform: scale(1);
   transition: transform 300ms;
 }
@@ -988,16 +1039,22 @@ ul {
 }
 .burgerclicker__logo {
   position: absolute;
-  width: 16rem;
+  width: 16vw;
   top: 0;
-  right: 4rem;
+  right: 6%;
 }
 
+@media (min-width: 60em) {
+  .burgerclicker__text {
+    font-size: 6rem;
+    bottom: 8rem;
+  }
+}
 .mermaidpuzzle__pillar {
   position: absolute;
   inset: 0;
   margin: auto;
-  width: 12rem;
+  width: 18vw;
   z-index: -1;
 }
 .mermaidpuzzle__notes {
@@ -1009,8 +1066,8 @@ ul {
   z-index: 11;
 }
 .mermaidpuzzle__note {
-  width: 3rem;
-  height: 3rem;
+  width: 2rem;
+  height: 2rem;
   border-radius: 6rem;
   background-color: red;
   cursor: pointer;
@@ -1032,4 +1089,11 @@ ul {
 }
 .mermaidpuzzle [data-note="1"] {
   background: orange;
+}
+
+@media (min-width: 60em) {
+  .mermaidpuzzle__note {
+    width: 4rem;
+    height: 4rem;
+  }
 }/*# sourceMappingURL=main.css.map */

@@ -157,9 +157,8 @@ export class EventHandlerCH1 extends EventHandler {
                 this.uiRenderer.createImage('playground', 'hectordeath', 'main__ohnonhectorestmortputaintroptriste', true);
             }
         },
-
         {
-            progress: 99, callback: () => {
+            progress: 98, callback: () => {
                 this.uiRenderer.getElement('playground').innerHTML = '';
                 this.triggerEvent('introEnd');
             }

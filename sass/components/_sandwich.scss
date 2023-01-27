@@ -1,5 +1,5 @@
 .sandwich {
-    width: 8rem;
+    width: 8vw;
     position: absolute;
     &__0 {
         top: 60%;
@@ -15,13 +15,13 @@
     }
     &__3 {
         top: 30%;
-        width: 0.8rem;
+        width: 1vw;
         right: 40%;
     }
     &__4 {
         bottom: -5%;
         right: -5%;
-        width: 15rem;
+        width: 12vw;
     }
     &__6 {
         transform: scaleY(-1);

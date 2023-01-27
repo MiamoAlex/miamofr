@@ -4,6 +4,10 @@
     position: absolute;
     inset: 0;
     margin: auto;
+
+    &__install {
+        display: none;
+    }
 }
 
 @media screen and (orientation: portrait) {

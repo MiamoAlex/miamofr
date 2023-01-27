@@ -36,6 +36,8 @@ export class UiRenderer {
      */
     renderTools(tools) {
         this.getElement('tools').innerHTML = '';
+        this.getElement('tools').classList.remove('hide');
+        this.getElement('menu').classList.remove('hide');
         tools.forEach(tool => {
             this.getElement('tools').innerHTML += `<img src="./assets/tex/${tool}.png" alt="lunettes magiques" class="tools__${tool}" data-tool="${tool}">`
         });

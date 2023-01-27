@@ -2,22 +2,23 @@
     &__return {
         top: 0;
         width: 100%;
-        height: 10rem;
+        height: 10vh;
     }
 
-    &__return2{
+    &__return2 {
         left: 0;
         height: 100%;
-        width: 13rem;
+        width: 12vw;
     }
 
     &__pillar {
         bottom: 5%;
         left: 40%;
+        width: 10vw;
     }
 
     &__eglantine {
-        width: 10rem;
+        width: 10vw;
         top: 42%;
         left: 22%;
         transform: rotate(-16deg);
@@ -25,48 +26,50 @@
     }
 
     &__teleport2 {
-        width: 19rem;
-        height: 19rem;
+        width: 25vw;
+        height: 29vh;
         top: 40%;
         left: 40%;
     }
-    
+
     &__teleport3 {
-        width: 19rem;
-        height: 19rem;
+        width: 16vw;
+        height: 20vh;
         bottom: 0;
         left: 0%;
     }
-    
+
     &__teleport4 {
-        width: 19rem;
-        height: 19rem;
+        width: 19vw;
+        height: 30vh;
         bottom: 30%;
         left: 45%;
     }
-    
+
     &__bouche {
         bottom: 2%;
         left: 43%;
+        width: 16vw;
     }
-    
+
     &__mermaid {
         right: 15%;
         bottom: 10%;
+        width: 12vw;
         animation: float 13s infinite;
     }
 
     &__creature {
         top: 10%;
         left: 32%;
-        width: 32rem;
-        height: 23rem;
+        width: 30vw;
+        height: 40vh;
     }
 
     &__key {
         bottom: 15%;
         right: 50%;
+        width: 4vw;
         animation: float 2s infinite;
     }
-
 }

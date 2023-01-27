@@ -2,15 +2,17 @@
     &__nerd {
         left: 45%;
         bottom: 23%;
+        width: 14vw;
         animation: float 1s infinite;
     }
     &__return {
         left: 0;
-        width: 12rem;
+        width: 12vw;
         height: 100%;
     }
     &__scroll {
         left: 40%;
+        width: 30vw;
         top: 30%;
     }
 }

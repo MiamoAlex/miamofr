@@ -80,7 +80,7 @@ export class UiController {
             ev.preventDefault();
             this.installPromptEvent = ev;
             this.uiRenderer.getElement('settings').children[3].style.display = "block";
-            this.uiRenderer.getElement('menu').children[2].style.display = "block";
+            this.uiRenderer.getElement('mobilePrompt').children[2].style.display = "block";
         });
 
         // Chargement du volume sonore

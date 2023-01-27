@@ -199,10 +199,10 @@ export class UiController {
                 x: Math.min(Math.max((ev.clientX || ev.touches[0].clientX), 0), rect.width) - rect.left,
                 y: Math.min(Math.max((ev.clientY || ev.touches[0].clientY), 0), rect.height) - rect.top
             };
-            document.documentElement.style.setProperty('--cursorX', -this.cursorPosition.x * 0.5 + 'px');
-            document.documentElement.style.setProperty('--cursorY', -this.cursorPosition.y * 0.5 + 'px');
-            document.documentElement.style.setProperty('--flashLightX', this.cursorPosition.x - 64 + 'px');
-            document.documentElement.style.setProperty('--flashLightY', this.cursorPosition.y + 'px');
+            document.body.style.setProperty('--cursorX', -this.cursorPosition.x * 0.5 + 'px');
+            document.body.style.setProperty('--cursorY', -this.cursorPosition.y * 0.5 + 'px');
+            document.body.style.setProperty('--flashLightX', this.cursorPosition.x - 64 + 'px');
+            document.body.style.setProperty('--flashLightY', this.cursorPosition.y + 'px');
         } else {
             switch (ev.target.dataset.tool) {
                 // Lunettes

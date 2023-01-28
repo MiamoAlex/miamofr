@@ -21,6 +21,7 @@
     &__sandwiches {
         @include flex(center, center, column);
         transition: opacity 300ms;
+        pointer-events: all;
         &-text {
             font-size: 2rem;
         }
@@ -29,7 +30,7 @@
         }
 
         &:hover {
-            opacity: 1;
+            opacity: 1!important;
         }
     }
 

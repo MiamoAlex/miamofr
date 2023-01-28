@@ -369,6 +369,7 @@ ul {
   align-items: center;
   flex-direction: column;
   transition: opacity 300ms;
+  pointer-events: all;
 }
 .main__sandwiches-text {
   font-size: 2rem;
@@ -377,7 +378,7 @@ ul {
   width: 4rem;
 }
 .main__sandwiches:hover {
-  opacity: 1;
+  opacity: 1 !important;
 }
 .main__menu {
   display: flex;
